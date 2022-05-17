@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Click the target</title>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700">
+    <link rel="stylesheet" href="base.css">
+    <script src="engine.js"></script>
+
+    <link rel="stylesheet" href="our-style.css">
+    <script src="our-script.js"></script>
+</head>
+
+<body>
+
+    <main>
+        <h1><img id="logo" src="crosshair.png"></span>Click the target</h1>
+
+        <div id="login">
+            <h2>Welcome to &ldquo;Click the target&rdquo;</h2>
+            <p>
+                We are collecting some data on user interaction. Thank you for
+                participating in our study.
+            </p>
+            <form>
+                <div class="form-control">
+                    <label for="age">Age: </label>
+                    <input type="text" id="age">
+                    <div class="error" id="error-age"></div>
+                </div>
+                <div class="form-control">
+                    <button type="submit">Start</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="arena">
+            <h2>The grid arena</h2>
+            <p>
+                This grid contains <span id="grid-cols"></span> &times;
+                <span id="grid-rows"></span> cells, each with a target.
+                Your task is to click the highlighted target. Once you click it,
+                the highlighted target moves around.
+            </p>
+            <p>
+                If you click on the highlighted target, we count a success; if
+                you click on any other target, we count a failure. If you click
+                in the space between targets, we count a mistake. Keep clicking
+                until the sequence ends.
+            </p>
+
+            <div id="counter"><span id="position">0</span> / <span id="sequence-length"></span></div>
+            <div id="grid"></div>
+        </div>
+
+        <div id="results">
+            <h2>Results</h2>
+            <p id="results-sent">Your results have been sent.</p>
+            <p>Thank you for your participation.</p>
+            <table>
+                <tr>
+                    <th>Age</th>
+                    <td><span id="results-age"></span></td>
+                </tr>
+                <tr>
+                    <th>Successes</th>
+                    <td><span id="results-successes"></span></td>
+                </tr>
+                <tr>
+                    <th>Failures</th>
+                    <td><span id="results-failures"></span></td>
+                </tr>
+                <tr>
+                    <th>Mistakes</th>
+                    <td><span id="results-mistakes"></span></td>
+                </tr>
+                <tr>
+                    <th>Time to complete</th>
+                    <td><span id="results-time"></span> seconds</td>
+                </tr>
+            </table>
+            <button>Again</button>
+        </div>
+    </main>
+
+</body>
+
+</html>

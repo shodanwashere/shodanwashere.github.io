@@ -1,0 +1,176 @@
+:root {
+    --grid-border-color: #808080;
+    --grid-background-color: #ffffff;
+    --header-height: 50px;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #eeeeee;
+}
+
+main {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 40px #00000099;
+    border: 1px solid #00000066;
+}
+
+main#dashboard {
+    max-width: 1000px;
+}
+
+h1 {
+    height: var(--header-height);
+    line-height: var(--header-height);
+    margin-top: 0;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+#logo {
+    width: var(--header-height);
+    margin-right: 5px;
+    vertical-align: top;
+}
+
+.form-control {
+    margin-top: 10px;
+}
+
+.error {
+    display: none;
+    color: darkred;
+    font-size: 90%;
+    margin-bottom: 4px;
+}
+
+#counter {
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
+    padding-bottom: 6px;
+}
+
+#grid {
+    display: grid;
+    width: 600px;
+    height: 600px;
+    background-color: var(--grid-border-color);
+    margin: 0 auto;
+    grid-gap: 1px;
+    border: 1px solid var(--grid-border-color);
+}
+
+.cell {
+    position: relative;
+    background-color: var(--grid-background-color);
+}
+
+.target {
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+#arena,
+#results {
+    display: none;
+}
+
+#results table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+#results th {
+    text-align: left;
+}
+
+#results tr > * {
+    border: 1px solid #333;
+    padding: 3px 6px;
+}
+
+#main-data {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+#main-data > * > tr > * {
+    border: 1px solid var(--grid-border-color);
+    padding: 3px 0px;
+    text-align: center;
+}
+
+#main-data .details {
+    display: none;
+}
+
+#main-data .details > td {
+    padding: 0;
+}
+
+.panel {
+    text-align: initial;
+    padding: 3px 0 10px;
+    ;
+}
+
+.panel div {
+    padding: 3px 14px;
+}
+
+.panel h3 {
+    display: inline;
+    font-weight: bold;
+}
+
+.panel table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    table-layout: fixed;
+}
+
+.panel table > * > tr > * {
+    border: 1px solid var(--grid-border-color);
+    padding: 3px 0px;
+    text-align: center;
+}
+
+.panel {
+    background-color: #dddddd;
+    border-left: 16px solid gray;
+}
+
+#main-data .main-row.active {
+    background-color: #dddddd;
+    border: 2px solid black;
+    border-bottom: none;
+}
+
+#main-data .details.active {
+    border: 2px solid black;
+    border-top: none;
+}
+
+#main-data > * > tr > *:nth-child(1) {
+    width: 14em;
+}

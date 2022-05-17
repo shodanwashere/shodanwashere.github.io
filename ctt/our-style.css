@@ -1,0 +1,15 @@
+.target {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #808080;
+}
+
+.goal-0 {
+    background-color: #ff4800;
+    cursor: pointer;
+}
+
+.goal-1, .goal-2{
+    background-color: #ff8859;
+    cursor: pointer;
+}
