@@ -1,16 +1,27 @@
-.center_logo{
-  margin:auto;
-  width: 95%;
+@font-face {
+    font-family: 'Microsoft Sans Serif Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Microsoft Sans Serif Regular'), url('micross.woff') format('woff');
+}
+			        
+@font-face {
+    font-family: 'Microsoft Sans Serif';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Microsoft Sans Serif'), url('micross.woff') format('woff');
 }
 
-.logo{
-  text-align: center;
-  font-family: Arial;
-  color: white;
-  -webkit-text-stroke: 2px black;
-  text-shadow: 5px 5px #000000;
-  font-size: 200%;
-  text-decoration: none;
+.center_logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo > img{
+    height: 100px;
+    width: auto;
+    padding: 20px;
 }
 
 .sidebar_logo{
@@ -19,23 +30,22 @@
 }
 
 body{
-  background-image: url('https://thumbs.gfycat.com/UnfoldedRedJaguarundi-max-1mb.gif');
+  background: rgb(1,130,129);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
 .menu{
-  width: 90%;
+  width: 100%;
   list-style-type: none;
-  margin-top: 0;
+  margin-top: 5px;
   margin-bottom: 0;
   margin-left: auto;
   margin-right: auto;
   padding: 0;
   overflow: hidden;
-  background-color: #000;
-  opacity: 0.7;
+  background-color: #010080;
 }
 
 .menu li{
@@ -45,7 +55,7 @@ body{
 li a{
   display:block;
   color: white;
-  font-family: "Arsenal", sans-serif;
+  font-family: "Microsoft Sans Serif", sans-serif;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -66,13 +76,15 @@ li a:hover{
 
 .tab{
   width: 90%;
-  margin: auto;
+  margin-top: 0;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
   display: block;
   padding: 2px 10px 20px 10px;
-  background-color: rgba(5,5,5,0.7);
-  color: white;
-  font-family: "Arsenal", sans-serif;
-  font-size: 120%;
+  background-color: rgb(192,192,192);
+  color: black;
+  font-family: "Microsoft Sans Serif", sans-serif;
   overflow: auto;
 }
 
@@ -83,8 +95,7 @@ li a:hover{
   padding: 2px 10px 2px 10px;
   background-color: rgba(5,5,5,0.7);
   color: white;
-  font-family: "Arsenal", sans-serif;
-  font-size: 120%;
+  font-family: "Microsoft Sans Serif", sans-serif;
   overflow: auto;
 }
 
