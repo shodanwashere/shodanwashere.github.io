@@ -1,118 +1,67 @@
-@font-face {
-    font-family: 'Microsoft Sans Serif Regular';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Microsoft Sans Serif Regular'), url('micross.woff') format('woff');
-}
-			        
-@font-face {
-    font-family: 'Microsoft Sans Serif';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Microsoft Sans Serif'), url('micross.woff') format('woff');
-}
-
-.center_logo{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo > img{
-    height: 100px;
-    width: auto;
-    padding: 20px;
-}
-
 .sidebar_logo{
-  float: right;
-  width: 24px;
-}
+    float: left;
+    width: 24px;
+  }
 
-body{
-  background: rgb(1,130,129);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
+  body{
+    background: rgb(253, 88, 88);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
 
-.menu{
-  width: 100%;
-  list-style-type: none;
-  margin-top: 5px;
-  margin-bottom: 0;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0;
-  overflow: hidden;
-  background-color: #010080;
-}
+  .menu{
+    width: 100%;
+    list-style-type: none;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    overflow: hidden;
+  }
 
-.menu li{
-  float: left;
-}
+  .menu li{
+    display: inline;
+  }
+  
+  li a{
+    color: white;
+    font-family: "Microsoft Sans Serif", sans-serif;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
 
-li a{
-  display:block;
-  color: white;
-  font-family: "Microsoft Sans Serif", sans-serif;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
+  .selected{
+    text-decoration: underline;
+    text-decoration-style: solid;
+  }
 
-li a:hover{
-  background-color: #111;
-}
+  li a:hover, .selected:hover{
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
 
-.selected{
-  color: black;
-  background-color: #ffffff;
-}
+  hr {
+    color: red;
+  }
 
-.selected:hover{
-  background-color: #aaaaaa;
-}
+  .badges{
+    width: 100%;
+    list-style-type: none;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    overflow: hidden;
+  }
 
-.tab{
-  width: 90%;
-  margin-top: 0;
-  margin-bottom: auto;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  padding: 2px 10px 20px 10px;
-  background-color: rgb(192,192,192);
-  color: black;
-  font-family: "Microsoft Sans Serif", sans-serif;
-  overflow: auto;
-}
+  .badges li{
+    display: inline;
+  }
 
-.post{
-  width:90%;
-  margin: auto;
-  display: block;
-  padding: 2px 10px 2px 10px;
-  background-color: rgba(5,5,5,0.7);
-  color: white;
-  font-family: "Microsoft Sans Serif", sans-serif;
-  overflow: auto;
-}
-
-.exper-img{
-  float: left;
-  box-shadow: 5px 5px #000000;
-  margin-right: 1%;
-}
-
-#background-video {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: -1;
-}
+  .badges li > a {
+    padding: 0px;
+  }

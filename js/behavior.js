@@ -7,7 +7,7 @@ function getImg(){
 }
 
 function randomWordArtLogo(){
-    let logo = document.querySelector(".center_logo > a.logo > img");
+    let logo = document.querySelector(".center_logo > center > a.logo > img");
     let img = "img/wordart/" + getImg();
     logo.src = img;
 }
