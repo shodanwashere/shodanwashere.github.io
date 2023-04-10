@@ -8,6 +8,11 @@
     <title>Home Page</title>
   </head>
   <body>
+    <audio loop autoplay id="bgm">
+        <source src="music/bgm.mp3" type="audio/mpeg">
+        <source src="music/bgm.ogg" type="audio/ogg">
+    </audio>
+
     <div class="sidebar_logo">
       <a href="https://github.com/shodanwashere"><img src="img/github.png" width="24px" height="24px" alt=""></a>
       <br>
@@ -124,6 +129,9 @@
     </ul>
     </center>
     <script src="js/behavior.js"></script>
-    <script>randomWordArtLogo();</script>
+    <script>randomWordArtLogo();
+            var audio = document.getElementById('bgm');
+	    audio.volume = 0.4;
+    </script>
   </body>
 </html>
