@@ -1,0 +1,1076 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Writing Code for Humans</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body>
+<a href="courses.html" style="display: block; padding: 5px; color: white; background-color: black; width: 100px">Return to Courses!</a>
+<br>
+<article id="e3ef5c59-4701-4da6-a317-0900a451609d" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1603468620905-8de7d86b781e?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://www.notion.so/icons/snippet_red.svg"/></div><h1 class="page-title">Writing Code for Humans</h1></header><div class="page-body"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="ca999e75-a218-4ce4-a243-53f5db1b9531"><div style="font-size:1.5em"><span class="icon">😎</span></div><div style="width:100%">Finished on <time>@May 8, 2023</time>. Written by Nuno Dias, <em><em><em>aka</em></em></em>, Shodan. Based on the <a href="https://app.pluralsight.com/library/courses/writing-clean-code-humans">Pluralsight course</a> of the same name by <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Cory House</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.</div></figure><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">Table of Contents</summary><div class="indented"><nav id="da5fd89a-70ab-4657-9184-2976b6328a37" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#47829b12-43cb-4335-928f-e2a30177e7b0">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7fa7889b-345f-4d47-8537-67438da4a082">Principles</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8caf1cc0-68c5-4710-bbc6-0d78ea2ce414">The Three Core Principles for Clean Code</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#47b1b669-d3c4-472a-8330-5f5eaf4a1964">Principle 1: The Right Tool for the Job</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0de850b7-865a-439b-b4d7-e31668e352fb">Principle 2: Maximize Signal to Noise Ratio</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#361576d8-061b-42c8-955c-f27c1f07a651">DRY Principle</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#79e4bc0c-ae77-4309-929a-09db81310a90">Principle 3: Self-documenting Code</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#73eb0b8a-da83-4e27-86ad-b81f4bff82b5">Naming</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a2c961a0-a51a-457f-8123-55fc84f00283">Naming Classes</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3674d1d7-6985-4819-bcc4-0c276a58618f">Method names</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#82506c7c-aa1c-4eeb-8d79-9b309973ad3b">Avoiding nasty unexpected function side-effects</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#493610bc-50e0-421d-ae73-9a8457e89666">Avoid abbreviation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5b2478fc-aa6e-4214-b654-51f793f2aa27">Principles for selecting good variable names</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f6458f94-a99f-4308-b158-647c019e52ba">Booleans</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5c408f18-1749-4b65-8cd5-995e3f83ba4e">Be symmetrical</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8285187a-79a3-4a15-a96d-2800d578a29e">Conditionals</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#73bb29e4-cedf-41df-8f90-feb02ce955d2">Assign Booleans Implicitly</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7a8930ee-6ca8-4c49-aeee-4ff3b25a432c">Don’t be Anti-negative</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9f4a8ad1-5fa7-42d3-acbd-60e73ca4fc4b">Ternary is elegant</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a77dee58-e755-4947-89c6-fc88997be6c8">Avoid being “Stringly” Typed</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9e4b96c6-8add-4d70-a8b1-1b06a03c640f">Magic Numbers</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bc6df24f-62b9-458f-a301-6a74a92b5b50">Complex Conditionals</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e37209ae-179a-45ca-88e4-a9fc754e2389">Encapsulate Complex Conditionals</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#492a56c2-7691-427e-9b02-a2e973cc38ff">Favor Polymorphism over Enums for Behavior</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c4f4d50a-6117-44f5-82ba-f6ebc1221bc6">Be declarative if possible</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#297e0d3d-2492-4621-8809-e8e3712c767d">Table Driven Methods</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2eb9435e-3fd2-4b7d-afa8-ec2374411bb1">Functions</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7d51b3ac-e01c-4cee-81ce-eb330c9b7305">When to create a function</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2d55a3ea-ca6d-4124-9a85-45660263bdcb">Avoid Duplication</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#cab90ef5-4c7d-464a-bffe-c66ad74bf9c3">Look for Patterns</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a8aa9401-b45b-4d3b-827c-4cadc9cf953b">Excessive Indentation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#34f2f7cd-ebbd-41c0-80e4-cc0bf2efb7ae">Arrow Code</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#31b884c9-fe06-48d5-8127-49cf93411f38">Extract Method</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6bfa6911-80a4-419c-8aea-d767bcbde8b8">Return Early</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c0bd452d-6d59-4b1f-a049-caae514c06aa">Fail Fast</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1bbca66a-d57b-4440-8fe5-3ae6a506485d">Conveying Intent</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b4ee2b6b-2d6b-4bb1-89f8-aea583e3f2e4">Do one thing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ccabab55-c09e-43a6-93c8-4d5b681f855f">Mayfly variables</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#58401599-6299-4a7c-92a9-5e5b48e8a409">How many parameters</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#00459a49-83d1-48c9-835a-456922169738">Watch for Flag Arguments</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#253f6fc7-b969-4cc6-b3a7-3958e2d2d4df">What is “too long”?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4240edc6-5de0-4099-b5cf-ecf2020921ec">Kinds of Exceptions</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bf2424d5-ad20-4735-83e5-d6fb503005a4">Unrecoverable</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1a6ffddb-5215-4ef3-afb6-6cdfe61cb861">Recoverable</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d0f61dfd-b513-41b6-9d06-0c0fa1fee3f0">Ignorable</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2a703640-f02e-4b42-9eea-67df218f7c4a"><code>Try</code>/<code>Catch</code>/<code>Log</code> = Fail Slow</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b0520ff4-f1ce-45e7-aa09-e32c16ab4796"><code>Try</code>/<code>Catch</code> Body Standalone</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7f459ecd-a522-49f0-8e6a-edfe781a578c">Classes</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5c7e96bb-e797-4cd5-8cea-9978bf88be08">When to Create</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7140ac1f-e640-4dde-b26c-ef78601d1bb7">High Cohesion</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c16b4ec9-dcf4-4cc5-9e25-0a09148469b8">Example:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#566df3be-68b6-4d5a-99db-5f2f02622460">Sniffing out lack of cohesion</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#045e2a18-c296-4784-bdad-7055ad259069">When is a class too small?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b8c7b8cb-13c1-4db0-9cc2-194dff39f3c6">Primitive Obsession</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9099e054-7f83-494d-9be0-3907bae1d083">Principle Proximity</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b9d7cc98-7731-47e5-b7f1-4da09ef440ce">The Outline Rule</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#318bc454-7f36-4d19-87d6-709ae7268a71">Comments</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1c67a197-2d0c-444d-b0f6-8a702e35ec1e">A Necessity and a Crutch</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#758e7cc1-5fd0-4b51-841c-ebb00ffc8444">Comments to avoid</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#617b9a41-3f99-46ec-a4c2-d8ca16d00d8a">Redundant Comments</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f85119d7-e8c8-477e-ac4c-73f19857ea9b">Intent Comments</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#cafc27d9-b4d5-405b-a65d-434dba0c35d6">Apology Comments</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#123a6538-6936-4da9-b0c6-f8a3c8e73fa3">Warning Comments</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#94d5fcb4-15ae-43b6-b084-b4062a749d43">(Kill) Zombie Code</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#388fc9ea-3363-4fbe-a7ca-64685f65cc6f">Why Zombie code hurts work</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#aec44b17-fb7a-41a6-88bc-8e3831430813">Divider Comments</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#152195a7-f5d4-45c7-a8c9-00a7ecd8335e">Brace Tracker Comments</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#46193b55-3df5-4688-920a-68b8e08e34a1">Bloated Header</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6c1abb7b-086b-4460-be55-6e246fbecf37">Defect Log</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#911e7eb1-32b7-4230-af0a-6917797f4bd3">Clean Comments</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a3f97090-ca05-41f2-9487-675f7c41b649">To Do Comments</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#489767fd-be06-4c92-a59e-99eea9f0c5c9">Summary Comments</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0905e2a0-f923-468b-9229-9ad2afd203f2">Documentation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2d9f0940-3856-4e00-b73c-91bb9ef74e20">Staying Clean</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0be9c107-4722-4ca4-aad0-a7c351393b48">When to Refactor to Clean Code</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eba2c911-38ae-4f4b-b160-a45525ade8c0">Accept No Broken Windows</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e8dfbc5e-39e4-4924-8b20-9231cea6ff6e">Code Reviews</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#237b1b57-497b-4087-9d4f-6bd7ae92f3aa">Work in pairs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#78d532fd-06fb-4f16-99df-c690561bc009">The Boy Scout Rule</a></div></nav></div></details><h1 id="7fa7889b-345f-4d47-8537-67438da4a082" class="">Principles</h1><h2 id="8caf1cc0-68c5-4710-bbc6-0d78ea2ce414" class="">The Three Core Principles for Clean Code</h2><p id="621b98fd-878d-49b8-b38c-df17a952ea74" class=""><strong><strong>1)</strong></strong> Clean code envolves using the right tool for the job.</p><p id="a9da2960-81a6-4779-9366-546a6682b52e" class=""><strong><strong>2)</strong></strong> High signal to noise ratio. </p><p id="8fc4f53d-d64b-4d63-9d66-f57674e21c29" class=""><strong><strong>3)</strong></strong> Self-documenting</p><p id="cf408e33-9901-46c1-aaf0-00c397c90c0c" class="">“The main contributor to code-level documentation isn’t comments, but good programming style.”</p><h3 id="47b1b669-d3c4-472a-8330-5f5eaf4a1964" class="">Principle 1: The Right Tool for the Job</h3><p id="3b034e31-b17a-4cec-940f-234dce8eb9e7" class="">Hacking together a solution may seem creative and genial, but it often times is cumbersome, messy and contributes to dirty, messy code.</p><p id="1bb91317-ccb4-4d4f-8701-78baeb6b0ffb" class="">How do we select the right tool for the job?</p><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="69a57056-2e4c-4cbb-830c-1b967fd77033"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Do not muddle the boundaries of what certain technologies should do or not (you shouldn’t have JavaScript in HTML files).</div></figure><p id="822047a9-cbc3-4d34-9a1c-44e69f38616a" class="">Every Tech is Potentially Evil!</p><h3 id="0de850b7-865a-439b-b4d7-e31668e352fb" class="">Principle 2: Maximize Signal to Noise Ratio</h3><p id="68a44c52-e3cd-4f53-aff9-28bbd5b51ac4" class="">Code with a high signal to noise ratio is easier to understand.</p><p id="f19a3364-1891-4673-8f7d-01bd56b25112" class=""><strong><strong><strong><strong><strong>Signal:</strong></strong></strong></strong></strong> Logic that follows the <strong><strong><strong>TED</strong></strong></strong> rule:</p><ul id="9fe9de0b-c2ed-4749-a09c-ef05c682cd25" class="bulleted-list"><li style="list-style-type:disc"><strong>T</strong>erse - your code should not be excessively wordy</li></ul><ul id="6c2bff97-d11b-4e29-a8eb-ab0af9a86afa" class="bulleted-list"><li style="list-style-type:disc"><strong>E</strong>xpressive - it’s clear what the code is trying to do</li></ul><ul id="c92f76ff-b1f9-405c-93ef-489f9b15e192" class="bulleted-list"><li style="list-style-type:disc"><strong>D</strong>o one thing - it should have a clear responsibility and should do it well</li></ul><p id="ac721aa0-3754-48d0-a95d-cf3fedf9929c" class=""><strong><strong><strong><strong><strong><strong>Noise:</strong></strong></strong></strong></strong></strong></p><ul id="2242a004-ec1b-4930-b433-b2c2eb459164" class="bulleted-list"><li style="list-style-type:disc">High cyclomatic complexity</li></ul><ul id="30c09af8-ace5-46ce-b646-c74f907162c0" class="bulleted-list"><li style="list-style-type:disc">Excessive indentation</li></ul><ul id="746e18f7-e1f4-4f66-b7d5-06d7f038a817" class="bulleted-list"><li style="list-style-type:disc">Zombie code</li></ul><ul id="f3ffef4b-714c-496f-8f97-6509b077f4a0" class="bulleted-list"><li style="list-style-type:disc">Unnecessary comments</li></ul><ul id="e6793da4-f552-4c5d-a100-68bc7a00f7b2" class="bulleted-list"><li style="list-style-type:disc">Poorly named structures</li></ul><ul id="b8d621d5-0658-4ae7-8494-d00cc2c773ab" class="bulleted-list"><li style="list-style-type:disc">Huge classes</li></ul><ul id="29a226e0-3b87-4658-b7e8-a1733bf08f0a" class="bulleted-list"><li style="list-style-type:disc">Long methods</li></ul><ul id="38febc7e-1023-44fb-a945-1fd5bdffe423" class="bulleted-list"><li style="list-style-type:disc">Repetition</li></ul><ul id="6fcc52b4-2242-49fb-b6b4-a17b2c8da9f6" class="bulleted-list"><li style="list-style-type:disc">No whitespace</li></ul><ul id="e40efab6-bc59-46c6-b781-a1ec0b2e36d0" class="bulleted-list"><li style="list-style-type:disc">Overly verbose</li></ul><p id="e674ec6b-c1bf-4d11-afd5-185c428c5063" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Why is signal to noise ratio so important?</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="55bb9cfa-3040-4aa5-85ec-2823a4404adf" class="">When reading code,</p><ol type="1" id="9813924d-47a1-456c-8422-75f61b0794b8" class="numbered-list" start="1"><li>Our brain is the compiler. You should follow the rule of 7 so as to not break the limit of human memory.</li></ol><ol type="1" id="47061e50-d22c-4dca-aff6-2fa7c31086b0" class="numbered-list" start="2"><li>The mess builds quietly, and subtly.</li></ol><h3 id="361576d8-061b-42c8-955c-f27c1f07a651" class="">DRY Principle</h3><p id="89c88455-28b5-4398-8b67-3de475844170" class="">also known as “Don’t Repeat Yourself”</p><p id="6a95d957-4a1b-4d5e-92d6-bbe08664f563" class="">Copy and pasting is often a sign of design problems.</p><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="cbe590d4-31b9-4272-8d39-5bd6b77a0129"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Duplication Issues:
+</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>1. Decreases signal to noise ratio
+2. Increases the number of lines of code
+3. Creates a maintenance problem</div></figure><h3 id="79e4bc0c-ae77-4309-929a-09db81310a90" class="">Principle 3: Self-documenting Code</h3><p id="b2120547-3297-4d06-95f2-56ce8190f4fd" class="">Understanding the original programmer’s intent is the most difficult problem.</p><p id="4e7bed99-83c4-486c-adab-4e15a641483f" class="">Well written code is self-documenting:</p><ul id="a463eafd-e01c-4fbc-8ded-cf8458fb51af" class="bulleted-list"><li style="list-style-type:disc">The intent of the code should be clear;</li></ul><ul id="b8096b2a-49d6-47ce-9022-ffc58e9e9c94" class="bulleted-list"><li style="list-style-type:disc">Layers of abstractions should be used;</li></ul><ul id="3645da22-28f4-439d-94cc-a55ceda55fc5" class="bulleted-list"><li style="list-style-type:disc">Formatting for readability will</li></ul><h1 id="73eb0b8a-da83-4e27-86ad-b81f4bff82b5" class="">Naming</h1><p id="b6d06b90-21af-468c-9349-e84310ed6d4c" class="">Dirty:</p><pre id="3cbbe2dc-c563-4f5c-977b-164a9835cb28" class="code code-wrap"><code>List&lt;decimal&gt; p = new List&lt;decimal&gt;() { 5.50m, 10.48m, 12.69m };
+decimal t = 0;
+foreach (var i in p){
+	t += i;
+}
+
+return t;</code></pre><p id="22ab3e74-26b0-45d4-bc06-0e2b10445190" class="">Names should be carefully chosen so as to convey code intent more clearly, and avoid mathematical names like single letters.</p><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="5f2b55a5-b968-44e7-b695-ab1882f6aa8f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Could you read this book?</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>
+P was very angry with G for insulting her M. G kicked P in the A. He slept on the C.</div></figure><p id="586703c9-f77f-45a6-96a5-553aebe06640" class="">The above example shows the kind of un-readability you can expect from using this kind of naming convention. You can derive variable name meanings from context, but that kind of mental gymnastics can be avoided through clean variable naming.</p><p id="41ef0837-7646-4f7e-a184-540c2a60a50a" class=""><strong>Clean:</strong></p><pre id="e7127f90-453e-423f-8b3e-5cbec32c50fd" class="code code-wrap"><code>List&lt;decimal&gt; prices = new List&lt;decimal&gt;() { 5.50m, 10.48m, 12.69m };
+decimal total = 0;
+foreach(var price in prices){
+	total += price;
+}
+return total;</code></pre><h2 id="a2c961a0-a51a-457f-8123-55fc84f00283" class="">Naming Classes</h2><div id="f1eaf702-820c-4185-826f-ede170875141" class="column-list"><div id="de75b4e9-16fc-40b3-8b49-4ed6c7e7d08b" style="width:50%" class="column"><p id="b31ec513-b6f6-4c9e-bcdc-b18fabf2dd53" class=""><mark class="highlight-teal"><strong><strong><strong><strong><strong><strong>Dirty:</strong></strong></strong></strong></strong></strong></mark></p><ul id="f7dd8bee-afd7-4338-b521-9167b59fd365" class="bulleted-list"><li style="list-style-type:disc"><code>WebsiteBO</code></li></ul><ul id="78e35b83-6b46-4fc6-a2c3-c2cba697ac88" class="bulleted-list"><li style="list-style-type:disc">Utility</li></ul><ul id="eaa3a751-f4f8-4901-bf12-39ff7a8a8283" class="bulleted-list"><li style="list-style-type:disc">Common</li></ul><ul id="1695c24d-5599-46e4-9eeb-85166e359b23" class="bulleted-list"><li style="list-style-type:disc">MyFunctions</li></ul><ul id="ec45ac43-a454-40ca-b400-0eab35a9b48c" class="bulleted-list"><li style="list-style-type:disc">JimmysObjects</li></ul><ul id="8eab4bf8-0054-44ae-8fe5-6444ac3613bb" class="bulleted-list"><li style="list-style-type:disc">*Manager / *Processor / *Info</li></ul></div><div id="c2179be8-bf8e-4fd8-abf6-42c0e991dc3c" style="width:50%" class="column"><p id="ee9210c2-cf47-4476-ae16-97c6668d866b" class=""><mark class="highlight-red"><strong><strong><strong><strong><strong><strong>Clean:</strong></strong></strong></strong></strong></strong></mark></p><ul id="8d3054c6-9c2a-4ab6-9059-8f09c72270cc" class="bulleted-list"><li style="list-style-type:disc">User</li></ul><ul id="9c3f4214-3e68-4388-9eb8-a3fd4194f260" class="bulleted-list"><li style="list-style-type:disc">Account</li></ul><ul id="ce8a39ba-7c08-4c04-b814-6751c8500c1e" class="bulleted-list"><li style="list-style-type:disc">QueryBuilder</li></ul><ul id="d90ed05b-d8ab-4591-94b3-284bdb8ff014" class="bulleted-list"><li style="list-style-type:disc">ProductRepository</li></ul><p id="4044bccf-ce94-4385-b9ec-77d7e8f65bbf" class="">
+</p></div></div><p id="8391ab82-62f9-4c56-94f3-738227874fa4" class=""><strong><strong><strong><strong><strong>Guidelines:</strong></strong></strong></strong></strong></p><ol type="1" id="beb4fb43-b295-4b6f-ab6f-a68749611cec" class="numbered-list" start="1"><li>Use a noun (we want to create an instance of User)</li></ol><ol type="1" id="7e6af769-910e-4cc2-8f5e-d73ab1fdca2b" class="numbered-list" start="2"><li>Specific name (creates a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>cohesive class</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>: instance variables are used by many of the methods within that class)</li></ol><ol type="1" id="463ca875-b582-4d60-b913-16e292ee57bc" class="numbered-list" start="3"><li>Name should lead the design toward Single Responsibility</li></ol><ol type="1" id="d28fbaf3-7d94-428a-9631-7644b99f9329" class="numbered-list" start="4"><li>Avoid generic suffixes</li></ol><h2 id="3674d1d7-6985-4819-bcc4-0c276a58618f" class="">Method names</h2><div id="1448b7cb-6f6f-464d-ae7b-6da5d9f42720" class="column-list"><div id="0e330c13-a3fb-471c-9050-3b64488e872a" style="width:50%" class="column"><p id="fcde6c68-3b5c-41b8-b950-05fc7b4838c8" class=""><mark class="highlight-red"><strong><strong><strong><strong><strong><strong><strong><strong><strong>Say what?</strong></strong></strong></strong></strong></strong></strong></strong></strong></mark></p><ul id="fd06c8bc-af7b-4425-8eb9-7f86487d1f5f" class="bulleted-list"><li style="list-style-type:disc"><code>Get</code></li></ul><ul id="382946fe-4d3f-478e-bed2-6db8c56e9f08" class="bulleted-list"><li style="list-style-type:disc"><code>Process</code></li></ul><ul id="a582403e-d5c3-4e0a-b76f-8a3da6306aff" class="bulleted-list"><li style="list-style-type:disc"><code>Pending</code></li></ul><ul id="ea3d8770-4575-4767-96e6-bdabe1e3d6aa" class="bulleted-list"><li style="list-style-type:disc"><code>DoIt</code></li></ul><ul id="0369a065-8158-4232-bdb4-3bdea8302367" class="bulleted-list"><li style="list-style-type:disc"><code>Start</code></li></ul><ul id="11567282-c9e0-4186-a1b8-f697fe2ff1c4" class="bulleted-list"><li style="list-style-type:disc"><code>On_Init, Page_Load, etc.</code></li></ul></div><div id="79ee6ed9-fe72-428e-ab09-5aeb9e3787d0" style="width:50%" class="column"><p id="1ed2b522-939c-4209-b42a-c256e521650e" class=""><mark class="highlight-teal"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Right on.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></mark></p><ul id="60cf04df-440c-4c7d-a2d7-ca11bb058c47" class="bulleted-list"><li style="list-style-type:disc"><code>GetRegisteredUsers</code></li></ul><ul id="c24e805a-0c1c-4428-a0eb-54b303679e32" class="bulleted-list"><li style="list-style-type:disc"><code>IsValidSubmission</code></li></ul><ul id="0d74e64d-6765-4b88-9b69-94aa301f02ca" class="bulleted-list"><li style="list-style-type:disc"><code>ImportDocument</code></li></ul><ul id="3940978c-a6c1-46cd-bca3-05136753661b" class="bulleted-list"><li style="list-style-type:disc"><code>SendEmail</code></li></ul></div></div><h2 id="82506c7c-aa1c-4eeb-8d79-9b309973ad3b" class="">Avoiding nasty unexpected function side-effects</h2><ul id="352021b6-61ee-4a0e-b306-35edcb9e2cec" class="bulleted-list"><li style="list-style-type:disc"><code>CheckPassword</code> shouldn’t log users out</li></ul><ul id="7e20a452-70d9-449e-8c19-b59d6abebe1f" class="bulleted-list"><li style="list-style-type:disc"><code>ValidateSubmission</code> shouldn’t save</li></ul><ul id="19b9e0ff-bee7-48d3-9238-7a5cf542e7e1" class="bulleted-list"><li style="list-style-type:disc"><code>GetUser</code> shouldn’t create their session</li></ul><ul id="94496275-36f6-4b20-a71c-a1009bf65f3b" class="bulleted-list"><li style="list-style-type:disc"><code>ChargeCreditCard</code> shouldn’t send emails</li></ul><h2 id="493610bc-50e0-421d-ae73-9a8457e89666" class="">Avoid abbreviation</h2><p id="bfa9e6cb-dcb2-4e72-b772-ab8c787ebe00" class="">It’s not the 80’s. There’s no need to avoid abbreviating variable names:</p><ul id="2e862be9-8aca-44f7-81e5-33f31183f1ba" class="bulleted-list"><li style="list-style-type:disc">There’s no standard to word abbreviation;</li></ul><ul id="1452320e-e016-45c9-b16f-036f8c051566" class="bulleted-list"><li style="list-style-type:disc">We talk about code, and awkward abbreviation slows that process down.</li></ul><h2 id="5b2478fc-aa6e-4214-b654-51f793f2aa27" class="">Principles for selecting good variable names</h2><h3 id="f6458f94-a99f-4308-b158-647c019e52ba" class="">Booleans</h3><p id="b3863440-7f85-465f-828c-913674d79f62" class="">Boolean names should sound like true/false questions</p><div id="09920803-fde5-4638-8ae5-ff3d54bb18d7" class="column-list"><div id="479c298c-fb72-4412-b2b1-bf72ab91b06c" style="width:50%" class="column"><p id="d753f199-6bda-4a0d-a91e-14232117abba" class=""><strong><strong><strong><strong><strong><strong>Dirty:</strong></strong></strong></strong></strong></strong></p><ul id="38e012ae-f097-4812-a3cb-c14a1d2b462c" class="bulleted-list"><li style="list-style-type:disc"><code>open</code></li></ul><ul id="d0c5d78f-9449-40c8-bcc9-b93002f3123e" class="bulleted-list"><li style="list-style-type:disc"><code>start</code></li></ul><ul id="a77d530d-35b9-4469-96dd-3db1af2be5a7" class="bulleted-list"><li style="list-style-type:disc"><code>status</code></li></ul><ul id="db33d7f9-ca6c-45ef-b676-efffb999a8e1" class="bulleted-list"><li style="list-style-type:disc"><code>login</code></li></ul><pre id="e49d9743-905d-4c95-814a-b4d235fa71b4" class="code code-wrap"><code>if(login){
+	// ...
+}</code></pre></div><div id="f05a9529-019b-4b28-86f9-8fac580b20bd" style="width:50%" class="column"><p id="91912ced-d869-44ad-800c-67e785735fad" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><ul id="a36881cc-a0dc-4e1c-a97e-c4bcd8a43c20" class="bulleted-list"><li style="list-style-type:disc"><code>isOpen</code></li></ul><ul id="59e5d90e-ac4d-4c79-aea5-25bf6a7ed666" class="bulleted-list"><li style="list-style-type:disc"><code>done</code></li></ul><ul id="f9c81705-2ecc-454e-95b6-9898e8222ee9" class="bulleted-list"><li style="list-style-type:disc"><code>isActive</code></li></ul><ul id="12a29999-ce3a-43c4-9d12-219896058f4e" class="bulleted-list"><li style="list-style-type:disc"><code>loggedIn</code></li></ul><pre id="b22ddfcc-f741-40ca-8b85-068972a02476" class="code code-wrap"><code>if(loggedIn){
+	// ...
+}</code></pre></div></div><h3 id="5c408f18-1749-4b65-8cd5-995e3f83ba4e" class="">Be symmetrical</h3><p id="da2e7ee3-8f19-474d-aea9-19855138a443" class="">When dealing with states that toggle, consistently use matching pairs.</p><div id="c5209a2a-03dd-4ada-b83c-43915f46f46a" class="column-list"><div id="d1674f3c-bd0a-4402-ac78-d766fcaf544e" style="width:50%" class="column"><p id="5e7083f7-9ba7-414e-9cf5-2aa602a5a95d" class=""><strong><strong><strong><strong><strong><strong>Dirty:</strong></strong></strong></strong></strong></strong></p><ul id="fde9d47e-c5d6-4395-bb1f-a55d173e167a" class="bulleted-list"><li style="list-style-type:disc"><code>on/disable</code></li></ul><ul id="dd94c715-7bdd-4d89-80a0-7214490e3385" class="bulleted-list"><li style="list-style-type:disc"><code>quick/slow</code></li></ul><ul id="0b181fb1-c2a0-4459-b879-a0f202253afc" class="bulleted-list"><li style="list-style-type:disc"><code>lock/open</code></li></ul><ul id="c9de1d38-6129-42f0-8b3f-1ef5690e7299" class="bulleted-list"><li style="list-style-type:disc"><code>slow/max</code></li></ul></div><div id="9a11b6d7-7f13-4fdd-aad3-32ec77f9b895" style="width:50%" class="column"><p id="6c71ceb3-eadd-48a1-bfe7-5d730fe4f03a" class=""><strong><strong><strong><strong><strong><strong>Clean:</strong></strong></strong></strong></strong></strong></p><ul id="30ae4296-cbf2-4186-b424-9c6307129def" class="bulleted-list"><li style="list-style-type:disc"><code>on/off</code></li></ul><ul id="7cadb969-55e9-4f9c-ab5f-5ec91c654090" class="bulleted-list"><li style="list-style-type:disc"><code>fast/slow</code></li></ul><ul id="26aa35db-fc0d-4def-b181-185c63265ffa" class="bulleted-list"><li style="list-style-type:disc"><code>lock/unlock</code></li></ul><ul id="3d481fc8-3583-4160-bf5b-d1627564ba83" class="bulleted-list"><li style="list-style-type:disc"><code>min/max</code></li></ul></div></div><h1 id="8285187a-79a3-4a15-a96d-2800d578a29e" class="">Conditionals</h1><div id="5bce2e77-1acf-4e90-a5fd-8320f8137a0a" class="column-list"><div id="ae0fed88-9b96-4ae6-b763-f0d15f7e78f5" style="width:50%" class="column"><p id="723d553e-d3ff-48cb-a269-a72f6f250487" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="b83b2cbe-0e19-4400-8880-200ac19d7e67" class="code"><code>if(loggedIn == true){
+	// ...
+}</code></pre></div><div id="5e12a6d5-87fa-4258-9112-34e127722ce7" style="width:50%" class="column"><p id="99b86d1c-e84d-4c69-9cd8-6a35d1ef1726" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="b3c9bd64-e184-4e53-96a6-2f0e374d447f" class="code"><code>if(loggedIn){
+	// ...
+}</code></pre></div></div><h2 id="73bb29e4-cedf-41df-8f90-feb02ce955d2" class="">Assign Booleans Implicitly</h2><div id="e99f2585-659e-411c-aaf9-5e678041a7fc" class="column-list"><div id="cefa0f61-a161-485e-9592-5474a0a9e42c" style="width:50%" class="column"><p id="0cc5e2c3-5d41-4cc9-9d7a-f5ceb0fc9802" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="d87ef3c4-bab5-45a8-98b9-c87895a251f1" class="code"><code>bool goingToChipotleForLunch;
+
+if(cashInWallet &gt; 6.00){
+	goingToChipotleForLunch = true;
+} else {
+	goingToChipotleForLunch = false;
+}</code></pre></div><div id="24ca46ea-e08e-4356-b834-c22188f0cc37" style="width:50%" class="column"><p id="37fc7e65-cb36-4a09-a2dc-9edfa2b2eae2" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="92a8dfda-dbcf-4b69-a519-3e3feb50d38b" class="code"><code>bool goingToChipotleForLunch = cashInWallet &gt; 6.00;</code></pre><ol type="1" id="a2dafcbc-7139-49b1-97be-48168ff15326" class="numbered-list" start="1"><li>Fewer lines</li></ol><ol type="1" id="e7da250a-9a73-478c-94f1-e1ab2ab21ccd" class="numbered-list" start="2"><li>No seperate intialization</li></ol><ol type="1" id="778d257c-5762-4b90-914e-e668b912e3ba" class="numbered-list" start="3"><li>No repetition</li></ol><ol type="1" id="9fe5b2fb-ee6c-48f3-893a-9b8da83a4a4d" class="numbered-list" start="4"><li>Reads like speech</li></ol></div></div><h2 id="7a8930ee-6ca8-4c49-aeee-4ff3b25a432c" class="">Don’t be Anti-negative</h2><p id="0640e882-50b4-44cf-9d4d-d6105e45e739" class="">In other words: use positive conditionals!</p><div id="6f9f6cc6-40ce-4838-bd0c-67a8316f3f8c" class="column-list"><div id="7afafcad-9942-4767-81ed-d9cae26ded5b" style="width:50%" class="column"><p id="c0e7af95-dd80-4190-b060-0c5313dba8d3" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="ead759ea-7ddd-4978-8bf5-abe646334934" class="code"><code>if(!isNotLoggedIn)
+	//...</code></pre></div><div id="c8a48e43-9b9d-4ea3-8724-504cb92cac78" style="width:50%" class="column"><p id="cdf6a9ee-185e-47a4-9b3b-93879aed64e1" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="a8fb244e-d34b-40f2-b716-35710bf68dd5" class="code"><code>if(loggedIn)
+	// ...</code></pre></div></div><h2 id="9f4a8ad1-5fa7-42d3-acbd-60e73ca4fc4b" class="">Ternary is elegant</h2><div id="1966b00c-65c7-43ce-bc9c-94ea97ce021a" class="column-list"><div id="e7d3b122-f99e-4545-9ffa-959585006d8c" style="width:50%" class="column"><p id="2d92187e-6397-47f5-8645-97f8fd00b015" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="ffabd965-24e8-40c3-889d-d9c13e991484" class="code"><code>int registrationFee;
+if(isSpeaker) {
+	registrationFee = 0;
+} else {
+	registrationFee = 50;
+}</code></pre></div><div id="4f92b755-894e-4dd2-9ac0-5b9e1b6dd4fd" style="width:50%" class="column"><p id="7ef4e5cd-d072-43e1-bc5f-6112f9acda43" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="81378337-0b0e-461a-990d-5c7d1ca3d44b" class="code"><code>int registrationFee = isSpeaker ? 0 : 50;</code></pre><p id="e132d71b-f47f-4429-8aa5-db449380948e" class="">Respects <strong><strong><strong><strong>DRY </strong></strong></strong></strong>(<strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself)</p><p id="71f44c34-7d3a-44e2-b723-213cd8d9b4bc" class="">(Don’t chain ternaries!)</p></div></div><h2 id="a77dee58-e755-4947-89c6-fc88997be6c8" class="">Avoid being “Stringly” Typed</h2><div id="47acdc0b-6ced-4811-a190-4d96fde5d00c" class="column-list"><div id="6e17c0fb-618e-4e42-819b-5e43dbd9bd74" style="width:62.5%" class="column"><p id="7b37cb3e-b3f6-49b7-9746-8296bcf5a557" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="f28b491c-7060-445d-8867-04de6d013a84" class="code"><code>if(employeeType == &quot;manager&quot;)</code></pre><p id="e94f1663-b4e9-4d78-86ea-8ec6da0e5368" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="25742f06-e1f9-455a-a68e-41060b9ee96f" class="code"><code>if(employee.Type == EmployeeType.Manager)</code></pre></div><div id="c88645f9-de7a-459a-b0ce-ca3bdf697683" style="width:37.5%" class="column"><ol type="1" id="d97fd490-e2e9-418a-883e-3322461c0323" class="numbered-list" start="1"><li>Strongly typed ⇒ No typos</li></ol><ol type="1" id="99d460dd-d9c2-4318-916d-11a7337585ee" class="numbered-list" start="2"><li>Intellisense support</li></ol><ol type="1" id="59a2c4d8-6b7d-4b0f-84f0-a9e0dd864b3f" class="numbered-list" start="3"><li>Documents states</li></ol><ol type="1" id="51474367-1ecd-4e36-8d83-1206f84be3e4" class="numbered-list" start="4"><li>Searchable</li></ol></div></div><h2 id="9e4b96c6-8add-4d70-a8b1-1b06a03c640f" class="">Magic Numbers</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="52897e9d-193c-477b-a8d5-038e108456c3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Which would you rather read?
+</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>Sally went to the #12 dealer to buy a #19 #515.
+<em><em>or
+</em></em>Sally went to the Ferrari dealer to buy a red Enzo.</div></figure><p id="e1f035a1-5a52-44f8-957b-2309b03c2382" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Like magic, few can explain.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><div id="83c4d5eb-f626-4a62-a21f-197f5119222f" class="column-list"><div id="d2aaecd5-81c7-4a3b-b255-20e41f111bed" style="width:50%" class="column"><p id="6cee5ce5-658e-4a04-b82f-6c777c529427" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="4471ef69-3d42-4ff3-ba07-6bde088cfbc2" class="code"><code>if(age &gt; 21){
+	//...
+}
+</code></pre></div><div id="d8a23138-75ee-4c0a-a10c-aa95b4e2530b" style="width:50%" class="column"><p id="569395a1-2b70-4f77-b815-583789c26022" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="172408d3-6bdf-48fe-8e26-3818b2cc3485" class="code"><code>const int legalDrinkingAge = 21;
+if(age &gt; legalDrinkingAge){
+	//...
+}</code></pre></div></div><p id="aba099a6-bba1-4cb5-abcc-fe850244a8e2" class="">Another example:</p><div id="c0c18a32-0062-4d72-a10c-3f626df3ec68" class="column-list"><div id="5f53c8d8-0220-4901-9733-d762621841cc" style="width:50%" class="column"><p id="b7ecb6ff-47d2-449c-9883-af0a2943f800" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="4cd0efa9-d0e0-48d6-a57c-d3fb8c15acb0" class="code"><code>if(status == 2){
+	// ...
+}</code></pre></div><div id="60e4eae7-7b57-4ccb-b501-e1e87418892d" style="width:50%" class="column"><p id="1e79ebd7-6985-42fc-a63b-fc892d5be231" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="e6bd5cb8-1722-45f3-ba3e-dfc95625ee07" class="code"><code>if(status == Status.Active){
+	// ...
+}</code></pre></div></div><h2 id="bc6df24f-62b9-458f-a301-6a74a92b5b50" class="">Complex Conditionals</h2><pre id="5d3f5954-373c-4dda-bdb6-35164bb69914" class="code"><code>if(car.Year &gt; 1980
+	 &amp;&amp; (car.Make == &quot;Ford&quot; || car.Make == &quot;Chevrolet&quot;)
+   &amp;&amp; (car.Odometer) &lt; 100000
+   &amp;&amp; car.Vin.StartsWith(&quot;V2&quot;) || car.Vin.StartsWith(&quot;IA3&quot;))
+{
+	// ...
+}</code></pre><p id="a3daec2e-6d80-4b33-a534-7a185726dcbe" class="">How to fix?</p><ol type="1" id="88942285-192a-49eb-afaf-b210b7eb6348" class="numbered-list" start="1"><li>Intermediate variables</li></ol><ol type="1" id="1c93f5f9-1190-4209-9ff3-2bbeadd0a9c7" class="numbered-list" start="2"><li>Encapsulate via function</li></ol><div id="e0d41ab4-fee7-4d51-ba67-c9fecf74085e" class="column-list"><div id="f50e5f06-0e00-45e6-a215-25bf63635565" style="width:50%" class="column"><p id="1ec33783-e304-41f0-8b25-f0d000a6e257" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="2534e2df-9aa4-49b1-8b84-1fef73e49be4" class="code"><code>if (employee.Age &gt; 55
+    &amp;&amp; employee.YearsEmployed &gt; 10
+    &amp;&amp; employee.IsRetired == true)
+{
+	// ..
+}</code></pre></div><div id="6da05efb-8fa3-478a-b5ee-5a7203277c38" style="width:50%" class="column"><p id="0d378c83-07e8-4ea0-8796-f08146dfc475" class=""><strong><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></strong></p><pre id="070ec31b-cd88-4099-a9c9-ad17487c10ef" class="code"><code>bool eligebleForPension = employee.Age &gt; MinRetirementAge
+		&amp;&amp; employee.YearsEmployed &gt; MinPensionEmploymentYears
+		&amp;&amp; employee.IsRetired;
+
+
+</code></pre></div></div><h3 id="e37209ae-179a-45ca-88e4-a9fc754e2389" class="">Encapsulate Complex Conditionals</h3><div><div id="ae990134-7eac-4ae1-a52f-793c563c236c" class="column-list"><div id="573b8c6e-60e8-4905-a019-a62197a1bdbf" style="width:50%" class="column"><p id="f934481f-7d11-4fba-8e04-baa1362910f2" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="5d45470f-5f5e-4f1c-998e-c06e0b5ad11c" class="code"><code>// Check for valid file extensions. Confirm admin or active
+if (fileExtension == &quot;mp4&quot; ||
+		fileExtension == &quot;mpg&quot; ||
+		fileExtension == &quot;avi&quot;)
+		&amp;&amp; (isAdmin || isActiveFile);</code></pre></div><div id="8cef9b06-b039-4a43-8a36-8549f0424d07" style="width:50%" class="column"><p id="0616c651-e67f-4c05-90fd-7f49d4dda044" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="e31fc12d-9470-40dc-b2d4-7a0fe9701ff4" class="code"><code>if (ValidFileRequest(fileExtension, isActiveFile, isAdmin))
+
+private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin){
+		bool validFileType = (fileExtension == &quot;mp4&quot; ||
+				fileExtension == &quot;mpg&quot; ||
+				fileExtension == &quot;avi&quot;);
+		bool userIsAllowedToViewFile = (isAdmin || isActiveFile);
+		return validFileType &amp;&amp; userIsAllowedToViewFile;
+}</code></pre></div></div></div><h2 id="492a56c2-7691-427e-9b02-a2e973cc38ff" class="">Favor Polymorphism over Enums for Behavior</h2><div id="0c84386c-972f-4e91-8d33-8d04316f6068" class="column-list"><div id="63805c27-b819-44d0-9bb0-a85cb8b7a6da" style="width:50%" class="column"><p id="405d5419-d8e2-435a-8b73-d1e5db72ccfe" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="7e9724e6-3fd0-492e-bf51-ef9421fd11e1" class="code"><code>private void LoginUser(User user){
+	switch(user.Status){
+		case Status.Active:
+			// ...
+			break;
+		case Status.Inactive:
+			// ...
+			break;
+		case Status.Locked:
+			// ...
+			break;
+	}
+}</code></pre><p id="423c5746-09dc-4741-98ea-90a24c8439f6" class="">
+</p></div><div id="9ad7d65b-3662-4917-98fe-0ba66ec86a33" style="width:50%" class="column"><p id="4490f3e9-784a-496a-b51d-7cb14e52f19f" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="79a75a79-244c-4d3a-bfb7-389256f11e8b" class="code"><code>private void LoginUser(User user){
+	user.Login();
+}</code></pre><pre id="8a152952-7a98-4567-ba10-181a9f5f4937" class="code"><code>private abstract class User {
+	public string FirstName;
+	public string LastName;
+	public Status Status;
+	public int AccountBalance;
+
+	public abstract void Login();
+}</code></pre></div></div><pre id="156be2b8-0df8-4e8a-a830-ed4f8676317c" class="code"><code>private class ActiveUser : User {
+	public void Login(){
+		// ...
+	}
+}
+
+private class InactiveUser : User {
+	public void Login(){
+		// ...
+	}
+}
+
+private class LockedUser : User {
+	public void Login(){
+		// ...
+	}
+}</code></pre><h2 id="c4f4d50a-6117-44f5-82ba-f6ebc1221bc6" class="">Be declarative if possible</h2><div id="6ca7d9f4-1146-43de-b003-9951f657ca20" class="column-list"><div id="611339e2-dfca-4406-a373-8d6665499f80" style="width:50%" class="column"><p id="c0f9cf20-9537-4d11-aaed-b163518ececb" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="ec8e22a8-4279-4644-8baf-5469dbb37def" class="code"><code>List&lt;User&gt; matchingUsers = new List&lt;User&gt;();
+
+foreach (var user in users){
+	if (user.AccountBalance &lt; minumAccountBalance
+		&amp;&amp; user.Status == Status.Active){
+		matchingUsers.Add(user);
+	}
+}
+
+return matchingUsers;</code></pre></div><div id="252b6a00-5b08-47df-8048-8ba19f1adde2" style="width:50%" class="column"><p id="aa37fa54-3284-40b9-b80b-df446e7a2927" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="3fc3850e-4272-4cde-96b0-ffc28b826cf5" class="code"><code>return users
+	.Where(u =&gt; u.AccountBalance &lt; minimumAccountBalance)
+	.Where(u =&gt; u.Status == Status.Active);</code></pre><ul id="86a4bee8-ff34-4c6b-8908-647eb370e38e" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong>C#: </strong></strong></strong></strong></strong></strong>LINQ to objects</li></ul><ul id="a81d33ec-4f8a-4843-8e6b-2f489548e18f" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong>Java: </strong></strong></strong></strong></strong></strong>Lamdaj</li></ul><ul id="dc6cfd75-19af-4f37-843c-fa54c7366977" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>JavaScript:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> jLinq</li></ul><ul id="e720e163-d807-433e-8baa-dd3924332c2d" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong>Python</strong></strong></strong></strong></strong></strong>: Pynq</li></ul></div></div><p id="644e2e4f-7b4b-4fb8-b781-124de42a3630" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Sometimes code isn’t the answer. </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><em><em><em><em><em>When?</em></em></em></em></em></p><h2 id="297e0d3d-2492-4621-8809-e8e3712c767d" class="">Table Driven Methods</h2><div id="879e55a4-2a3a-4f1e-a7b7-303c27236c7c" class="column-list"><div id="ad59dc2f-b02a-427b-bb9e-2ee5a406a47c" style="width:37.5%" class="column"><p id="a8862706-820c-4ffc-ae11-2b065a080c7a" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="c2ed004b-c819-441b-b52c-7b8d97943551" class="code"><code>if(age &lt; 20){
+	return 345.60m;
+} else if (age &lt; 30) {
+	return 419.50m;
+} else if (age &lt; 40) {
+	return 476.38m;
+} else if (age &lt; 50) {
+	return 516.25m;
+} else if // ...</code></pre></div><div id="eda81f57-39d3-483d-bce7-6bf4e5fffd70" style="width:62.5%" class="column"><p id="44287724-9d0e-4419-b9b5-74f5b2b9318e" class=""><strong><strong><strong><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></strong></strong></strong></p><figure id="c50dd833-c856-411e-9f3c-5cfaae3000f2" class="image"><a href="img/wcfh/Untitled.png"><img style="width:156px" src="img/wcfh/Untitled.png"/></a></figure><pre id="70e41584-c8d8-4f59-8827-559c046bbc94" class="code"><code>return Repository.GetInsuranceRate(age);</code></pre></div></div><ul id="16cf94c2-07cc-4b00-8a5a-c0b6934f701f" class="bulleted-list"><li style="list-style-type:disc">Great for dynamic logic</li></ul><ul id="2df650bf-eb3f-4031-927e-5560d559dd6b" class="bulleted-list"><li style="list-style-type:disc">Avoids hard coding</li></ul><ul id="3a5a5b27-026f-4ada-bf75-c06a9d338899" class="bulleted-list"><li style="list-style-type:disc">Write less code - Avoids complex data structures</li></ul><ul id="475a96d2-92d8-460b-a8cb-9284a233b693" class="bulleted-list"><li style="list-style-type:disc">Easily changeable without a code change/app deployment</li></ul><h1 id="2eb9435e-3fd2-4b7d-afa8-ec2374411bb1" class="">Functions</h1><h2 id="7d51b3ac-e01c-4cee-81ce-eb330c9b7305" class="">When to create a function</h2><ul id="0de0f74a-d917-4695-82f4-2b19b593ba09" class="bulleted-list"><li style="list-style-type:disc">You want to avoid duplication;</li></ul><ul id="632370f6-bb3d-495e-939f-44deb7332973" class="bulleted-list"><li style="list-style-type:disc">Indentation - you have complex code you want to call again;</li></ul><ul id="5e45e649-9004-4467-afeb-aae5fee2ca24" class="bulleted-list"><li style="list-style-type:disc">Code doesn’t convey intent clearly - but encapsulating it in a function and giving it a good name can;</li></ul><ul id="11b81cc4-4c0d-46ef-82f3-355c2577e2a3" class="bulleted-list"><li style="list-style-type:disc">Task division - you want to accomplish a task, by dividing it into multiple atomic subtasks, that can be represented by functions (Single Responsibility).</li></ul><h2 id="2d55a3ea-ca6d-4124-9a85-45660263bdcb" class="">Avoid Duplication</h2><p id="624a8bdd-1366-497a-b1f7-78a3c55c6d66" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Key: Don’t repeat yourself</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="2f602259-295c-481c-abb4-84d2d330fd9f" class="">Code is a libaility</p><p id="518ba600-e448-4aa0-9c9a-c024f14b1f92" class="">Less is more</p><h3 id="cab90ef5-4c7d-464a-bffe-c66ad74bf9c3" class="">Look for Patterns</h3><figure id="c71263ab-1122-441c-b390-377128892d93" class="image"><a href="img/wcfh/Untitled%201.png"><img style="width:568px" src="img/wcfh/Untitled%201.png"/></a></figure><h2 id="a8aa9401-b45b-4d3b-827c-4cadc9cf953b" class="">Excessive Indentation</h2><h3 id="34f2f7cd-ebbd-41c0-80e4-cc0bf2efb7ae" class="">Arrow Code</h3><figure id="79198751-31f1-460c-a7fd-11540ee241f9" class="image"><a href="img/wcfh/Untitled%202.png"><img style="width:434px" src="img/wcfh/Untitled%202.png"/></a></figure><p id="f2f2d977-dabb-4e59-a3b4-36dc1efb62f0" class="">As our logic grows more complex, it’s common to see an arrow shape form. Arrow code is a sign that a method has <strong><strong><strong><strong><strong><strong><strong><strong>high cyclomatic complexity.</strong></strong></strong></strong></strong></strong></strong></strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ee1f47de-92fd-473d-8854-9d39188f54f1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Cyclomatic complexity
+</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>There are many distinct paths through a method. High cyclomatic complexity hurts readability, hinders testing and increases the likelihood of bugs in a given method.</div></figure><blockquote id="ca98aaea-5aae-48e1-b434-a864b8385374" class="">Comprehension decreases beyon three levels of nested <code>if</code> blocks.
+- <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>1986 Study by Noam Chomsky and Gerald Weinberg</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></blockquote><p id="6c889c56-6260-4a81-8e16-e64cc232f2ce" class="">Solutions:</p><h3 id="31b884c9-fe06-48d5-8127-49cf93411f38" class="">Extract Method</h3><div id="a8b0d70b-3c2e-45a2-96d5-08af3e8ad518" class="column-list"><div id="0bb1e01c-756e-410f-bf3b-e54d1d817918" style="width:50%" class="column"><p id="1ec1ddec-c342-454b-8c8e-b4dd9f77218e" class=""><strong><strong><strong><strong><strong><strong>Before</strong></strong></strong></strong></strong></strong></p><pre id="62288267-a092-4f9d-ab0a-8b6b40af0f5e" class="code"><code>if
+	if
+		while
+			do
+			some
+			complicated
+			thing
+		end while
+	end if
+end if
+</code></pre></div><div id="eb9f9c10-b113-4c75-8fa7-053235ce2d20" style="width:50%" class="column"><p id="75653f71-b8b6-4676-9cb3-5c971ff1ff7d" class=""><strong><strong><strong><strong><strong>After</strong></strong></strong></strong></strong></p><pre id="cd469adc-c339-4e27-b81c-7beb303a3806" class="code"><code>if
+	if
+		doComplicatedThing()
+	end if
+end if
+
+doComplicatedThing(){
+	while
+		do some complicated thing
+	end while
+}</code></pre></div></div><h3 id="6bfa6911-80a4-419c-8aea-d767bcbde8b8" class="">Return Early</h3><p id="c735b402-6b24-4d05-bb1b-761dcceaccb5" class="">If you have nothing more to do, return</p><div id="74c69a91-f4a9-4f73-8dbb-0156958f8bfc" class="column-list"><div id="20952885-4011-41e4-af67-902ed537be4b" style="width:50%" class="column"><pre id="ed6871f3-c0f1-4e74-b3ce-9bbd6d36fa81" class="code"><code>// DIRTY
+private bool ValidUsername(string username){
+	bool isValid = false;
+	
+	const int MinUsernameLength = 6;
+	if(username.length &gt;= MinUsernameLength){
+		const int MaxUsernameLength = 25;
+		if(username.Length &lt;= MaxUsernameLength){
+			bool isAlphaNumeric = username.All(Char.IsLetterOrDigit);
+			if(isAlphaNumeric){
+				if(!ContainsCurseWords(username)){
+					isValid = IsUniqueUsername(username);
+				}
+			}
+		}
+	}
+
+	return isValid;
+}</code></pre></div><div id="6f1c78ec-ce9e-4009-aea7-cffab9f210ba" style="width:50%" class="column"><pre id="ea3e6284-d68c-4fd2-9de8-15a27ef8bb5c" class="code"><code>// CLEAN
+private bool ValidUsername(string username){
+	const int MinUsernameLength = 6;
+	if(username.Length &lt; MinUsernameLength) return false;
+
+	const int MaxUsernameLength = 25;
+	if(username.Length &gt; MaxUsernameLength) return false;
+
+	bool isAlphaNumeric = username.All(Char.IsLetterOrDigit);
+	if(!isAlphaNumeric) return false;
+
+	if(ContainsCurseWords(username)) return false;
+
+	return IsUniqueUsername(username);
+}
+
+
+
+</code></pre></div></div><blockquote id="f0be666a-1e0d-4b3b-aa73-42d431eb839e" class="">Use a return when it enhances readability… in certain routines, once you know the answer… not returning immediately means that you have to write more code.
+- <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>Steve McConnell, “Code Complete”</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></blockquote><h3 id="c0bd452d-6d59-4b1f-a049-caae514c06aa" class="">Fail Fast</h3><div id="19ee27a4-0a71-462f-8bbf-15bce4dd3418" class="column-list"><div id="4b99bb88-2dae-4a89-8617-cf6c3a675e82" style="width:37.5%" class="column"><p id="6fad45a5-87ab-4777-b385-d623ff436b81" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="80bf95f8-18f8-4ec1-9cb2-0af15582a5da" class="code"><code>public void RegisterUser(string username, string password){
+	if(!string.IsNullOrWhiteSpace(username)){
+		if(!string.IsNullOrWhiteSpace(password)){
+			// todo: register user
+		} else {
+			throw new ArgumentException(&quot;Username is required&quot;);
+		}
+	} else {
+		throw new ArgumentException(&quot;Password is required&quot;);
+	}
+}</code></pre></div><div id="2978b226-6b1f-435f-9d6a-a677597d1539" style="width:62.5%" class="column"><p id="69b18e4a-6e84-4c97-a525-0c54fbc8302e" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="869065ed-c05e-410c-91aa-39fa9866ee65" class="code"><code>public void RegisterUser(string username, string password){
+	// guard clauses
+	if (string.IsNullOrWhiteSpace(username)) throw new ArgumentException(&quot;Username is required&quot;);
+	if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException(&quot;Password is required&quot;);
+
+	// TODO: Register user
+}</code></pre><p id="b6f7499b-d3ba-439b-82b9-619ba29741fa" class="">
+</p></div></div><h2 id="1bbca66a-d57b-4440-8fe5-3ae6a506485d" class="">Conveying Intent</h2><div></div><h2 id="b4ee2b6b-2d6b-4bb1-89f8-aea583e3f2e4" class="">Do one thing</h2><p id="f94e6700-f9da-448c-9f30-949602128b49" class="">Could you read a book with no paragraphs?</p><p id="be9e85ae-7388-4418-8baf-047037ee807d" class="">Could you maintain a codebase with one single method?</p><p id="edc64689-1b90-4642-9676-8390fc6fa4f2" class="">Maintaining a single responsibility:</p><ul id="d519495e-5250-4a8b-b342-42492a2abf4f" class="bulleted-list"><li style="list-style-type:disc">Aids the reader;</li></ul><ul id="95bfccb0-2f9b-4b93-af44-d8ba2cd11019" class="bulleted-list"><li style="list-style-type:disc">Promotes reuse;</li></ul><ul id="25e807ff-2a68-44a4-97d2-94d1a5f88b74" class="bulleted-list"><li style="list-style-type:disc">Eases naming and testing;</li></ul><ul id="61e10ce7-a13e-477c-b3b0-b2ed09bb6c48" class="bulleted-list"><li style="list-style-type:disc">Avoids side-effects.</li></ul><h2 id="ccabab55-c09e-43a6-93c8-4d5b681f855f" class="">Mayfly variables</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d5a012d7-6173-4a93-b5f2-1265c287d64d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Would you read this?
+</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>Bobby - Boy from Chicago
+Sandy - Girl from New York
+Tom - Man from Boston
+Etc…
+
+Once upon a time…</div></figure><p id="355e3412-5845-400f-a355-5796e96a11f7" class="">Without context, it’s noise and mental weight.</p><div id="265179cf-7d8a-4af8-a9c3-78d4a70ac5e1" class="column-list"><div id="f30241b0-7d7d-4ab3-a27b-61a0ecf4225f" style="width:50%" class="column"><p id="6185c18a-f7c6-4200-9910-672d05fe6606" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="c7f00a90-8e66-46da-a505-33751be1cd01" class="code"><code>private void MayFly(){
+	bool a = false;
+	int b = 0;
+	string c = string.Empty;
+	bool d = true;
+
+	// body continues
+	// ...
+	// ...
+	// ...
+
+	a = SomethingIsTrue();
+	if(a){
+		if(c.Length &gt; b){
+			// body continues
+			// ...
+			// ...
+			// ...
+			d = c.Substring(0, 3) == b.ToString();
+		}
+	}
+}</code></pre></div><div id="abe2abbd-d43d-45b0-9d95-54b4c8df4f0e" style="width:50%" class="column"><p id="30e477ea-b5b7-4e90-a837-c25079e52fe9" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Recipe for Mayfly variables:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ol type="1" id="b5f19eeb-b86a-4bb1-824b-ea17045d52de" class="numbered-list" start="1"><li>Initialize Variables just-in-time</li></ol><ol type="1" id="70550eb4-b26f-4881-b7bd-a9ad897ae9c2" class="numbered-list" start="2"><li>Do one thing</li></ol></div></div><h2 id="58401599-6299-4a7c-92a9-5e5b48e8a409" class="">How many parameters</h2><ul id="fb7d483b-a4bf-485c-a515-f0332d5b2a81" class="bulleted-list"><li style="list-style-type:disc">Strive for 0 - 2 parameters</li></ul><ul id="e023482e-2c72-4c8f-86b7-60545d4a0adc" class="bulleted-list"><li style="list-style-type:disc">Easier to understand, read and test</li></ul><ul id="1504b73e-47b2-44d1-b388-e3cec7ad6243" class="bulleted-list"><li style="list-style-type:disc">Helps assure function does one thing</li></ul><p id="ed82b79d-aa8f-4e35-951f-dfe9670ff417" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="81e3e309-5053-4c3b-9b92-9e900b57e9e2" class="code"><code>public void SaveUser(User user, bool sendEmail, int emailFormat,
+	bool printReport, bool sendBill)</code></pre><h3 id="00459a49-83d1-48c9-835a-456922169738" class="">Watch for Flag Arguments</h3><p id="889584f3-b6b5-4678-a2d8-771ba5708af0" class="">A sign the function is doing two things</p><div id="9b384fe4-9bff-4ebc-951b-4a4c6991f281" class="column-list"><div id="f9279100-c9ea-4c3e-8dd3-3f01e6808ae1" style="width:50%" class="column"><p id="ccff6c69-3d45-4d97-8de9-c8ca3f8fa6e1" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="84603638-aece-4158-a7d8-0fcfb0b816c0" class="code"><code>private void SaveUser(User user, bool emailUser){
+	// save user
+	if(emailUser){
+		// email user
+	}
+}
+</code></pre></div><div id="be92b39b-d271-41a1-b533-28dc65a36a5d" style="width:50%" class="column"><p id="aa9167a0-4b4a-404a-9a6e-e129f3f8e7e7" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="ce49d264-24b5-4cf8-b585-c59f6229abc8" class="code"><code>private void SaveUser(User user){
+	// save user
+}
+
+private void EmailUser(User user){
+	// email user
+}</code></pre></div></div><h2 id="253f6fc7-b969-4cc6-b3a7-3958e2d2d4df" class="">What is “too long”?</h2><ul id="f7cdbc16-2e96-4316-a9e4-f33e67c3036b" class="bulleted-list"><li style="list-style-type:disc">Whitespace &amp; comments are used to separate lines of thought;</li></ul><ul id="d522a95a-ab40-4267-af9d-2138e6ee20b1" class="bulleted-list"><li style="list-style-type:disc">Scrolling is required;</li></ul><ul id="25b4f14e-3d3b-4ab5-9803-86d38ac8b3f4" class="bulleted-list"><li style="list-style-type:disc">Hard time coming up with a name for it;</li></ul><ul id="f43e196d-b8fb-4464-91a8-bd683e076c0f" class="bulleted-list"><li style="list-style-type:disc">Multiple conditionals;</li></ul><ul id="d60ec576-4d17-4693-8af2-ee0cbfe43ee1" class="bulleted-list"><li style="list-style-type:disc">Hard to digest.</li></ul><blockquote id="6f821ff8-0116-4248-8f1b-93e9eaa122d8" class="">Functions should rarely be over 20 lines, hardly ever over 100 lines and should have no more than 3 parameters.
+- <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>Robert C. Martin, “Clean Code”</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></blockquote><blockquote id="0c207a83-67f7-4f23-9027-d8d4627f3533" class="">The maximum length (…) is inversely proportional to the complexity and indentation level of that function. So if you have a conceptually simple function that is just one long (but simple) case statement (…) it’s OK to have a longer function (…) if you have a complex function (…) adhere to limits all the more closely.
+- <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>Linux style guide</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></blockquote><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b3f04aa3-0756-4b1b-beb1-ae1d02bd0051"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Simple functions can be longer. Complex functions should be short.</div></figure><h2 id="4240edc6-5de0-4099-b5cf-ecf2020921ec" class="">Kinds of Exceptions</h2><div id="78aff4fd-8953-468f-828e-d8386fc18886" class="column-list"><div id="2ebd06ac-0ec5-437e-9b01-c4254bb1f7e8" style="width:33.33333333333333%" class="column"><h3 id="bf2424d5-ad20-4735-83e5-d6fb503005a4" class="">Unrecoverable</h3><p id="8cad01f0-5e73-4453-a0ce-1a0f404ec968" class="">The most common:</p><ul id="bc8c2407-5b8a-4d52-b35f-d15e3ecf84ab" class="bulleted-list"><li style="list-style-type:disc">Null reference;</li></ul><ul id="1c868daa-7bf4-4cc5-ad9c-e3c1eb8b256d" class="bulleted-list"><li style="list-style-type:disc">File not found;</li></ul><ul id="b606199f-1af4-43f4-a565-9af2cabbe219" class="bulleted-list"><li style="list-style-type:disc">Access denied;</li></ul><ul id="09861cae-3d5e-4b3e-89cd-02b0700fb864" class="bulleted-list"><li style="list-style-type:disc">etc.</li></ul></div><div id="1b23b648-cbaa-4f81-a8bb-96ce777ed360" style="width:33.33333333333333%" class="column"><h3 id="1a6ffddb-5215-4ef3-afb6-6cdfe61cb861" class="">Recoverable</h3><p id="b31cd561-b5b5-406e-ad5b-415c45e0f6b2" class="">It’s not all lost:</p><ul id="b3a7e37f-4550-43ac-a007-35ed626c84be" class="bulleted-list"><li style="list-style-type:disc">Retry connection;</li></ul><ul id="1f8678b3-5cfb-4623-bb4a-373a9659a78e" class="bulleted-list"><li style="list-style-type:disc">Try different file;</li></ul><ul id="ed0b9628-4bb1-42df-839a-c5f47a4a3d7f" class="bulleted-list"><li style="list-style-type:disc">Wait and try again;</li></ul><ul id="c6116bb0-cf85-41f8-983a-373f06e37950" class="bulleted-list"><li style="list-style-type:disc">etc.</li></ul></div><div id="214978e1-d94e-4aaa-8ad3-a484c9d9a40b" style="width:33.33333333333333%" class="column"><h3 id="d0f61dfd-b513-41b6-9d06-0c0fa1fee3f0" class="">Ignorable</h3><p id="0feebcef-b9ce-41ed-b26f-ff9946686f43" class="">Truly ignorable exceptions are rare.</p><ul id="009dca4b-4376-452a-9e7a-3bf34bb8a854" class="bulleted-list"><li style="list-style-type:disc">Logging click</li></ul></div></div><p id="267dbd58-1524-48c9-baa5-89f287ff56ab" class="">You should never catch an exception that you can’t handle intelligently. <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Let it bubble up</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. If you have an error that you can’t swallow, that you can’t deal with on the spot, and that you can’t deal with higher up in the application, then your application is broken. <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>The correct behavior for a broken application is to crash immediately.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> A broken application that tries to limp along in an inconsistent state is a danger to itself, its data and its users.</p><h2 id="2a703640-f02e-4b42-9eea-67df218f7c4a" class=""><code>Try</code>/<code>Catch</code>/<code>Log</code> = Fail Slow</h2><div id="f5cd1369-28a2-4375-b771-729f07758c1d" class="column-list"><div id="9a0819f4-a4c8-4b46-ba84-5dd51726ab5a" style="width:50%" class="column"><p id="bbdfb564-41b5-4e3d-ac2e-b624a6c5fafe" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="adf13e14-7d7a-4e2d-8917-aa4688940a65" class="code"><code>try{
+	RegisterSpeaker();
+} catch (Exception e) {
+	LogError(e);
+}
+
+EmailSpeaker();</code></pre></div><div id="395bec65-a5d7-4fe9-bf44-3f3bdffa500c" style="width:50%" class="column"><p id="3051bbfc-558b-4c19-9428-2c6a138f16c4" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="a6192f39-c0c2-429f-bb60-5ed182c7f260" class="code"><code>RegisterSpeaker();
+EmailSpeaker();</code></pre></div></div><h2 id="b0520ff4-f1ce-45e7-aa09-e32c16ab4796" class=""><code>Try</code>/<code>Catch</code> Body Standalone</h2><div id="2757375d-9ad4-4de4-bd4d-44b4623bb289" class="column-list"><div id="fc371d54-1008-4437-beaf-d5076300c199" style="width:50%" class="column"><p id="097b4cfd-e19f-41e0-9e88-18fd4c37b360" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="61d73f90-f7c0-4e39-9997-c2cf68153819" class="code"><code>try {
+	// many
+	// lines
+	// of
+	// complicated
+	// and verbose
+	// logic here
+} catch (ArgumentOutOfRangeException) {
+	// do something here
+}
+
+
+
+</code></pre></div><div id="f2cea900-1c22-4a44-8d71-4c0707f347fd" style="width:50%" class="column"><p id="a6fa779e-bdef-4250-bef4-4ac15ebaeef9" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="8f427750-4bff-49dc-9b85-7e0862128f89" class="code"><code>try {
+	SaveThePlanet();
+} catch (ArgumentOutOfRangeException) {
+	// do something here
+}
+
+private void SaveThePlanet(){
+	// many
+	// lines
+	// of
+	// complicated
+	// and verbose
+	// logic here
+}</code></pre></div></div><h1 id="7f459ecd-a522-49f0-8e6a-edfe781a578c" class="">Classes</h1><h2 id="5c7e96bb-e797-4cd5-8cea-9978bf88be08" class="">When to Create</h2><p id="41a1b248-8fff-434b-bc94-1a1a8547ae04" class="">Classes are like headings in a book.</p><figure id="97697e4e-4b00-4f16-af38-935bdad439ef" class="image"><a href="img/wcfh/Untitled%203.png"><img style="width:682px" src="img/wcfh/Untitled%203.png"/></a></figure><p id="846d5e60-29a6-4b81-a2ee-956e533b08ac" class="">You should create a class to:</p><ol type="1" id="ce96eec1-da0a-4a10-94bb-d6fb6982288f" class="numbered-list" start="1"><li>Model an object or new concept (either abstract or real-world);</li></ol><ol type="1" id="7907e762-6d7f-4fc3-9c34-bc998c3e7c48" class="numbered-list" start="2"><li>Refactor a class with low cohesion (split it into classes whose methods relate to the concept being modeled);</li></ol><ol type="1" id="97599259-1785-4967-ae48-0c4d9729c4e2" class="numbered-list" start="3"><li>Promote reuse (small, targeted code ⇒ reusage )</li></ol><ol type="1" id="13c4fd9b-f72a-4cc4-b82b-622d42474036" class="numbered-list" start="4"><li>Reduce complexity (solve once, hide away)</li></ol><ol type="1" id="cdbc4b75-adff-4802-bbfa-633351db071e" class="numbered-list" start="5"><li>Clarify parameters (can identify a group of data)</li></ol><h2 id="7140ac1f-e640-4dde-b26c-ef78601d1bb7" class="">High Cohesion</h2><ul id="58ab0402-b1f3-4560-aa63-ce30facb34ff" class="bulleted-list"><li style="list-style-type:disc">Class responsibilities should be strongly-related:<ul id="911d41ed-ef27-41e7-b100-73871addf9ea" class="bulleted-list"><li style="list-style-type:circle">Enhances readability;</li></ul><ul id="333129d3-26f5-456a-88d4-f2eb22fd62ba" class="bulleted-list"><li style="list-style-type:circle">Increases likelihood of reuse;</li></ul><ul id="a74a1373-9668-4d25-b5ba-75d26f3f60b5" class="bulleted-list"><li style="list-style-type:circle">Avoids attracting the lazy.</li></ul></li></ul><ul id="7793b15f-54e3-4aaa-9ba5-fed25c096441" class="bulleted-list"><li style="list-style-type:disc">Watch out for:<ul id="d9f3ccad-6f54-4e4a-a25b-2908e89ebc91" class="bulleted-list"><li style="list-style-type:circle">Methods that don’t interact with the rest of the class;</li></ul><ul id="ea72ed23-7170-46c6-bf3d-40668ec97229" class="bulleted-list"><li style="list-style-type:circle">Fields that are only used by one method;</li></ul><ul id="f6a774be-73c1-4bf0-84d5-37309d7bc149" class="bulleted-list"><li style="list-style-type:circle">Classes that change often</li></ul></li></ul><h3 id="c16b4ec9-dcf4-4cc5-9e25-0a09148469b8" class="">Example:</h3><div id="95bd610d-ad50-4edf-b0c7-8a7561c512e3" class="column-list"><div id="6c361184-7bbd-4ffe-b332-db4761d77372" style="width:50%" class="column"><p id="a04d9d2d-163d-4275-971e-8daa09f7e0e7" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Low Cohesion</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="dd888d47-5b2b-498c-ad99-8344b4936845" class="bulleted-list"><li style="list-style-type:disc">Vehicle<ul id="d80c7e31-be75-47c2-a6ce-cb8cdfba0674" class="bulleted-list"><li style="list-style-type:circle">Edit vehicle options</li></ul><ul id="d561db44-dc6e-4347-89f9-23115d0df52d" class="bulleted-list"><li style="list-style-type:circle">Update pricing</li></ul><ul id="fdfc5132-decd-458a-b4d6-ded0b41b4463" class="bulleted-list"><li style="list-style-type:circle">Schedule maintenance</li></ul><ul id="2114b687-17b1-40d7-9cb4-1a8f4a79cab2" class="bulleted-list"><li style="list-style-type:circle">Send maintenance reminder</li></ul><ul id="25c2ba9d-6c8d-430e-84ff-12c6193eb773" class="bulleted-list"><li style="list-style-type:circle">Select financing</li></ul><ul id="6990121b-4cfb-4187-8270-66d394c8e03b" class="bulleted-list"><li style="list-style-type:circle">Calculate monthly payment</li></ul></li></ul></div><div id="d87afd16-87ad-4692-b0bf-99dc0bc9d8d0" style="width:50%" class="column"><p id="d89ea585-5f7b-48fe-88a4-e06b202155ce" class=""><strong><strong><strong><strong><strong><strong><strong>High Cohesion</strong></strong></strong></strong></strong></strong></strong></p><ul id="e017efb3-998b-485a-9d73-a47ca99abeea" class="bulleted-list"><li style="list-style-type:disc">Vehicle<ul id="812587ce-7eb9-4f5d-8aba-c21625a7cdcc" class="bulleted-list"><li style="list-style-type:circle">Edit vehicle options</li></ul><ul id="9e13f8e0-7d34-445f-808b-0ce2200965af" class="bulleted-list"><li style="list-style-type:circle">Update pricing</li></ul></li></ul><ul id="8b4aa450-ae77-45b7-b824-c2efdf72ed20" class="bulleted-list"><li style="list-style-type:disc">VehicleMaintenance<ul id="25da5094-5afc-4f7f-ae2f-57b60acb2a87" class="bulleted-list"><li style="list-style-type:circle">Schedule maintenance</li></ul><ul id="ea3017cc-e180-4e08-a6f8-41cd66f03213" class="bulleted-list"><li style="list-style-type:circle">Send maintenance reminder</li></ul></li></ul><ul id="f4df80b7-8308-419a-a8b1-0b94d8f11aa2" class="bulleted-list"><li style="list-style-type:disc">VehicleFinance<ul id="089e7ca3-3b9d-4d38-ae25-15bb3ed4ccc1" class="bulleted-list"><li style="list-style-type:circle">Select financing</li></ul><ul id="82e3a598-752b-4526-bfa4-9033679b18db" class="bulleted-list"><li style="list-style-type:circle">Calculate monthly payment</li></ul></li></ul></div></div><h3 id="566df3be-68b6-4d5a-99db-5f2f02622460" class="">Sniffing out lack of cohesion</h3><p id="1e6566da-428a-416b-aa24-903fea01bfee" class="">Classes with overly general and under-descriptive names attract magnet classes (classes that attract unrelated code due to poor naming conventions of what methods and data go where, leading to extremely bloated classes).</p><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="134e85e7-522b-4cf9-b223-1893200c5942"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Specific names lead to smaller, more cohesive classes.</div></figure><h2 id="045e2a18-c296-4784-bdad-7055ad259069" class="">When is a class too small?</h2><ol type="1" id="33fe032a-cfa3-4a55-9195-db92f33ce3b7" class="numbered-list" start="1"><li>Inappropriate intimacy (Rely heavily on one another and frequently call each other’s methods - a sign that the two classes should really be one class mixed together);</li></ol><ol type="1" id="7ed28f8c-099c-4a46-bbb4-be039922d31b" class="numbered-list" start="2"><li>Feature envy (One class that relies heavily on another - the two classes should be mixed together);</li></ol><ol type="1" id="10429337-0c2f-49de-9f17-22160e934d48" class="numbered-list" start="3"><li>Too many small moving parts (Can add unwanted complexity due to too many classes interacting with one another).</li></ol><h2 id="b8c7b8cb-13c1-4db0-9cc2-194dff39f3c6" class="">Primitive Obsession</h2><div id="0f4c8c9b-51ae-446c-b4ed-45b8257c06d1" class="column-list"><div id="0209da81-b82c-47fe-918f-c9f5166df2a5" style="width:50%" class="column"><p id="6ba7b1f7-e51d-48cd-96ba-899bce69c242" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="8e4bfe53-1c51-4d22-bc65-dd7a56e26105" class="code code-wrap"><code>private void SaveUser(string firstName,
+											string lastName,
+											string state,
+											string zip,
+											string eyeColor,
+											string phone,
+											string fax,
+											string maidenName)</code></pre></div><div id="71cfcbbd-468d-4ffb-b48a-3a86833895d5" style="width:50%" class="column"><p id="9bd58e70-a517-4a23-9d41-e27f66c3c092" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="3f0addd4-7f67-43a8-ba11-93a4da745e87" class="code code-wrap"><code>private void SaveUser(User user)</code></pre><ul id="0d66499d-5165-4d67-ad37-10defecedfaf" class="bulleted-list"><li style="list-style-type:disc">Helps reader conceptualize</li></ul><ul id="0e152c4e-6043-4bf9-aa57-9ba2346a2b79" class="bulleted-list"><li style="list-style-type:disc">Implicit → Explicit</li></ul><ul id="ca926f09-9118-4892-ba92-3504ec7ec81d" class="bulleted-list"><li style="list-style-type:disc">Encapsulation</li></ul><ul id="3cd33b4d-6281-4584-a4ce-f434194970cc" class="bulleted-list"><li style="list-style-type:disc">Aids maintenance</li></ul></div></div><h2 id="9099e054-7f83-494d-9be0-3907bae1d083" class="">Principle Proximity</h2><ul id="5e855706-a332-4eff-9e4c-669dbfc07c65" class="bulleted-list"><li style="list-style-type:disc">Strive to make code read top to bottom when possible</li></ul><ul id="ae9bcff0-f0e2-410e-8fa6-6ea45778f772" class="bulleted-list"><li style="list-style-type:disc">Keep related actions together</li></ul><pre id="498dc4c7-6f51-49a5-82c1-a20bdeced150" class="code code-wrap"><code>private void ValidatingRegistration(){
+	ValidateData();
+	if(!SpeakerMeetsOurRequirements())
+		throw new SpeakerDoesntMeetRequirementsException(&quot;This speaker doesn&#x27;t meet our standards.&quot;);
+	ApproveSessions();
+}
+
+private void ValidateData(){
+	if(string.IsNullOrEmpty(FirstName)) throw new ArgumentNullException(&quot;First name is required.&quot;);
+	if(string.IsNullOrEmpty(LastName)) throw new ArgumentNullException(&quot;Last name is required.&quot;);
+	if(string.IsNullOrEmpty(Email)) throw new ArgumentNullException(&quot;Email is required.&quot;);
+	if(Sessions.Count() == 0) throw new ArgumentException(&quot;Can&#x27;t register speaker with no sessions to present.&quot;);
+}
+
+private bool SpeakerMeetsOurRequirements(){
+	return IsExceptionalOnPaper() || !ObviousRedFlags();
+}</code></pre><h2 id="b9d7cc98-7731-47e5-b7f1-4da09ef440ce" class="">The Outline Rule</h2><p id="063dda65-f25d-4e71-96ff-a1d12a470dbe" class="">Collapsed code should read like an outline. Strive for multiple layers of abstraction</p><div id="aea724f3-a621-46b5-bd8c-4d737a2c23d9" class="column-list"><div id="7d8f869c-3dc5-4e90-abba-fb360ad4a041" style="width:50%" class="column"><ul id="cb632f5b-1172-4388-91ff-1d2db33a651f" class="bulleted-list"><li style="list-style-type:disc">Chapter Title<ul id="fea54f19-b369-4ae2-aaaa-37b036e4bd19" class="bulleted-list"><li style="list-style-type:circle">Heading 1<ul id="43c3ceef-fe0c-49d3-a1b4-6de580804346" class="bulleted-list"><li style="list-style-type:square">Paragraph 1</li></ul><ul id="7c37ba16-4218-499b-b687-7b96565559a7" class="bulleted-list"><li style="list-style-type:square">Paragraph 2</li></ul><ul id="502b04c2-e650-4a3d-ba68-f706c485b221" class="bulleted-list"><li style="list-style-type:square">Paragraph 3</li></ul></li></ul><ul id="95b64f8e-bc9b-4267-a7a5-450508e92e21" class="bulleted-list"><li style="list-style-type:circle">Heading 2<ul id="2616f3e6-07d8-49b4-b5f3-e6fabe431e69" class="bulleted-list"><li style="list-style-type:square">Paragraph 1</li></ul><ul id="bf531b5d-8248-46f8-9f89-9e9af21993a5" class="bulleted-list"><li style="list-style-type:square">Paragraph 2</li></ul></li></ul><ul id="5ef7322d-35bc-4cba-a13f-7bd562b8bd01" class="bulleted-list"><li style="list-style-type:circle">Heading 3<ul id="91fb5cbc-e628-41aa-8891-6b0356774d6e" class="bulleted-list"><li style="list-style-type:square">Paragraph 1</li></ul></li></ul></li></ul></div><div id="13b5bb32-3ae7-464c-8047-6ef363e71362" style="width:50%" class="column"><ul id="95350488-2f5d-4a5e-9254-ca2f6eb91cd1" class="bulleted-list"><li style="list-style-type:disc">Class<ul id="6302fe24-3467-4463-81e8-427beedc60a5" class="bulleted-list"><li style="list-style-type:circle">Method 1<ul id="daf35208-0773-4011-b2f6-2380f9cab75e" class="bulleted-list"><li style="list-style-type:square">Method 1a<ul id="a8f37873-0fad-47f8-b923-89f680aa9b41" class="bulleted-list"><li style="list-style-type:disc">Method 1ai</li></ul><ul id="1a17b4c9-86d2-42f0-bfbe-f4b7df69bc4a" class="bulleted-list"><li style="list-style-type:disc">Method 1bii</li></ul></li></ul><ul id="7b147e29-62a9-4db2-b9bc-8b9da4a3d1bd" class="bulleted-list"><li style="list-style-type:square">Method 1b</li></ul><ul id="2134b190-55c5-4371-bae1-9514d9dc8d05" class="bulleted-list"><li style="list-style-type:square">Method 1c</li></ul></li></ul><ul id="03c9f03c-568f-4a96-8f72-0e60478dd855" class="bulleted-list"><li style="list-style-type:circle">Method 2<ul id="9469213d-0448-4eb4-b6bf-a999563e09b5" class="bulleted-list"><li style="list-style-type:square">Method 2a</li></ul><ul id="a7b735c7-4818-4370-9cc0-0e326d1b71bb" class="bulleted-list"><li style="list-style-type:square">Method 2b</li></ul></li></ul><ul id="0e1f2652-663e-466d-8ecf-db21bc194414" class="bulleted-list"><li style="list-style-type:circle">Method 3<ul id="0bf43dd1-8594-4c33-9d35-4f0d46aa65c7" class="bulleted-list"><li style="list-style-type:square">Method 3a</li></ul></li></ul></li></ul></div></div><div id="a0132dc3-6a13-462f-991f-13be5dbdea43" class="column-list"><div id="8182fd50-31d2-467b-bacf-4f8f22e71408" style="width:50%" class="column"><p id="02386769-cf01-4172-bc63-bbdb27c0acc2" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Typical Class</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="c435cb19-3dbb-4686-91b8-3ac6b6b01ad6" class="bulleted-list"><li style="list-style-type:disc">Class<ul id="3ae3d8df-30f7-481c-b3cf-5df70859cbf3" class="bulleted-list"><li style="list-style-type:circle">Method 1<ul id="c29bb574-207b-4fc5-91ef-419ae3bbd7a5" class="bulleted-list"><li style="list-style-type:square">Method 1a<ul id="1bb64049-9100-4736-a4d2-2d4939c07d81" class="bulleted-list"><li style="list-style-type:disc">Method 1ai</li></ul><ul id="99691aa7-fb84-4d25-a903-08898fe8dd10" class="bulleted-list"><li style="list-style-type:disc">Method 1aii</li></ul><ul id="04b82c74-b2a0-40be-aee5-12cf48e43e7e" class="bulleted-list"><li style="list-style-type:disc">Method 1aiii</li></ul></li></ul><ul id="ad866f3e-0169-4878-8bff-7ea9f082ab08" class="bulleted-list"><li style="list-style-type:square">Method 1b</li></ul><ul id="77e3b301-3c2a-4f5f-8547-dd80ca64c403" class="bulleted-list"><li style="list-style-type:square">Method 1c</li></ul></li></ul></li></ul></div><div id="f0373199-af54-4ce4-a042-734c283310e4" style="width:50%" class="column"><p id="e539ead0-40b0-47cb-9e6c-6f3e63b9b624" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Strive for this:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="4aa11cd9-b3eb-4b9a-a227-ac7a2fdfa3ff" class="bulleted-list"><li style="list-style-type:disc">Class<ul id="de728e84-a1b0-4eb8-b374-28dc9dab0c95" class="bulleted-list"><li style="list-style-type:circle">Method 1<ul id="b0021127-e6f5-4cd8-8c67-4f37ca468caf" class="bulleted-list"><li style="list-style-type:square">Method 1a<ul id="c6fe9275-c89c-4bca-a5a7-1281c8af0956" class="bulleted-list"><li style="list-style-type:disc">Method 1ai</li></ul><ul id="7866fbf0-4cc3-4dd2-9b1c-ed6b4da6e896" class="bulleted-list"><li style="list-style-type:disc">Method 1aii</li></ul></li></ul><ul id="6bb329c2-da82-465d-b2c8-6545bfd029a3" class="bulleted-list"><li style="list-style-type:square">Method 1b<ul id="bade5b4a-e8ed-45f4-bde0-8e5b2b671691" class="bulleted-list"><li style="list-style-type:disc">Method 1bi</li></ul><ul id="7e952ba6-dd35-450f-b4cd-1531862573bb" class="bulleted-list"><li style="list-style-type:disc">Method 1bii</li></ul></li></ul><ul id="e1aa6f9f-74df-40d4-b2db-a9641b9e7691" class="bulleted-list"><li style="list-style-type:square">Method 1c</li></ul></li></ul><ul id="1c04e293-69de-4386-8928-113884c9a2dc" class="bulleted-list"><li style="list-style-type:circle">Method 2<ul id="3e24d5da-a049-4d84-9bcb-7cc0a17f974e" class="bulleted-list"><li style="list-style-type:square">Method 2a</li></ul><ul id="87ab6f77-1f09-47be-96e4-96dea24943d9" class="bulleted-list"><li style="list-style-type:square">Method 2b</li></ul></li></ul><ul id="1559ce3b-d4a8-4bc0-8f54-31c3d90aa4c1" class="bulleted-list"><li style="list-style-type:circle">Method 3<ul id="af563aa8-5424-41a2-9c53-d5e5de0f2b0c" class="bulleted-list"><li style="list-style-type:square">Method 3a</li></ul><ul id="623ad007-a509-4d04-9583-94ca97089c63" class="bulleted-list"><li style="list-style-type:square">Method 3b</li></ul></li></ul></li></ul></div></div><h1 id="318bc454-7f36-4d19-87d6-709ae7268a71" class="">Comments</h1><p id="4cd40e48-d76b-4d04-9ae5-11086798d590" class="">Comments lie. They’re not kept up to date. They’re either redundant or a crutch for bad code.</p><p id="ce06a0d1-0696-4a38-ba69-eecf206b2d9c" class="">Are comments great, or a code smell? <strong><strong><strong><strong><strong>Both.</strong></strong></strong></strong></strong></p><h2 id="1c67a197-2d0c-444d-b0f6-8a702e35ec1e" class="">A Necessity and a Crutch</h2><p id="210be049-c7c9-48fb-8389-b7c066deb338" class="">General rules:</p><ol type="1" id="0f58120f-6866-483c-83d9-d362956397e1" class="numbered-list" start="1"><li>Prefer expressive code over comments;</li></ol><ol type="1" id="4446f67d-66ef-447a-943e-44201939171b" class="numbered-list" start="2"><li>Use comments when code alone can’t be sufficient.</li></ol><h2 id="758e7cc1-5fd0-4b51-841c-ebb00ffc8444" class="">Comments to avoid</h2><h3 id="617b9a41-3f99-46ec-a4c2-d8ca16d00d8a" class="">Redundant Comments</h3><div id="a9c3e14f-f0dd-470a-9366-0971dcc770cd" class="column-list"><div id="c3014098-e344-483f-bc60-9be05d7c44af" style="width:50%" class="column"><p id="cab388d8-673e-48dc-bbfb-8ab18f28f971" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="d273f835-95d9-4492-ad5b-34ff02c1b016" class="code code-wrap"><code>int i = 1; // Set i = 1
+
+var cory = new User(); // Instantiate a new user
+
+/// &lt;summary&gt;
+/// Default Constructor
+/// &lt;/summary&gt;
+public User() {
+	// ...
+}
+
+/// &lt;summary&gt;
+/// Calculates Total Charges
+/// &lt;/summary&gt;
+private void CalculateTotalCharges(){
+	// TODO
+}</code></pre></div><div id="75678ac6-6095-4b14-9da2-ce8f3c364b02" style="width:50%" class="column"><ul id="423c5c63-7b30-4d2c-bfad-3c9c55419bc7" class="bulleted-list"><li style="list-style-type:disc">Assume your reader can read code;</li></ul><ul id="dc0e8864-ecfb-48ab-8f19-acd0f1dadf98" class="bulleted-list"><li style="list-style-type:disc">Don’t repeat yourself.</li></ul></div></div><h3 id="f85119d7-e8c8-477e-ac4c-73f19857ea9b" class="">Intent Comments</h3><div id="20dcfd99-23f3-429c-91a1-85716fcb29aa" class="column-list"><div id="69a60330-143e-48c4-9158-b6ea6ffe1b54" style="width:50%" class="column"><p id="fea299f2-a052-43c0-bade-6cf7f9073b64" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="d25911d1-b230-4ac3-b2ae-a28bb43868a6" class="code code-wrap"><code>// Assure user&#x27;s account is deactivated
+if(user.Status == 2)</code></pre></div><div id="a6f7d7da-05e5-422e-9d05-908ebc0ef0b4" style="width:50%" class="column"><p id="257314cd-991b-44a0-8dbc-99913a91780a" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="a61ccef0-5fc0-450f-bf98-abb4598c9230" class="code code-wrap"><code>if(user.Status == Status.Inactive){
+	// ...
+}</code></pre></div></div><p id="f220aad3-c6e9-41f0-a42c-6d6617b1b4e5" class="">Instead, clarify intent in code:</p><div id="389da7a3-a1f4-4d46-aab0-ebf067e3ef8b" class="column-list"><div id="3545ca93-ad40-4657-80ec-588d732b8560" style="width:50%" class="column"><ul id="168a752f-e5d9-487c-adf6-6e89f366f334" class="bulleted-list"><li style="list-style-type:disc">Improved function naming</li></ul><ul id="09083443-b43b-4fbb-b291-13aa25183b86" class="bulleted-list"><li style="list-style-type:disc">Intermediate variable</li></ul></div><div id="eb62db99-16dd-4c52-8d54-d5ac35444dfe" style="width:50%" class="column"><ul id="cc60a3c5-ac73-4366-aedb-591eede026ab" class="bulleted-list"><li style="list-style-type:disc">Constant or enum</li></ul><ul id="3272c4d0-f9b2-49ef-918d-f8c0210c86ce" class="bulleted-list"><li style="list-style-type:disc">Extract conditional to function</li></ul></div></div><h3 id="cafc27d9-b4d5-405b-a65d-434dba0c35d6" class="">Apology Comments</h3><div id="0f2abe6c-97e8-4a18-9a55-fcba67a55c98" class="column-list"><div id="d8490f6a-5392-4ad4-8f05-136b4eee4691" style="width:50%" class="column"><p id="ed03ca41-e216-4640-a752-4a37f2ec5b54" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="fbb6c25a-ed54-4d21-9b70-0e5d91c992af" class="code code-wrap"><code>// Sorry, this crashes a lot so I&#x27;m just swallowing the exception
+
+// I was too tired to refactor this pile
+// of spaghetti code when I was done...</code></pre></div><div id="85df4987-6de7-4fce-bc9a-abef0ad74cc9" style="width:50%" class="column"><ul id="5a3d0b3e-d086-4895-85ef-1049d4b78ce3" class="bulleted-list"><li style="list-style-type:disc">Don’t apologize:<ul id="5a1d18c6-5b55-4ba5-811f-013808b26a3c" class="bulleted-list"><li style="list-style-type:circle">Fix it before commit/merge;</li></ul><ul id="adf77a51-59d6-494c-aa61-75ece94ed0b4" class="bulleted-list"><li style="list-style-type:circle">Add a TODO marker comment if you must.</li></ul></li></ul></div></div><h3 id="123a6538-6936-4da9-b0c6-f8a3c8e73fa3" class="">Warning Comments</h3><div id="77240c3a-68fd-441e-b4fb-e04016bd94b6" class="column-list"><div id="49f1e148-aed4-4043-a830-9f0999faaadd" style="width:50%" class="column"><p id="6e5970ec-32e1-48f4-aa03-0ed899d7df17" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="4e3c2ffe-f803-4332-82db-64cda5c4a90d" class="code code-wrap"><code>// Here be dragons - See Bob
+
+// Great sins against code
+// begin here...</code></pre></div><div id="06d2734a-d259-4557-9733-68b1a6e23abc" style="width:50%" class="column"><p id="07686bab-9d78-4593-b29e-414ef25eacbd" class="">To avoid warnings, <strong><strong><strong><strong><strong><strong><strong><strong><strong>refactor.</strong></strong></strong></strong></strong></strong></strong></strong></strong></p></div></div><h3 id="94d5fcb4-15ae-43b6-b084-b4062a749d43" class="">(Kill) Zombie Code</h3><div id="65754d3a-e681-4a82-ba70-f9ab969303c9" class="column-list"><div id="e9e9d3e9-77ff-406f-965a-0b4f8853448f" style="width:50%" class="column"><figure id="10b50172-d2bb-41c0-87fb-0af51dcfa9bc" class="image"><a href="img/wcfh/Untitled%204.png"><img style="width:480px" src="img/wcfh/Untitled%204.png"/></a><figcaption>Notice the absurd quantity of commented code.</figcaption></figure></div><div id="923103ac-2649-4acb-b740-6fbee71a8478" style="width:50%" class="column"><p id="4103787a-f653-4751-bca0-38cb518b880f" class="">Zombies appear to be dead but are alive enough to ruin things.</p><p id="80bf63ff-6ba8-4e9d-9729-675d9cb9b36d" class="">Why zombie?</p><ul id="ef727d1c-7142-4912-9317-8c57170a0c62" class="bulleted-list"><li style="list-style-type:disc">It doesn’t execute in runtime because it’s all commented;</li></ul><ul id="9dddb58f-edd1-4e4e-bbd2-82b9f6969ee9" class="bulleted-list"><li style="list-style-type:disc">It’s still present and often confused with real code, making maintenance infuriating.</li></ul><p id="8ee4dc93-5922-4ba5-a070-6419eb08f5b8" class="">There are 2 main reasons for the existence of zombie code:</p><ol type="1" id="a3aea598-44a7-473d-9af4-98146ca4b76b" class="numbered-list" start="1"><li>Risk Aversion (developers are scared of deleting code);</li></ol><ol type="1" id="3b0502fe-4b29-40b7-9fe3-4327217a8799" class="numbered-list" start="2"><li>Hoarding mentality (keeping code just in case they may need it later).</li></ol></div></div><p id="46473a3d-42a6-43a8-9639-53b841a54478" class="">An example:</p><figure id="7438bdbe-34dc-4005-8af8-9c242b9eaf5c" class="image"><a href="img/wcfh/Untitled%205.png"><img style="width:528px" src="img/wcfh/Untitled%205.png"/></a><figcaption>Would you read this newspaper?</figcaption></figure><h3 id="388fc9ea-3363-4fbe-a7ca-64685f65cc6f" class="">Why Zombie code hurts work</h3><div id="eacce108-f5a0-4454-8142-824f6ad74dbb" class="column-list"><div id="b24f8f34-8288-4f45-8dcb-7b61567eff50" style="width:50%" class="column"><figure id="aeb1eca1-4b88-4408-86c1-398868cfd88f" class="image"><a href="img/wcfh/Untitled%206.png"><img style="width:335px" src="img/wcfh/Untitled%206.png"/></a></figure></div><div id="54bb0641-2858-475c-9526-902835858950" style="width:50%" class="column"><p id="66ad3d6f-a0e5-440d-bb23-5cc46437a813" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Ambiguity hinders debugging:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="99d1c643-ed16-42b7-bf7f-23de00c635d9" class="bulleted-list"><li style="list-style-type:disc">What did that section do?</li></ul><ul id="1d254672-8083-4b15-a28e-3c3eeaba96a8" class="bulleted-list"><li style="list-style-type:disc">Was this accidentally commented out?</li></ul><ul id="272ecee0-4d44-4212-bb2c-79ce6619c8c2" class="bulleted-list"><li style="list-style-type:disc">Who did this</li></ul><p id="c798d096-504c-4765-a33b-50a378d1b4e6" class=""><strong><strong><strong>Ambiguity hinders refactoring:</strong></strong></strong></p><ul id="8d386562-7169-4dc8-b572-6467991a9901" class="bulleted-list"><li style="list-style-type:disc">Do I need to refactor this too?</li></ul><ul id="6762f221-2cd8-429c-a986-8b594465650a" class="bulleted-list"><li style="list-style-type:disc">How does my change impact this code?</li></ul><ul id="6e8f589e-3d00-4f6e-82f1-851f4d3f2b06" class="bulleted-list"><li style="list-style-type:disc">What if someone uncomments it later?</li></ul><p id="391dbd38-3d8b-40cd-93f0-00badd0b4b37" class="">
+</p></div></div><ul id="e3a16c79-2036-4865-9d22-557109f3c090" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Reduces readability</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><ul id="5d3a7a36-f726-402a-b582-6a32dfc34d65" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Creates ambiguity</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><ul id="331464e5-ca7e-495a-83f1-6516babc74d4" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Hinders refactoring</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><ul id="5ad26ea5-4661-49d1-9caf-0830f5af0bd8" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Adds noise to searches (by keyword)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><ul id="a2748655-b638-449e-a714-200bb817201a" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong>Code isn’t “lost”</strong></strong></strong></strong></strong></li></ul><p id="4b02ca63-43fd-4084-8c26-5e354dd4e144" class="">About to comment out code? Ask yourself:</p><ul id="0202dedc-436e-4d36-adca-b8a82aaa01d3" class="bulleted-list"><li style="list-style-type:disc">When, if ever, would this be uncommented?</li></ul><ul id="dffa162c-fd66-4e7c-97a4-27dafa88e0eb" class="bulleted-list"><li style="list-style-type:disc">Can I just get it from source control later?</li></ul><ul id="7d82b99a-5e98-46bd-a4d0-4921a00fb710" class="bulleted-list"><li style="list-style-type:disc">Is this incomplete work that should be worked via a branch?</li></ul><ul id="03f98c40-72e4-4bdd-b4ba-8b14ddace50d" class="bulleted-list"><li style="list-style-type:disc">Is this a feature that should be enabled/disabled via configuration?</li></ul><ul id="3a838e08-f286-4ab6-8f66-0a817ef85adf" class="bulleted-list"><li style="list-style-type:disc">Did I refactor out the need for this code?</li></ul><h2 id="aec44b17-fb7a-41a6-88bc-8e3831430813" class="">Divider Comments</h2><p id="4ebe361e-9ee6-4862-99fc-290f00243e67" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="2c94af8f-7389-432d-b33c-d575f962c954" class="code code-wrap"><code>private void MyLongFunction() {
+	lots
+	of
+	code
+	
+	// Start search for available concert tickets
+
+	lots
+	of
+	concert
+	ticket
+	search
+
+	// End of concert ticket search
+
+	lots
+	more
+	code
+
+	// ...
+
+}</code></pre><p id="d1f687bd-679b-4503-a8f6-5aa8c7ad7704" class="">Need comments to divide function sections? <strong><strong><strong><strong><strong><strong><strong><strong><strong>Refactor.</strong></strong></strong></strong></strong></strong></strong></strong></strong></p><h2 id="152195a7-f5d4-45c7-a8c9-00a7ecd8335e" class="">Brace Tracker Comments</h2><div id="98a63d7a-a402-48f0-9fc4-b6b9443ca2e3" class="column-list"><div id="368a5244-8834-4f11-91a8-d78c3422be19" style="width:50%" class="column"><p id="fdc6e335-aa04-42d4-95bb-1de8ebbb7c28" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="7aa01c98-c54f-4d9d-8c49-e54f5231d2fe" class="code code-wrap"><code>private void AuthenticateUsers(){
+	bool validLogin = false;
+	// deeply
+		// nested
+			// code
+			if(validLogin){
+				// Lots
+				// of
+				// code
+				// to
+				// log
+				// user
+				//in
+			} // end user login
+		// even
+	// more code
+}</code></pre></div><div id="800b8cbc-6320-4c9b-8140-8418db31c40d" style="width:50%" class="column"><p id="d3094ccd-0726-45eb-8521-6ccaa2dbaa9e" class=""><strong><strong><strong><strong><strong>Clean</strong></strong></strong></strong></strong></p><pre id="f29e065e-c8e5-4631-8353-0a56c5fac791" class="code code-wrap"><code>private void AuthenticateUsers(){
+	bool validLogin = false;
+	//deeply
+		// nested
+			// code
+			if(validLogin){
+				LoginUser();
+			}
+		// even
+	// more code
+}</code></pre><p id="c4948efb-ba46-40e9-b2ef-919730c8f5e7" class="">
+</p></div></div><h2 id="46193b55-3df5-4688-920a-68b8e08e34a1" class="">Bloated Header</h2><div id="ef54e890-6ed1-4c86-a499-4d7f04bbab45" class="column-list"><div id="f973988a-71aa-4398-abc0-54e1119055a9" style="width:50%" class="column"><p id="4c38c582-01da-4890-8760-2a13de0eff9e" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="4bac8441-4fa4-4d80-80bc-d39a4e8f86e2" class="code code-wrap"><code>//***************************************************
+// Filename: Monolith.cs                            *
+//                                                  *
+// Author: Nuno Dias                                *
+// Created: 08/05/2023                              *
+// Weather that day: Sunny, summer weather          *
+//                                                  *
+// Summary                                          *
+// This class does a great many things. To make it  *
+// extra useful I placed pretty much all the app    *
+// logic here. You wish your class was this         *
+// powerful. Bwahahahahaha!                         *
+//***************************************************</code></pre></div><div id="d9d8b7b6-e929-4a98-8da2-b4f5e0271ed6" style="width:49.99999999999999%" class="column"><ul id="481f490f-20e0-46e0-913b-1b85fccee95a" class="bulleted-list"><li style="list-style-type:disc">Avoid line endings</li></ul><ul id="bc7453a0-7c2a-4d84-9f60-40987063ba7d" class="bulleted-list"><li style="list-style-type:disc">Don’t repeat yourself</li></ul><ul id="926787c9-9425-414f-8684-5ae265af7a9d" class="bulleted-list"><li style="list-style-type:disc">Follow conventions</li></ul></div></div><h2 id="6c1abb7b-086b-4460-be55-6e246fbecf37" class="">Defect Log</h2><div id="f07d6e80-c248-479c-bb19-2e22df60b084" class="column-list"><div id="2df9646a-da33-44a0-be7c-7e2fdfaa3124" style="width:50%" class="column"><p id="a3c8813a-3cfd-4162-8471-08624304376e" class=""><strong><strong><strong><strong><strong>Dirty</strong></strong></strong></strong></strong></p><pre id="24597f9f-e9ea-42ba-9e0c-1932af90190c" class="code code-wrap"><code>// DEFECT #5274 DA 12/10/2010
+// We weren&#x27;t checking for null here
+if(FirstName != null){
+	// code continues ...
+}</code></pre></div><div id="a22fe01b-acc7-45db-b28f-a7a4bae5887a" style="width:50%" class="column"><ul id="7f4d5864-4bbc-4a2d-9b76-35aca103b95c" class="bulleted-list"><li style="list-style-type:disc">Change metadata belongs in source control</li></ul><p id="5fe8ee92-6a37-4f3b-96ef-e2cf0f868134" class="">
+</p></div></div><h2 id="911e7eb1-32b7-4230-af0a-6917797f4bd3" class="">Clean Comments</h2><h3 id="a3f97090-ca05-41f2-9487-675f7c41b649" class="">To Do Comments</h3><pre id="d51f6eb1-5760-4b00-af22-997ce2b38697" class="code code-wrap"><code>// TODO Refactor out duplication
+// HACK The API doesn&#x27;t expose needed call yet.</code></pre><ul id="3401cb5c-07ff-4b3b-b790-0486c4e0a186" class="bulleted-list"><li style="list-style-type:disc">Standardize;</li></ul><ul id="77011024-5f46-415f-b88a-3ce27dd21c9c" class="bulleted-list"><li style="list-style-type:disc">Watch out:<ul id="c4daf3ba-8a9b-4cab-90ee-1c29697f1c72" class="bulleted-list"><li style="list-style-type:circle">May be an apology or warning comment in disguise;</li></ul><ul id="86cac5e1-7e46-442f-8b2a-c1b9a89b5fa7" class="bulleted-list"><li style="list-style-type:circle">Often ignored;</li></ul></li></ul><h3 id="489767fd-be06-4c92-a59e-99eea9f0c5c9" class="">Summary Comments</h3><pre id="9b758117-2412-4737-84d7-ef2908295ea4" class="code code-wrap"><code>// Encapsulates logic for calculating retiree benefits
+
+// Generates custom newsletter emails</code></pre><ul id="85bd82ec-d1ff-4bfe-915a-22ffd794cde6" class="bulleted-list"><li style="list-style-type:disc">Describes intent at general level higher than the code;</li></ul><ul id="85e535f2-1bcf-4bc1-b973-b27e173bb9ef" class="bulleted-list"><li style="list-style-type:disc">Often useful to provide high level overview of classes;</li></ul><ul id="222096be-52cd-47ec-9576-07a8a20f5f76" class="bulleted-list"><li style="list-style-type:disc">Risk: Don’t use to simply augment poor naming/code level intent.</li></ul><h3 id="0905e2a0-f923-468b-9229-9ad2afd203f2" class="">Documentation</h3><pre id="717b5cdd-fedd-4d42-b800-9b629cdca580" class="code code-wrap"><code>// See www.facebook.com/api for documentation</code></pre><h1 id="2d9f0940-3856-4e00-b73c-91bb9ef74e20" class="">Staying Clean</h1><h2 id="0be9c107-4722-4ca4-aad0-a7c351393b48" class="">When to Refactor to Clean Code</h2><ol type="1" id="6d09c770-2360-4fed-acb3-24dcb494fb8f" class="numbered-list" start="1"><li>You need to work with the code</li></ol><ol type="1" id="815bdee7-1735-4a91-b58c-3ea1d2c77a93" class="numbered-list" start="2"><li>Difficult to comprehend or change</li></ol><ol type="1" id="6ce2f93d-2d09-4d28-ba3a-47870476c79e" class="numbered-list" start="3"><li>Test coverage to protect from regression</li></ol><h2 id="eba2c911-38ae-4f4b-b160-a45525ade8c0" class="">Accept No Broken Windows</h2><p id="b075b07c-ed5f-4b9f-a022-3b890d5d30b8" class="">Badly maintained code is often overlooked and mistreated, leading future maintenance workers that put their hands on it to treat it in the same way, or often worse: much like a building with broken windows, that will probably attract vandals in to break more windows and set fires.</p><p id="bd014abc-1b09-4c95-aa53-406caa67706a" class="">Don’t accept broken windows. Take pride in your codebase and strive to make it better and cleaner.</p><h2 id="e8dfbc5e-39e4-4924-8b20-9231cea6ff6e" class="">Code Reviews</h2><ol type="1" id="884b6e2c-c3a0-4b20-b084-e742858f9430" class="numbered-list" start="1"><li>Promotes proactive cleanliness</li></ol><ol type="1" id="3b136327-e07c-43af-8db4-a9729b974794" class="numbered-list" start="2"><li>Set guidelines</li></ol><h2 id="237b1b57-497b-4087-9d4f-6bd7ae92f3aa" class="">Work in pairs</h2><ul id="e8e919be-cc9e-498a-a895-f7d178351db4" class="bulleted-list"><li style="list-style-type:disc">Real-time code review</li></ul><ul id="62429355-38f5-45e2-974c-58b77e9fb413" class="bulleted-list"><li style="list-style-type:disc">Increases quality</li></ul><ul id="7d9aa36e-53a7-4196-bb8a-c61e0254e8df" class="bulleted-list"><li style="list-style-type:disc">Naming and refactoring is easier</li></ul><h2 id="78d532fd-06fb-4f16-99df-c690561bc009" class="">The Boy Scout Rule</h2><blockquote id="9adfe1b2-4e3d-45f1-a98c-6e24f1942149" class="">Always leave the code you’re editing a little better than you found it.
+- <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>Robert C. Martin</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></blockquote></div></article></body></html>
