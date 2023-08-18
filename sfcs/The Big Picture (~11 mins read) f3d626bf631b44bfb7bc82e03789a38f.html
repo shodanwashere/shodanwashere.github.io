@@ -1,0 +1,748 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Big Picture (~11 mins read)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body>
+<a href="../sfcs.html" style="display: block; padding: 5px; color: white; background-color: black; width: 100px">Go Back To Learning Plan Menu!</a>
+	<article id="f3d626bf-631b-44bf-b7bc-82e03789a38f" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1608751819407-6ec94205fd7b?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">1️⃣</span></div><h1 class="page-title">The Big Picture (~11 mins read)</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="ba6ff9cf-dd62-48b9-a03b-f2ec7e0f31e6"><div style="font-size:1.5em"><span class="icon">😎</span></div><div style="width:100%">Finished on <time>@August 17, 2023</time>. Written by Nuno Dias, <em><em><em>aka</em></em></em>, Shodan. Based on the <a href="https://app.pluralsight.com/library/courses/spring-big-picture/table-of-contents">Pluralsight course</a> of the same name by <strong>Dustin Schultz</strong>.</div></figure><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Table of Contents</summary><div class="indented"><nav id="fba74d5a-e91f-481a-9b81-162504644913" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e3dc0851-bc46-4c20-a530-c9a42b8b2c53">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#aa36c6bf-e22b-4507-9237-eb17b30dc475">What is Spring?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b3a4887e-675e-426a-bde0-3142538b234a">Meet the Spring Family</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5257ce33-43a3-4ab0-9df1-14ef5c4f58fb">Why Spring?</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ea498e4b-0628-4207-8c85-c86a724f5de0">Getting to Know Spring with Spring Boot</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c232cae3-edf6-4878-a8a2-f6d8993af788">Understanding Spring’s Foundations: The Spring Framework</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#da07ed21-99c6-4659-8eef-5d7099949e09">The Six Key Areas of the Spring Framework</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9247f27e-d074-4538-a820-97624b55886c">Core</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#493dea39-bceb-42e5-aa54-236f60d821e8">Web</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#790c13ce-fea3-4b2b-9a4c-6d3e6fcd600b">AOP</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cf40318a-1d73-4727-9a2d-09eb9df422d0">Data Access</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#864b8f56-8f57-45c5-b2f8-60d0606372d0">Integration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2da58ed0-2761-4bd6-8bab-c9796b6b9fd9">Testing</a></div></nav></div></details><h1 id="aa36c6bf-e22b-4507-9237-eb17b30dc475" class="">What is Spring?</h1><p id="55e6a311-eb4d-4963-ab19-715118c3c842" class="">Well, it’s a bit confusing. Spring could mean:</p><ul id="a1f51d4b-3f97-4ab4-b11c-75bdd8f6c60e" class="bulleted-list"><li style="list-style-type:disc">The Spring Framework;</li></ul><ul id="b5aa247e-e885-4ec0-9a8b-74fdecb89fab" class="bulleted-list"><li style="list-style-type:disc">Spring Boot;</li></ul><ul id="fd568fd1-797a-4832-9c32-ca4e0158a7cf" class="bulleted-list"><li style="list-style-type:disc">Spring Data;</li></ul><ul id="bb33c6a6-5352-4b9a-8950-6340da2bb566" class="bulleted-list"><li style="list-style-type:disc">Spring Cloud;</li></ul><ul id="6101f100-990a-45c8-8312-2fb71783bf70" class="bulleted-list"><li style="list-style-type:disc">Spring Batch;</li></ul><ul id="0d85f10e-1df4-4c04-84b7-d0239229c1cf" class="bulleted-list"><li style="list-style-type:disc">etc.</li></ul><p id="ca1674bf-81cd-438c-97b0-603119e097a4" class="">Most often, when people say “Spring”, they mean the entire family of projects.</p><h2 id="b3a4887e-675e-426a-bde0-3142538b234a" class="">Meet the Spring Family</h2><p id="62c50d28-1df3-4f1e-a5ab-1b871083de82" class="">It all started with the Spring Framework. It aimed at removing complexity and help make things like web development and data access easier to implement. It also strives to avoid creating boilerplate code.</p><p id="4ddd449f-a9f4-4e63-add6-d9b40f01aa9f" class="">The Spring Framework led to the creation of several other projects built on top of the Spring Framework that give it additional functionality.</p><p id="8478df31-6af6-4d4f-9fe0-14af1f237586" class="">Spring Boot makes creating Spring based applications faster and easier, removing the need to configure and choose components by default.</p><h2 id="5257ce33-43a3-4ab0-9df1-14ef5c4f58fb" class="">Why Spring?</h2><p id="436f2fb7-6e0c-44b6-baef-961c37aaa940" class="">Spring <em><em><em><em><em><em><em><em> started</em></em></em></em></em></em></em></em> as a response to the complexity of Java EE. Today, Spring is so much more than an alternative to Java EE. In fact, it’s complementary to it. <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Spring makes it easy to create Java enterprise applications</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.</p><ul id="f8ca53ff-b562-4f08-9fd1-1dda71063c0f" class="bulleted-list"><li style="list-style-type:disc">It’s flexible, modular and backwards compatible.</li></ul><ul id="e5bed2c2-ce4a-4a62-b0ab-5205876f17ba" class="bulleted-list"><li style="list-style-type:disc">Large and active community.</li></ul><ul id="ef8e9a14-d3b2-4394-be6d-30fe2eb7c280" class="bulleted-list"><li style="list-style-type:disc">Continually innovates and evolves.</li></ul><h1 id="ea498e4b-0628-4207-8c85-c86a724f5de0" class="">Getting to Know Spring with Spring Boot</h1><p id="7be108c4-20ea-4a06-aeaf-80875e954c95" class="">Getting started with any technology can be confusing and frustrating. <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Spring Boot makes getting started with Spring quick and easy</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.</p><p id="6f7578ed-fe27-44de-bad2-b0f59477c4c5" class="">It can be used to build both Web Applications and Non-Web Applications.</p><p id="566f3ba5-f444-49e5-827d-1fb36bbd9303" class="">It has a number of key features that make it unique and easy to use:</p><ul id="b48ebfc1-5180-42ec-b5f4-a9ca5f8db506" class="bulleted-list"><li style="list-style-type:disc"><strong>Auto-configuration</strong>
+It attempts to automatically configure your Spring application based on the dependencies that you have added.<ul id="233e196b-f105-4a26-b823-6971ca6f4561" class="bulleted-list"><li style="list-style-type:circle"><strong>Auto-configurations are contextually aware and smart!</strong> For example, if your Spring Application depends on some database-related library, then it will take that context and auto-configure the application for database access.</li></ul><ul id="c9dbf83d-dda7-47dd-b768-0272b27294aa" class="bulleted-list"><li style="list-style-type:circle"><strong>Setting up Auto-configuration is Effortless!</strong><pre id="1659fb51-619d-4753-9274-697d3b12e3f3" class="code"><code>@EnableAutoConfiguration
+public class DemoApplication {
+...
+}</code></pre></li></ul></li></ul><ul id="dbb90a72-8e34-48c6-82cf-f4fafc6ad3e4" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Spring Boot makes it easy to create standalone, production grade, Spring-based applications that you can ‘just run’.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="7961d1f9-046a-4c0f-a8ce-c6308b0fa08b" class="bulleted-list"><li style="list-style-type:circle">Typical Process for Running Java Web Applications:<ul id="c64eb588-62c3-45ba-9364-eff087e2c16d" class="bulleted-list"><li style="list-style-type:square">Package the application</li></ul><ul id="1a7f65f0-b3f3-46a8-bf32-da970f0ad3ab" class="bulleted-list"><li style="list-style-type:square">Choose &amp; Download Webserver</li></ul><ul id="cbc09074-eea7-4561-94c9-385ad2ef61c3" class="bulleted-list"><li style="list-style-type:square">Configure Webserver</li></ul><ul id="8fd6d8af-a258-400e-9c94-497a6f85d407" class="bulleted-list"><li style="list-style-type:square">Deploy Application &amp; Start Webserver</li></ul></li></ul><ul id="0fdc9e5c-fab6-4941-8cc9-fbf415e55c95" class="bulleted-list"><li style="list-style-type:circle">Process for Running Spring Boot Applications:<ul id="5c7c6ad3-1a35-42d6-ae3d-0b76cc0d0e52" class="bulleted-list"><li style="list-style-type:square">Package the application</li></ul><ul id="0ed88b2c-0537-459a-ae0b-294340575919" class="bulleted-list"><li style="list-style-type:square">Run! Like <code>java -jar my-application.jar</code></li></ul></li></ul></li></ul><ul id="d3a440e1-86b1-4b90-a364-96ed3772ac1b" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Takes an opinionated view of building production-ready Spring applications</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. Not a nagging type of opinionated, but it favors convention over configuration and is designed to get you up and running as quickly as possible.</li></ul><h1 id="c232cae3-edf6-4878-a8a2-f6d8993af788" class="">Understanding Spring’s Foundations: The Spring Framework</h1><p id="1044cac2-f0b2-4e4f-9c90-009611b4b998" class="">Spring is a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Software Framework.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><blockquote id="fcb6d364-41ac-49f7-a039-3d79a9ad7cc7" class="">(…) a universal, reusable software environment that provides aparticular functionality as part of a larger software platform to facilitate development of software applications, products and solutions</blockquote><p id="88f108f7-1cd2-437d-b2c0-9fdfbd9e42cd" class="">The Spring Framework was the beginning of Spring. Enterprise Java Development at the time was a complex process. The Spring Framework has grown and evolved over time. </p><p id="ed5db9fb-53de-4597-88e7-4acb6ed62fbf" class="">In addition to simplifying Java development, it became the foundation for Spring Projects, which Applications can use to further simplify development.</p><h2 id="da07ed21-99c6-4659-8eef-5d7099949e09" class="">The Six Key Areas of the Spring Framework</h2><p id="5e634d2c-8244-4a22-a353-d92a973a1ba2" class="">The Spring Framework utilizes a modular architecture. It can be decomposed into 6 key areas:</p><h2 id="9247f27e-d074-4538-a820-97624b55886c" class="">Core</h2><p id="34c697a5-9152-422b-a34f-e2d862c1de2b" class="">The most important and foundational module. It provides a number of different features:</p><ul id="10f6fca8-d9d1-4a16-ac0d-a70113baadcf" class="bulleted-list"><li style="list-style-type:disc">i18n internationalization support;</li></ul><ul id="829c8297-69de-43df-803c-341dde9bb196" class="bulleted-list"><li style="list-style-type:disc">Validation support;</li></ul><ul id="7440c820-49cd-4381-8a57-cc6298bbf40f" class="bulleted-list"><li style="list-style-type:disc">Data binding support;</li></ul><ul id="9e02a987-0a89-47e0-be8d-000154fb714f" class="bulleted-list"><li style="list-style-type:disc">Type conversion support;</li></ul><ul id="3bd1f1ec-8d59-45d5-9b52-93539c1d8178" class="bulleted-list"><li style="list-style-type:disc">etc.</li></ul><p id="db901ccb-4717-45b5-9345-19b82e25b014" class="">At the center of Spring Core is <strong><strong><strong><strong><strong>Dependency Injection</strong></strong></strong></strong></strong>. During OOP, Developers create objects to represent or model real-life things, but objects don’t exist by themselves (for the most part), they are dependent on other objects.</p><pre id="689ff911-33ff-45f6-a3bb-e0b73c25b9c6" class="code"><code>public class Computer { // a computer doesnt exist by itself
+	HardDisk hdd;         // it needs a hard drive
+  Memory[] memory;      // and memory to work
+}</code></pre><p id="949a7543-38a7-4c37-925a-d0b0a240d22c" class="">Dependency Injection is about dealing with the way objects fulfill their dependent objects.</p><p id="265adbfb-ad72-4984-840d-c256c179439d" class="">Fulfilling dependencies can be done in one of two ways:</p><ol type="1" id="8cf9ff0e-561a-4b6e-beb9-c6b37d4ed1f4" class="numbered-list" start="1"><li>The object fulfills its own dependencies.<ol type="a" id="292593fe-39f2-4f77-991b-f2a3081c244e" class="numbered-list" start="1"><li>Seems easy</li></ol><ol type="a" id="2c930cd4-afd4-49a5-88ee-3bc942c3f144" class="numbered-list" start="2"><li>Creates <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>tightly coupled</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> objects</li></ol></li></ol><ol type="1" id="7b00b772-0e85-404f-a468-2a8ede6b0aed" class="numbered-list" start="2"><li>The object declares what other objects it depends on and some external entity fulfills those dependencies.<ol type="a" id="6d457f44-79fd-4a6f-b316-8e628a8c2c53" class="numbered-list" start="1"><li>More flexible</li></ol><ol type="a" id="4722be8a-cdd7-4c5a-8012-d53927101ed2" class="numbered-list" start="2"><li>Creates <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>loosely coupled</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> objects</li></ol></li></ol><p id="6c172114-1115-45fb-9f6b-5c0bb5022b25" class="">Spring Core is a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>dependency injection container</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>:</p><ul id="41927828-d3f5-4f5d-9319-8116f404de22" class="bulleted-list"><li style="list-style-type:disc">It creates and maintains objects and their dependencies<ul id="a9961e42-6de2-4f2e-884b-3f8816408553" class="bulleted-list"><li style="list-style-type:circle">Less for developer to manage</li></ul></li></ul><ul id="6b4d82e8-5c29-4cdf-b81b-5dbd3f5d8cf9" class="bulleted-list"><li style="list-style-type:disc">It’s the “glue” of the application.</li></ul><h2 id="493dea39-bceb-42e5-aa54-236f60d821e8" class="">Web</h2><p id="c3d91776-b80e-4112-a40b-11231c8e667c" class="">It’s a framework for handling web requests, with two different Spring submodules<div class="indented"><h3 id="6bfa75eb-3672-4da5-b965-f29de2e77c1d" class="">Spring Web MVC</h3><p id="7b45e7f7-cc93-4df5-b16a-03d2df0ea47d" class="">Spring Web MVC depends on a key component called a “Servlet”:</p><blockquote id="d7c934bd-c371-4eb6-a3bf-8bbd863db9b7" class="">an object that receives a request and generates a response based on the request.</blockquote><figure id="77eabfac-9c5f-416f-8cfb-6780256aa292" class="image"><a href="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled.png"><img style="width:949px" src="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled.png"/></a></figure><p id="4ad2fbd4-708a-4487-ae5b-0363adf27a5e" class="">Challenges with the Servlet API:</p><ul id="5094eb25-44bc-4710-a140-606ffec59915" class="bulleted-list"><li style="list-style-type:disc">Somewhat a low-level API<ul id="b83dc316-5665-41f2-b598-45e5b70f1157" class="bulleted-list"><li style="list-style-type:circle">Not as easy to use</li></ul><ul id="23feda42-8e09-44e2-88f4-ece313a2d858" class="bulleted-list"><li style="list-style-type:circle">Less productive</li></ul></li></ul><ul id="c7568968-5064-41e6-ba8e-85d5d94519e8" class="bulleted-list"><li style="list-style-type:disc">Easy to mix-up concerns</li></ul><p id="65faa20c-4c2e-4577-bab8-e35a1d96bcfb" class="">With Spring MVC:</p><figure id="aab3b3f0-d8ab-43fc-9278-f631fdf85010" class="image"><a href="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%201.png"><img style="width:1123px" src="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%201.png"/></a></figure><p id="703ded55-d837-49e5-9bbd-d495bd10cf41" class="">Notice how Spring Web MVC sits behind the Business Logic and ahead of the Servlet API.</p><ul id="b9a18843-1398-46fe-822e-96dcac314956" class="bulleted-list"><li style="list-style-type:disc">It’s a higher level API<ul id="cb767f82-4dec-423c-80b4-87eaf2cf4bca" class="bulleted-list"><li style="list-style-type:circle">Easier to use</li></ul><ul id="ff442d6f-f2ec-4270-ba63-b51012fabbf0" class="bulleted-list"><li style="list-style-type:circle">More productive</li></ul></li></ul><ul id="be4bafae-2d85-4025-8f18-890c805be039" class="bulleted-list"><li style="list-style-type:disc">There’s a clear separation of concerns:<figure id="61999ccc-c582-493a-b3eb-a6fc00eb846f" class="image"><a href="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%202.png"><img style="width:1308px" src="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%202.png"/></a></figure></li></ul><h3 id="ba3d3529-ad25-459e-8b60-57923f2bb669" class="">Spring Webflux</h3><p id="66dbae76-e66f-437e-a163-0b8cad2d1782" class="">Spring Webflux is based on <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Reactive Programming</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>:</p><blockquote id="530ea905-9989-4a76-8d2f-862a610b076c" class="">a declarative programming paradigm concerned with data strams and the propagation of change</blockquote><p id="6fcbe15b-200d-47ad-9610-88dc6ef0f70d" class="">In reactive programming, you <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>React rather than wait.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="6715b92a-8942-47a9-bd42-0838a46f86c7" class="bulleted-list"><li style="list-style-type:disc">Has a different way of handling web requests<ul id="deef77fd-06be-4d05-b06c-342dba11b8eb" class="bulleted-list"><li style="list-style-type:circle">Asynchronous execution</li></ul><ul id="979105e2-aa6b-4e57-bda9-29cf7999dd29" class="bulleted-list"><li style="list-style-type:circle">Doesn’t block (wait)<ul id="9235e194-f4f6-4e9f-9a3a-a7bbf6e27433" class="bulleted-list"><li style="list-style-type:square">Better resource utilization</li></ul></li></ul></li></ul><p id="1bd747bc-50e6-4a7d-8e63-6ca754960134" class="">Traditional Flow:</p><figure id="9fcf5ac7-34fc-45ba-b89e-478aaad1b4b1" class="image"><a href="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%203.png"><img style="width:1141px" src="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%203.png"/></a><figcaption>Request 2 isn’t sent until request 1 is replied to and vice-versa.</figcaption></figure><p id="12f3a723-6f1f-414c-918c-3cc7b3396a40" class="">Reactive Flow:</p><figure id="5c1012d7-c0b1-42bf-8499-9f97765bc448" class="image"><a href="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%204.png"><img style="width:1129px" src="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%204.png"/></a><figcaption>Every request is independent from one another. They’re executed asynchronously. The request is sent, and rather than blocking the application, it asks to be notified once a reply comes in, allowing for other operations to take place at the same time.</figcaption></figure></div></p><h2 id="790c13ce-fea3-4b2b-9a4c-6d3e6fcd600b" class="">AOP</h2><p id="3c19719a-e7e8-44f8-a412-4e1235c01b5d" class="">(also known as Aspect-Oriented Programming)</p><blockquote id="f2d67dd2-55dd-4be2-bdea-de52957a523e" class="">A programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns.</blockquote><p id="dc1d44f1-df68-4635-8949-2d0508058c2a" class="">Without AOP, solving concerns that are cross cutting, results in scattered and duplicated code across many parts of an application.</p><p id="e0a77576-5dd6-4eb7-a8ab-27e4dead73c7" class="">It’s used to:</p><ul id="b85897b6-1168-4482-aae4-ac99009f974d" class="bulleted-list"><li style="list-style-type:disc">Implement features in Spring</li></ul><ul id="8c2f6d49-2507-4c97-807f-790e4b44be6c" class="bulleted-list"><li style="list-style-type:disc">Handle cross-cutting concerns</li></ul><p id="7fd42299-cf8b-4f0a-a51d-da1a06089fda" class="">Example (Application Security):</p><pre id="a05893fd-1aea-4fd3-808a-05d29a014209" class="code"><code>public void sensitiveOperation(){
+	// check if user is authenticated and has the correct role
+	if (...) {
+		// do sensitive operation
+	} else {
+		// raise an unauthorized error
+		// log failed attempt
+    // redirect user to login page
+	}
+}</code></pre><p id="fa7ff662-a103-4411-89cd-802476e52899" class="">Example (Application Security with Spring AOP):</p><pre id="25fdfecf-4440-4fa6-9e33-18a9c759fd64" class="code"><code>@PreAuthorized(&quot;hasRole(&#x27;admin&#x27;)&quot;)
+public void sensitiveOperation(){
+	// do sensitive operation
+}</code></pre><h2 id="cf40318a-1d73-4727-9a2d-09eb9df422d0" class="">Data Access</h2><p id="317e16ee-d8e3-4d1c-aa13-66180097f9a7" class="">Almost every application interacts with data. Data is really important.</p><p id="0119858b-ec47-4a1c-899b-1f96f5190bcc" class="">The Spring Framework’s Data Access module makes it easier to develop applications that interact with data.</p><p id="de7454ff-86de-4347-91bf-97c4e1a96c4a" class="">Example (code to retrieve data using JDBC):</p><pre id="dea9caa7-f03b-45f9-990b-dc5e8481be6c" class="code"><code>try{
+	Statement stmnt = conn.createStatement();
+	try {
+		ResultSet rs = stmnt.executeQuery(&quot;SELECT COUNT(*) FROM foo&quot;);
+		try {
+			rs.next();
+			int cnt = rs.getInt(1);
+		} finally {
+			rs.close();
+		}
+	} finally {
+		stmnt.close();
+	}
+} catch (SQLException e) {
+	// handle error
+} finally {
+	try {
+		conn.close();
+	} catch (SQLException e) {
+		// handle error
+	}
+}</code></pre><pre id="2a20edfc-54f8-4177-a761-601a0999f0e7" class="code"><code>int cnt = new JdbcTemplate(ds).queryForInt(&quot;SELECT COUNT(*) FROM foo&quot;);</code></pre><p id="14ed8a53-f6f5-4cfb-bfd5-b77a4267300a" class="">Database transactions with the Spring Framework’s Data Access module are really easy.</p><pre id="527127b5-746a-4a72-a13a-8a386cee99d7" class="code"><code>try {
+	connection.setAutoCommit(false);
+	
+	// 1 or more queries or updates
+	
+	connection.commit();
+} catch (Exception e) {
+	connection.rollback();
+} finally {
+	connection.close();
+}</code></pre><pre id="6e00983d-9012-49cf-8e7b-a41a2a151e49" class="code"><code>@Transactional
+public void operation(){
+	// 1 or more queries or updates
+}</code></pre><p id="c33fe132-34ca-4afd-93cd-3b2c990ee279" class="">The Data Access module also provides a small but useful feature called “Exception Translation”. Different Vendors use different exceptions, but using Data Access’ Exception Translation, vendor-specific exceptions are mapped into a well-known set of exceptions.</p><p id="dc86e1b1-b2d5-4d3c-b378-1a444347d80f" class="">For example, for a data integrity violation error:</p><ul id="86eb8ce6-04d8-423a-b01f-d3785ad52875" class="bulleted-list"><li style="list-style-type:disc">MySQL will return error code 630</li></ul><ul id="6245feaf-4622-4c37-9e12-6bd49c0e1db2" class="bulleted-list"><li style="list-style-type:disc">Oracle DB will return error code 1400</li></ul><ul id="e030e0f8-187b-4c2a-9c14-4edca07dc529" class="bulleted-list"><li style="list-style-type:disc">Other database engines will return different error codes</li></ul><ul id="297b35b5-4d10-492a-8e8a-94cd16f33ed9" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Spring Data Access will map all of these error codes to the </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><code><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>DataIntegrityViolationException</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></code><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><p id="03e500c4-a208-41d1-80d4-a19311a57b60" class="">Testing data is easier with the Spring Framework’s Data Access module.</p><ul id="82c0de56-9764-433d-b727-6b36718872c0" class="bulleted-list"><li style="list-style-type:disc">Easy to switch configurations for testing<figure id="6301daa5-174e-45c8-910f-428db8adaf2e" class="image"><a href="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%205.png"><img style="width:1146px" src="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f/Untitled%205.png"/></a></figure></li></ul><h2 id="864b8f56-8f57-45c5-b2f8-60d0606372d0" class="">Integration</h2><p id="59797819-9ccc-47a1-a092-b14bef1fa54c" class="">It’s all about making different systems and applications work together. How does one application “talk” to another?</p><p id="06a7b372-780d-47ec-802c-8f9b57b1471d" class="">This is a multisided problem:</p><ol type="1" id="bfe19c99-a4b6-4021-9132-dc33e4bd4f4f" class="numbered-list" start="1"><li>How do you expose operations to other systems?</li></ol><ol type="1" id="d89b5060-5f71-4891-88f2-a43946cef914" class="numbered-list" start="2"><li>How do you invoke or run operations on other systems?</li></ol><p id="0f350071-6da1-439c-b6f3-33f12956b8aa" class="">There’s many ways to expose operations:</p><ul id="1764d3e8-b2c6-4b37-afb8-c42e6aa7f3c9" class="bulleted-list"><li style="list-style-type:disc">RMI (Remote Method Invocation)</li></ul><ul id="f2a16803-78a2-419d-8666-84a1d025830b" class="bulleted-list"><li style="list-style-type:disc">Messaging Systems</li></ul><ul id="457e551e-13df-4655-b4ff-67588dc99883" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Web Services</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><p id="04e3ef8b-ce75-461a-bf4e-9ad8b85f19e5" class="">The Spring Framework makes it easy to both expose and invoke web services.</p><pre id="352bc80f-1ff7-47ba-87a6-6bd0772c1707" class="code"><code>@RestController // Denotes we&#x27;re using REST
+public class AccountController {
+	@GetMapping(&quot;/account/{id}&quot;)  // denotes operation and path
+	public Account find(@PathVariable int id){ // associates path and value
+		// look up account by id
+	}
+}</code></pre><p id="a2e369b9-3b24-48b4-a387-be3191b0a614" class="">Invoking a web service is also easy and is made via a <code>Rest Template</code>:</p><ul id="29003202-4160-4074-b5f2-d5fd1c5d25ca" class="bulleted-list"><li style="list-style-type:disc">It abstracts away tedious details<ul id="f71f6fd6-d07f-431b-90bb-f8829de64678" class="bulleted-list"><li style="list-style-type:circle">Connecting to the web service</li></ul><ul id="75871209-c6d5-4463-bc5c-69b5fba69ca6" class="bulleted-list"><li style="list-style-type:circle">Sending the command</li></ul><ul id="b4c70d41-6b35-4072-96cf-f0b445878101" class="bulleted-list"><li style="list-style-type:circle">Handling the response</li></ul></li></ul><pre id="6756d975-fec1-4f8c-befc-b3a1652adc91" class="code"><code>restTemplate.getForObject(&quot;http://path/to/web/service&quot;, Object.class);</code></pre><h2 id="2da58ed0-2761-4bd6-8bab-c9796b6b9fd9" class="">Testing</h2><p id="56e4f624-b3f5-420b-b65a-a6373bf6c75a" class="">Testing is an important part of software development, and there’s different ways to test. Spring Testing focuses on <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Unit testing </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>and <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Integration testing</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.<div class="indented"><h3 id="5b61f78e-39bb-45a1-9302-aee3e637b284" class="">Unit Testing</h3><blockquote id="c799caff-5e0d-4e92-b93e-5ca0a6d326c8" class="">a software development process in which the smallest testable parts of an application, called units, are individually and independently scrutinized for proper operation</blockquote><p id="7f17b587-1911-4790-92ae-e8e75936c3fe" class="">Explicit support for unit testing is minimal.</p><ul id="10920595-9ced-41d9-9fc0-36daa3012992" class="bulleted-list"><li style="list-style-type:disc">Benefits come from using dependency injection</li></ul><p id="42276463-2461-489f-b2f3-a616f25c1885" class="">When performing unit testing, you want to test the smallest unit of code possible.</p><ul id="58a82912-ed69-4563-b836-869649838c7b" class="bulleted-list"><li style="list-style-type:disc">Dependencies cause challenges.</li></ul><p id="9ed1bf36-4edc-4f17-81bf-381a997849bb" class="">Dependency injection forces the developer to declare dependencies. During testing, dependent code can be replaced with code that behaves a certain way, i.e., you control how the dependencies are supposed to behave.</p><p id="c2b2a34a-07ee-4f43-a7d0-30aecdce0d0f" class="">This way you:</p><ul id="6365408a-2aea-4b03-94d9-e09fb333725a" class="bulleted-list"><li style="list-style-type:disc">Only test the code, not its dependencies</li></ul><ul id="940e1f73-993e-41d0-a6f0-c3083ed2c14b" class="bulleted-list"><li style="list-style-type:disc">Mock the dependencies</li></ul><p id="f12dc03d-df3c-47de-9f60-25af1faa4d5a" class=""><strong>Example </strong>(Using Dependency Injection in Testing):</p><pre id="4aae919f-fbd3-492d-a055-73c785079ccd" class="code"><code>public Permission getPermissions(Security Manager sm) {
+	String securityLevel = sm.getSecurityLevel();
+
+	if (securityLevel.equals(&quot;CONFIDENTAIL&quot;)){
+		// give user confidential permissions
+	} else if (securityLevel.equals(&quot;SECRET&quot;)){
+		// give user secret permissions
+	} else if (securityLevel.equals(&quot;TOP_SECRET&quot;)){
+		// give user top secret permissions
+	}
+}</code></pre><p id="f52d3741-a71c-4f77-832a-b12ae3b86760" class=""><strong>Objective</strong>: test every condition</p><p id="2157f8ca-e923-4394-9134-c56bb3652192" class=""><strong><strong><strong><strong><strong><strong>Method</strong></strong></strong></strong></strong></strong>: (Mock) Control how the <code>SecurityManager</code> (the dependency) behaves to control the test</p><p id="5ca6ea45-b038-4ad6-8171-3cc343a15d9c" class="">The Spring Framework comes with several built-in mocks to make testing easier and faster.</p><h3 id="3a6be212-88ca-4d52-b58b-4cec3943c562" class="">Integration Testing</h3><blockquote id="d781fb8f-edb0-486d-b3e7-8fad8e20b837" class="">the phase in software testing in which the individual software modules are combined and tested as a group. It occurs after unit testing.</blockquote><p id="4ec7a074-b704-42f0-9b12-4f920890a52b" class="">Provides support for piecing together parts of an application for testing</p><ul id="adb16316-a56f-41e0-b142-bf41e1381409" class="bulleted-list"><li style="list-style-type:disc">Inject dependencies and put everything together</li></ul><p id="63b5d352-22b4-456a-9bcd-b5893996bcfe" class="">Provides support for common testing scenarios</p><ul id="d592eba1-ba02-4600-ad50-7043dd57077d" class="bulleted-list"><li style="list-style-type:disc">Testing with data</li></ul><ul id="199c6209-9cf3-4692-a572-e8658fc7f259" class="bulleted-list"><li style="list-style-type:disc">Web application testing</li></ul><p id="d2b290d0-1aa7-4ac5-9bd2-2f4781974901" class="">Provides support for cleaning up after tests</p><ul id="b4b11353-ec62-4a8f-ac36-143cf66a8146" class="bulleted-list"><li style="list-style-type:disc">Tests modify things, need to reverse modifications after test so as to not affect the next tests</li></ul><h1 id="e8514e62-8f2a-426d-a0ec-e90bae4d0ebd" class="">Is Spring a Good Fit?</h1><h2 id="c3bc33f3-d52d-476a-9f08-3e8f233ea348" class="">The Advantages of Using Spring</h2><ul id="cbe95e80-e2ce-4811-9ed5-e223cf41eeac" class="bulleted-list"><li style="list-style-type:disc">Rock-solid &amp; well engineered</li></ul><ul id="40b446ea-cc13-4807-95ee-ec1b47f3b3ba" class="bulleted-list"><li style="list-style-type:disc">Stood the test of time</li></ul><ul id="2b40c1c0-020a-4354-8604-25f438e5aefb" class="bulleted-list"><li style="list-style-type:disc">Has a huge community</li></ul><ul id="46896416-f018-4ef6-bd95-2f285f955b2b" class="bulleted-list"><li style="list-style-type:disc">Well-liked</li></ul><ul id="c8c4541c-f103-4a85-adca-6360e1dd8a62" class="bulleted-list"><li style="list-style-type:disc">Large talent pool</li></ul><ul id="03e5360a-e1ce-4db1-8ab5-0897cbc89abd" class="bulleted-list"><li style="list-style-type:disc">Wealth of existing knowledge</li></ul><ul id="c06bacce-43e7-4444-9a3c-a099dbd5b0e3" class="bulleted-list"><li style="list-style-type:disc">Very actively developed (the project is open-source)</li></ul><ul id="3d420bf9-cab4-4d19-a4ad-5267e98f3d27" class="bulleted-list"><li style="list-style-type:disc">Built-in IDE support</li></ul><ul id="ad72ce76-5579-4e37-a791-826e9c21df10" class="bulleted-list"><li style="list-style-type:disc">Scalable</li></ul><h2 id="3be6c8e6-4d37-44b3-84b9-97760af80ac3" class="">The Disadvantages of Using Spring</h2><ul id="feebd136-018f-4281-ae50-7745cbf1f242" class="bulleted-list"><li style="list-style-type:disc">Too much “magic”</li></ul><ul id="018769b2-2816-4bf4-a757-4b66e1ebdbbf" class="bulleted-list"><li style="list-style-type:disc">Steep learning curve</li></ul><ul id="dd9ff09b-da4f-464d-9177-ac0b5e8365c1" class="bulleted-list"><li style="list-style-type:disc">Increases the size of your deliverable</li></ul><ul id="886880b9-2c8f-4028-904e-30a53b672669" class="bulleted-list"><li style="list-style-type:disc">Hard to debug</li></ul><ul id="d61eccde-168b-440a-81a3-3ed56cd8b460" class="bulleted-list"><li style="list-style-type:disc">Adds memory overhead</li></ul><ul id="d546d318-dbe8-4205-b77b-2b6dfdddcf9d" class="bulleted-list"><li style="list-style-type:disc">Spring’s complexity has grown over time</li></ul><ul id="e50e6689-6ebb-485a-b768-e5e140c93c05" class="bulleted-list"><li style="list-style-type:disc">Spring can be too configurable</li></ul><ul id="e07dd00c-73cc-436d-9936-979f63c3f249" class="bulleted-list"><li style="list-style-type:disc">Spring is “big” (Not good for small problems that need quick results)</li></ul><ul id="508f9fe2-d107-4a4c-ada5-40fa2bf21e70" class="bulleted-list"><li style="list-style-type:disc">Spring’s community projects are hit or miss</li></ul><p id="a705c2ae-c74b-481d-b798-fd83233d1f29" class="">
+</p></div></p></div></article></body></html>

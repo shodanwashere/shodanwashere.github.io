@@ -1,0 +1,920 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Spring 5 Fundamentals</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body>
+<a href="../sfcs.html" style="display: block; padding: 5px; color: white; background-color: black; width: 100px">Go Back To Learning Plan Menu!</a>
+	<article id="3532fc24-2f74-48a9-9f1e-beb931ee5d6b" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">2️⃣</span></div><h1 class="page-title">Spring 5 Fundamentals</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="bdb9d063-1312-4535-baf8-66448934686f"><div style="font-size:1.5em"><span class="icon">😎</span></div><div style="width:100%">Finished on <time>@August 18, 2023</time>. Written by Nuno Dias, <em><em><em>aka</em></em></em>, Shodan. Based on the <a href="https://app.pluralsight.com/library/courses/spring-framework-spring-fundamentals/table-of-contents">Pluralsight course</a> of the same name by <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Bryan Hansen</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.</div></figure><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Table of Contents</summary><div class="indented"><nav id="cecad937-9032-4fe3-aab0-dcfa397877ec" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ac6f3a5e-abc2-4442-a0cc-706e64917a81">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a2a4942c-0932-4dd5-8b99-5133163042c4">Disclaimer</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cf6be917-9182-4262-a054-90d7213da95a">Architecture and Project Setup</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0f53e39c-a263-474c-8ad0-12ab6e84e9ca">Prerequisites:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e072f0ce-4793-49d9-9558-f61afcd2022c">Sample App</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#55702236-cc69-425e-a9f9-9c4ec871d413">Model</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8e83722f-3a28-45ea-a51b-ce1f7a6d1aab">Repository</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#3cb1b1f3-f55b-4930-9086-8409f15a60f8">Service</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0c0ec879-80f2-42a4-b664-fa01e490b903">Application</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c1ebd6e2-62a2-40ce-94a4-1a76559bd35e">Configuration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9687baad-766c-430a-b6f2-d0cc334cbc80">Getting Spring</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1ee2f22b-d56c-419b-a61b-04e3314ab7e3">Spring Configuration Using Java</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#be6eeee5-a8d6-48d5-8b7f-b018ac5ef6db">Bean</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9c3e201d-ae99-4da0-9bff-63bfcd7cc96a">Setter Injection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#07395b27-4cb1-4ec1-81a0-5171963cf3fe">Construction Injection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b8e1d413-4150-460f-be18-754184cd442b">Linking the configuration file to the application</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3a7c77c7-26e4-4236-b79c-736f6822f56f">Spring Scopes and Autowiring</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#58bafe91-3d97-4715-8c5a-4f952ada998a">Scopes</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8b7ea796-02c8-42ed-8254-c9dde7d60f5e">All-Valid Configs:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d62c6ad6-3144-4d09-83d8-491c701f0217">Singleton</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#4814ddf5-6a44-420e-b7db-5e685d4a199c">Prototype</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1eaf1645-5616-4ba0-a0e4-569591382586">Web-Aware Configs:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#282592bb-7f49-495b-a1cc-1f3396331246">Autowired</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#37bb5f79-d902-414d-8788-74934db29ec3">Stereotype Annotations</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b5d8c674-d433-4004-bb86-48f22ffcea41">Spring Configuration Using XML</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d3cb05ac-4bd0-48e9-b171-d28e9e678546">applicationContext.xml</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9de41535-c5af-4b97-a4d1-73b02cc0b967">Setter Injection</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#662bd0c0-862c-4217-b4bd-e1269d3f301b">Constructor Injection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3837b39c-ceed-4b18-b458-d6ebb4d6ed4e">Linking applicationContext.xml</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b2af613a-f9d0-4f84-88e7-d519b64c5286">Autowiring</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0dbc3b62-5cb3-4f48-8c3e-5bfcb9f87480">Advanced Bean Configuration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#09a70bca-b6ea-4811-a0d9-77b3677ab927">Bean Lifecycle</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#882d6efd-3f84-4cfa-aabd-403466e7c6b9">FactoryBean</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#118fd673-b0d6-412c-8e2f-bd36066670cf">SpEL</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#75bf25bd-b0a3-4024-a952-7a167ab7f2dd">Bean Profiles</a></div></nav></div></details><p id="cb0fe484-a79c-4191-9426-2124a9193527" class="">Version Check</p><p id="48fa9d2f-4fb0-4973-a419-4a1d95d0a5e1" class="">This course is 100% applicable to Spring 5 through 5.3.</p><h3 id="a2a4942c-0932-4dd5-8b99-5133163042c4" class="">Disclaimer</h3><p id="92465d1f-6f73-4d7d-aa22-c621b17ce582" class="">The introductory “What Is Spring?” module was cut, as its contents are already explained, in some but not excruciating detail, in this course:</p><figure id="f3d626bf-631b-44bf-b7bc-82e03789a38f" class="link-to-page"><a href="The%20Big%20Picture%20(~11%20mins%20read)%20f3d626bf631b44bfb7bc82e03789a38f.html"><span class="icon">1️⃣</span>The Big Picture (~11 mins read)</a></figure><h1 id="cf6be917-9182-4262-a054-90d7213da95a" class="">Architecture and Project Setup</h1><h2 id="0f53e39c-a263-474c-8ad0-12ab6e84e9ca" class="">Prerequisites:</h2><ul id="65f7e8b2-221d-4559-841a-896ea131c5e2" class="bulleted-list"><li style="list-style-type:disc">Java JDK and JRE</li></ul><ul id="6c7e65aa-b8c4-4fe5-8792-a0eae4e99565" class="bulleted-list"><li style="list-style-type:disc">Maven</li></ul><ul id="fd4fe0e0-7ee6-4e70-8e79-b63d191cb7a5" class="bulleted-list"><li style="list-style-type:disc">An IDE (Instructor Choice is Intellij)</li></ul><ul id="f87f48fe-8c91-4c11-9b3f-a873cbf963f4" class="bulleted-list"><li style="list-style-type:disc">Tomcat</li></ul><h2 id="e072f0ce-4793-49d9-9558-f61afcd2022c" class="">Sample App</h2><p id="5fde3bdf-42c0-49f9-8689-ff095ac7b985" class="">Let’s start with a sample app, through which I’ll present some of the things we do with Java normally, but end up being a pain afterwards. I’ll be using IntelliJ IDEA and JDK 11 for this Sample App.</p><p id="54250c8c-b138-40e0-8a7e-ec021de6c138" class="">Open up IntelliJ (or some other IDE of your choice, but remember to follow the steps for your specific IDE) and create a new project.</p><div id="87e9fd02-a919-44d9-a1a8-4cd233815a14" class="column-list"><div id="6d43b168-2007-4e1f-9ff2-2b6593125a75" style="width:62.5%" class="column"><figure id="ecbf1539-84a6-470e-a09a-a445c5fcc876" class="image"><a href="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled.png"><img style="width:781px" src="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled.png"/></a></figure></div><div id="98b5a1a4-ecf0-403e-8759-f22263d1f44a" style="width:37.5%" class="column"><p id="610d86bc-7c01-47f9-8d5a-eacfe69ca6d7" class="">We’ll name this app <code>conference</code> <strong>(1)</strong>. Make sure your language is set to Java and that your Build system is set to “Maven”. Select your JDK version. For our demos, we’ll be using JDK 11 <strong>(2)</strong>. Set your GroupId <strong>(3)</strong> and your ArtifactId <strong>(4)</strong>. For naming’s sake, I gave it the same as the project name.</p></div></div><p id="6374689c-d9eb-40ac-915a-84a3969b254e" class="">Click “Create” and your Java project will be created. The first file we’ll want to see is the Maven <code>pom.xml</code> file. This describes what Maven needs to know about how to build your project, what plugins to use, etc.</p><p id="127e2bb6-72d7-4be8-91ea-c174d3b20292" class="">It should look something like this:</p><pre id="f95ad1eb-761b-494c-b85d-17b779d08bff" class="code"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.shodan&lt;/groupId&gt;
+    &lt;artifactId&gt;conference&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;/properties&gt;
+
+&lt;/project&gt;</code></pre><p id="e73babc1-c3ff-43d6-8579-022b2dea50ac" class="">Don’t worry too much about it. You can see the <code>groupId</code> and <code>artifactId</code> you gave to the project. In the properties are specified what version of Java the source code was written for and what’s the target version to build for.</p><p id="580ebf86-ae20-4cd3-b593-19ebbe43d708" class="">Let’s start by creating a few classes. For the following examples, I will be using <code>com.shodan</code> as my project’s base groupId. Here’s the structure for mine:</p><h3 id="55702236-cc69-425e-a9f9-9c4ec871d413" class="">Model</h3><p id="3c569a05-bd4b-406a-8b41-e1fb6b9758d3" class="">Create a new package called <code>com.shodan.</code><code><strong><strong><strong><strong><strong>model</strong></strong></strong></strong></strong></code> and inside it, a class named <code>Speaker</code>. It should have two attributes, a <code>firstName</code>, a <code>lastName</code> and for each, getter and setter methods:</p><pre id="d9f861dd-91ef-4090-8850-c7ff208360e6" class="code"><code>package com.shodan.model;
+
+public class Speaker {
+    private String firstName;
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+}</code></pre><h3 id="8e83722f-3a28-45ea-a51b-ce1f7a6d1aab" class="">Repository</h3><p id="9d10cdd5-411a-4d2a-abe5-24fc25566ff5" class="">Now we’ll create a Repository for our application (an interface and its implementation). Create a new package called <code>com.shodan.</code><code><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>repository</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></code><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> Using IntelliJ (as of now, I’m not sure if the same can be done in Eclipse or other IDE’s), I’ll first write the implementation, and from that class, extract an interface. I’ll name mine <code>HibernateSpeakerRepositoryImpl</code>:</p><pre id="da5679cd-31f8-422c-8642-4de60dbb5b70" class="code"><code>package com.shodan.repository;
+
+import com.shodan.model.Speaker;
+import java.util.List;
+import java.util.ArrayList;
+
+public class HibernateSpeakerRepositoryImpl{
+    public List&lt;Speaker&gt; findAll() {
+        List&lt;Speaker&gt; speakers = new ArrayList&lt;Speaker&gt;();
+
+        Speaker speaker = new Speaker();
+
+        speaker.setFirstName(&quot;Nuno&quot;);
+        speaker.setLastName(&quot;Dias&quot;);
+
+        speakers.add(speaker);
+
+        return speakers;
+    }
+}</code></pre><p id="a3831273-7f35-4a5b-8e4b-af22734ed6ee" class="">If you wanna do the same thing I did, right click on your code and select “Refactor”&gt;”Extract Interface”:</p><figure id="65122c52-e726-4a16-b6a5-fcbecdc9c5f8" class="image"><a href="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%201.png"><img style="width:731px" src="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%201.png"/></a></figure><p id="d97cfc92-f2dd-41c1-a13d-a2c6d3b3fc18" class="">Give it a new name, for example, <code>SpeakerRepository</code> and select the one method, <code>findAll</code>, that we created in the implementation.</p><figure id="455cf970-0ef1-433c-8682-071a477fd360" class="image"><a href="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%202.png"><img style="width:509px" src="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%202.png"/></a></figure><p id="df71c6bf-bc85-4ff3-887d-24928afe0ec9" class="">Once you click “Refactor”, an interface named <code>SpeakerRepository</code> will be created, and your Repository Implementation will be modified:</p><ul id="519f35da-1ec8-4b29-a9d8-a7e31583172b" class="bulleted-list"><li style="list-style-type:disc"><code>findAll</code> will have an <code>@Override</code> annotation;</li></ul><ul id="1d06d438-f2f8-473e-addb-3d4656072d0b" class="bulleted-list"><li style="list-style-type:disc">the class header will have an <code>implements</code> operator denoting that your class implements the <code>SpeakerRepository</code> interface.</li></ul><h3 id="3cb1b1f3-f55b-4930-9086-8409f15a60f8" class="">Service</h3><p id="7dd14456-07dc-4258-8d09-def59dc20ac4" class="">Create a new package named <code>com.shodan.</code><code><strong><strong><strong><strong><strong><strong><strong>service</strong></strong></strong></strong></strong></strong></strong></code><strong><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></strong>and add a class to it named <code>SpeakerServiceImpl</code>. It should have one method named <code>findAll</code>, and make usage of the Repository to find all speakers:</p><pre id="fa4cdb79-0fe5-481d-9b30-5ec2584c49f7" class="code"><code>package com.shodan.service;
+
+import com.shodan.model.Speaker;
+import com.shodan.repository.HibernateSpeakerRepositoryImpl;
+import com.shodan.repository.SpeakerRepository;
+
+import java.util.List;
+
+public class SpeakerServiceImpl {
+
+    private SpeakerRepository repository = new HibernateSpeakerRepositoryImpl();
+
+    public List&lt;Speaker&gt; findAll() {
+        return repository.findAll();
+    }
+
+}</code></pre><p id="89a947e1-afb5-4e95-bd90-98d8d00d3ceb" class="">Repeat the interface extraction process or write one yourself.</p><h3 id="0c0ec879-80f2-42a4-b664-fa01e490b903" class="">Application</h3><p id="877b5ebc-5a01-462f-a9c9-7c471e422aa6" class="">Now, from your root <code>java</code> directory in your project, create an <code>Application</code> class: </p><pre id="01ee1445-ee52-494c-95b7-6f2a7f6bc602" class="code"><code>import com.shodan.service.SpeakerService;
+import com.shodan.service.SpeakerServiceImpl;
+
+public class Application {
+
+    public static void main(String[] args) {
+        SpeakerService service = new SpeakerServiceImpl();
+        System.out.println(service.findAll().get(0).getFirstName());
+    }
+
+}</code></pre><p id="fdffb2bb-a6e5-4cbb-859d-2f50fc69d645" class="">Once you run this code, it will read the first name of the first speaker in the list. My name is Nuno so…</p><figure id="46b5e3a4-009b-4d3a-abc0-12d662f51649" class="image"><a href="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%203.png"><img style="width:383px" src="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%203.png"/></a></figure><h2 id="c1ebd6e2-62a2-40ce-94a4-1a76559bd35e" class="">Configuration</h2><p id="1fb0c3b7-52ae-4d3e-a524-29fb6b44c139" class="">Spring is all about removing configuration code from your application. Configuration code is bad because it:</p><ul id="310060e6-af3c-46bb-953c-0b212382d6fb" class="bulleted-list"><li style="list-style-type:disc">Makes things brittle (hard to move to different environments);</li></ul><ul id="d72287ae-76d7-414a-8e7a-e0769f701136" class="bulleted-list"><li style="list-style-type:disc">Causes difficulties testing.</li></ul><h2 id="9687baad-766c-430a-b6f2-d0cc334cbc80" class="">Getting Spring</h2><p id="5489b3ff-1500-431c-8724-26c66b81ef46" class="">Getting Spring inside of our application is actually quite easy. All you need is to modify your Maven <code>pom.xml</code>. You’ll need to create a <code>dependencies</code> list, and then create a new <code>dependency</code>. The Spring Framework’s groupId is <code>org.springframework</code>, and the artifactId is <code>spring-context</code>. As of the time of writing this writeup, the version is <code>5.3.29</code>.</p><pre id="6437c6c1-dc3f-4705-985a-5b1b4dc20440" class="code"><code>...
+&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+            &lt;version&gt;5.3.29&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;properties&gt;
+...</code></pre><h1 id="1ee2f22b-d56c-419b-a61b-04e3314ab7e3" class="">Spring Configuration Using Java</h1><p id="6b3a476a-edec-44be-a069-8be2a94eee6b" class="">For this chapter, we’ll walk through the configuration of a Spring application using just Java. We’re going to take that Sample application we created before and wire it up using Java annotations and the Java configuration loader.</p><p id="42ab92e0-d0a2-4e85-8975-74849c4d778a" class="">For the purposes of this chapter, I will be using a duplicate of the sample application we’ve worked on before.</p><p id="348de242-361b-47dd-a203-db92afce8410" class="">To begin configuring our application, we want to create a file where we can bootstrap everything at. Create a new class named <code>AppConfig</code> or something similar at your project root.</p><p id="90111388-4d05-40fb-9643-4204655692df" class="">Now, to configure our Application, we’ll use the <code>@Configuration</code> annotation at class level to specify that this is a configuration class.</p><p id="fe1e23b4-2d89-40b5-bb12-815cecf81cfa" class="">Inside our configuration file, we’ll define <strong><strong><strong><strong><strong>Beans</strong></strong></strong></strong></strong>.</p><h2 id="be6eeee5-a8d6-48d5-8b7f-b018ac5ef6db" class="">Bean</h2><p id="dc2266e1-20a6-48c1-9095-20b4c0ec2d7f" class="">In the previous course, it was defined that Spring is based on Inversion of Control, or Dependency Injection, as we usually call it. This means that objects declare their dependencies without having to fulfill them, because someone else will.</p><blockquote id="38d5bad8-91e8-4a58-bd58-fdf1e9512172" class="">In Spring, the objects that form the backbone of your application and that are managed by the Spring [Dependency Injection] container are called <strong><strong><strong><strong><strong>beans</strong></strong></strong></strong></strong>. A <strong><strong><strong><strong>bean</strong></strong></strong></strong> is an object that is instantiated, assembled and otherwise managed by a Spring [Dependency Injection] container.</blockquote><p id="f8b498a0-f140-4e8d-9420-206bda470ff1" class="">So Beans are essentially objects that make usage of Spring’s Dependency Injection. Let’s examplify this by declaring a bean for the <code>SpeakerService</code>. In our <code>AppConfig</code>, we can add a new Bean by defining a sort of “getter” method with a <code>@Bean</code> annotation:</p><pre id="5cc75ec2-0693-40c2-a949-93d43fc4bf8b" class="code"><code>import com.pluralsight.service.SpeakerService;
+import com.pluralsight.service.SpeakerServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+
+    @Bean(name=&quot;speakerService&quot;)
+    public SpeakerService getSpeakerService() {
+        return new SpeakerServiceImpl();
+    }
+
+}</code></pre><h2 id="9c3e201d-ae99-4da0-9bff-63bfcd7cc96a" class="">Setter Injection</h2><p id="4187ba5a-e54b-4108-a82c-7d9dd28edc1b" class=""><strong>Setter Injection </strong>is a method of Dependency Injection via a “setter” method. Essentially, the <em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong>dependent </strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>class</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> will need:</p><ul id="45b56a10-08b5-453b-8fe4-1c8e08b06489" class="bulleted-list"><li style="list-style-type:disc">a private attribute with the same class as the <em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong>dependency</strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong> class</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>;</li></ul><ul id="148370dc-df2f-4d61-8688-3d937d85178d" class="bulleted-list"><li style="list-style-type:disc">a setter method for that attribute;</li></ul><ul id="2a422fe0-16ae-425f-bffe-30613a673990" class="bulleted-list"><li style="list-style-type:disc">changes made to the Bean in the Configuration file.</li></ul><p id="114bf8eb-1fb2-46c3-9816-917de3079f6f" class="">And the <strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em><strong><em>dependency </em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong></em></strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>class</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> will need its own Bean in the Configuration file. This way, when Beans are being registered and created, via this Setter, we can immediately inject the dependencies needed. To examplify this, let’s take care of one of <code>SpeakerServiceImpl</code>&#x27;s (the implementation class we defined in the configuration file) dependencies: it needs a <code>SpeakerRepository</code>.</p><p id="2c981541-b891-4432-a733-1d94a670a16e" class="">First, in our <code>AppConfig</code> class, we’ll create a new Bean for the <code>SpeakerRepository</code>, using the implementation of it that we have, the <code>HibernateSpeakerRepositoryImpl</code>:</p><pre id="75d96f22-a366-4b61-ac45-57f2cad5bcb1" class="code"><code>@Bean(name = &quot;speakerRepository&quot;)
+public SpeakerRepository getSpeakerRepository() {
+		return new HibernateSpeakerRepositoryImpl();
+}</code></pre><p id="803ecb49-8c62-47cc-896c-55c0a3477eec" class="">Next, we’ll add the needed repository attribute and setter to the <code>SpeakerService</code>, or rather, its implementation.</p><p id="4b18f7ee-b8af-48ce-9363-74a21ef6b727" class="">In <code>SpeakerServiceImpl</code>, we modify and add the following:</p><pre id="142b175d-0528-41fd-995c-04cc1d36817b" class="code"><code>private SpeakerRepository repository; // = new HibernateSpeakerRepositoryImpl();
+
+public void setSpeakerRepository(SpeakerRepository repository) {
+		this.repository = repository;
+}</code></pre><p id="595d2103-34bc-4459-b956-a15652f55ba7" class="">Because this is some method not in the interface, we’ll get yelled at by Java. Remember to add the method signature to the <code>SpeakerService</code> interface.</p><p id="a9226a58-02ab-43a1-80ce-ff4e5970eb14" class="">Finally, in our configuration file, we modify the <code>SpeakerService</code> Bean to inject a <code>SpeakerRepository</code> Bean into it:</p><pre id="01d11805-36a2-4101-b087-e57c60e9e909" class="code"><code>@Bean(name = &quot;speakerService&quot;)
+public SpeakerService getSpeakerService(){
+		SpeakerService speakerService = new SpeakerServiceImpl();
+		speakerService.setSpeakerRepository(getSpeakerRepository());
+
+		return speakerService;
+}</code></pre><h2 id="07395b27-4cb1-4ec1-81a0-5171963cf3fe" class="">Construction Injection</h2><p id="101f66ec-4288-46cd-853a-c6743fb247ac" class="">Construction Injection is just like Setter Injection, but, instead of using a setter for injecting dependencies, we do it straight on the Bean class’ constructor. For example, if we wanted to use Construction Injection, instead of defining the setter, <code>SpeakerServiceImpl</code>&#x27;s constructor would look like this:</p><pre id="a1fcc365-91d7-47c7-82a3-aeae1658ac44" class="code"><code>public SpeakerServiceImpl(SpeakerRepository speakerRepository){
+		this.repository = speakerRepository;
+}</code></pre><p id="eaf24e55-83aa-4c0c-8112-58de4f280a22" class="">Because this is a constructor, we don’t need to add it to the interface.</p><p id="d99b1f22-3254-41e4-8f0e-90bb8b431489" class="">And the Bean would look something like this:</p><pre id="9bd517e7-ad02-46f9-b837-37e3e3950f2f" class="code"><code>@Bean(name=&quot;speakerService&quot;)
+public SpeakerService getSpeakerService(){
+		SpeakerService speakerService = new SpeakerServiceImpl(getSpeakerRepository());
+		return speakerService;
+}</code></pre><h2 id="b8e1d413-4150-460f-be18-754184cd442b" class="">Linking the configuration file to the application</h2><p id="061a7f04-0250-4d06-804e-bf2a341e2817" class="">Finally, we can link the Configuration file to the application. Thankfully, it’s also quite easy.</p><p id="80390085-341d-44c9-80f8-81d5913f9906" class="">Spring uses a special type of object called the <code>ApplicationContext</code> to save these configurations.</p><p id="f854b642-cf03-44a3-a1a6-ada9791db925" class="">To make this link, we create an application context object using the implementation for annotated configurations (Java-only configuration) like so:</p><pre id="6d57bbcb-2861-49c6-a3f3-b61c45a588b4" class="code"><code>ApplicationContext applicationContext
+		= new AnnotationConfigApplicationContext(AppConfig.class);</code></pre><p id="24ff0f5e-bd48-4124-8ff8-0433185d030c" class="">Now, when we want to get an instance of a class we’ve defined as a Bean, all we need to do is obtain it from the application context! How neat is that?</p><pre id="afdfec00-bd88-49b1-b22f-007f2e583bbe" class="code"><code>//SpeakerService service = new SpeakerServiceImpl();
+SpeakerService service
+		= applicationContext.getBean(&quot;speakerService&quot;, SpeakerService.class);</code></pre><p id="c37c9885-f143-44d1-a037-f029a3c15f2b" class="">This works particularly well, because by default, <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Beans are defined as Singletons by Spring</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, so when you obtain a Bean, it’s only instanced once, and is never recreated again.</p><p id="dab38398-431f-4994-8fea-256aa49be9a3" class="">Using this implementation, you can test that the application still runs!</p><figure id="c74ef91d-b822-42d4-81c5-950372c62b45" class="image"><a href="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%204.png"><img style="width:971px" src="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%204.png"/></a></figure><h1 id="3a7c77c7-26e4-4236-b79c-736f6822f56f" class="">Spring Scopes and Autowiring</h1><p id="951117fb-3fe6-471d-a30f-79240c8358c5" class="">Now that we’ve seen some of the basic Spring configuration and how to create and implement beans inside of our application, let’s go a little deeper and look at Spring scopes and autowiring.</p><h2 id="58bafe91-3d97-4715-8c5a-4f952ada998a" class="">Scopes</h2><p id="d38894b0-ab6e-472b-8622-1060847f277f" class="">There are five scopes available inside of Spring for us to configure a bean inside of our applications:</p><ul id="d41c20cd-b4df-4fa0-8160-aaeca5c3d391" class="bulleted-list"><li style="list-style-type:disc">Valid in any configuration:<ul id="c56aace8-a1ba-4986-84d1-abec0b221ee9" class="bulleted-list"><li style="list-style-type:circle">Singleton</li></ul><ul id="2de96f62-90d7-4e9a-acbe-3d4ac8b9abd9" class="bulleted-list"><li style="list-style-type:circle">Prototype</li></ul></li></ul><ul id="d2d0ade7-5447-4b8d-a24c-c410ca01f375" class="bulleted-list"><li style="list-style-type:disc">Valid only in web-aware Spring projects:<ul id="e319dd83-3255-4e7f-8fc0-a0ea3642e051" class="bulleted-list"><li style="list-style-type:circle">Request</li></ul><ul id="f40a3888-7a93-4fdd-913f-712282eed87f" class="bulleted-list"><li style="list-style-type:circle">Session</li></ul><ul id="2cabe53b-56fc-40a2-8a8b-1c8c12857fa0" class="bulleted-list"><li style="list-style-type:circle">Global</li></ul></li></ul><h2 id="8b7ea796-02c8-42ed-8254-c9dde7d60f5e" class="">All-Valid Configs:</h2><h3 id="d62c6ad6-3144-4d09-83d8-491c701f0217" class="">Singleton</h3><p id="fed57059-77d1-4ca0-a3a9-269923e57818" class="">The Singleton design pattern restricts the instantiation of a class to a single object. It is the default bean inside of Spring. If you don’t give it a specific configuration, a Bean will be a singleton by default, which means there is one instance of it per Spring container or context.</p><p id="daa9c9bc-10ce-4893-a6ee-e37639c73025" class="">The configuration for adding scope using Java configuration is quite simple. Let’s use our Sample Application to examplify and add scope to our <code>SpeakerService</code> Bean. Go to your <code>AppConfig</code>:</p><pre id="ca7927cb-f9c5-49c9-b4ba-758c2a659324" class="code"><code>@Bean(name = &quot;speakerService&quot;)
+@Scope(value=BeanDefinition.SCOPE_SINGLETON)
+public SpeakerService getSpeakerService(){
+		return new SpeakerServiceImpl(getSpeakerRepository());
+}</code></pre><h3 id="4814ddf5-6a44-420e-b7db-5e685d4a199c" class="">Prototype</h3><p id="5a41c8ea-5592-4ab6-bb4e-a39b5007b7df" class="">The Prototype design pattern guarantees a unique instance per request, and thus, the scope inside of a Spring container mimics that design pattern: each time you request a Bean from the container, you are guaranteed a unique instance. It is essentially the opposite of a Singleton.</p><pre id="d4889c94-06ac-4d19-baab-a644ad0b2941" class="code"><code>@Bean(name = &quot;speakerService&quot;)
+@Scope(value=BeanDefinition.SCOPE_PROTOTYPE)
+public SpeakerService getSpeakerService(){
+		return new SpeakerServiceImpl(getSpeakerRepository());
+}</code></pre><h2 id="1eaf1645-5616-4ba0-a0e4-569591382586" class="">Web-Aware Configs:</h2><p id="2b3ffd35-449b-40bd-9ada-a206ccd9245d" class="">The three other scopes that are available are:</p><ul id="890f4048-1c2d-4896-8fcf-83ddaea0f54b" class="bulleted-list"><li style="list-style-type:disc">The <strong><strong><strong><strong><strong><strong><strong>Request</strong></strong></strong></strong></strong></strong></strong> Scope, which returns a new Bean per HTTP request;</li></ul><ul id="d194723e-113d-46f0-9560-112d9516c772" class="bulleted-list"><li style="list-style-type:disc">The <strong><strong><strong><strong><strong><strong><strong>Session</strong></strong></strong></strong></strong></strong></strong> Scope, which returns a single Bean per HTTP session, which stays afloat while the HTTP session is alive;</li></ul><ul id="ada4ac87-06af-4db5-bd19-6131dca8617c" class="bulleted-list"><li style="list-style-type:disc">The <strong><strong><strong><strong><strong>GlobalSession</strong></strong></strong></strong></strong> Scope, which returns a single Bean per application.</li></ul><p id="02989cb9-5fed-436b-8ca4-7a0323fad3c5" class="">I won’t go into much detail about these configurations, but there are other courses that explain this well.</p><h2 id="282592bb-7f49-495b-a1cc-1f3396331246" class="">Autowired</h2><p id="de63abb7-01f6-4971-80f5-2b9cdccbc0e6" class="">Autowiring is a great technique used to reduce the wiring up and configuration of code. </p><p id="3b790e69-995a-4f6b-9af9-266ed7c3631f" class="">You can use the <code>@Autowired</code> annotation to autowire a bean to a method, if that method takes in an object of a class with a configured Bean. Let’s say for example, in our Setter Injection scenario.</p><p id="572c891e-0546-4300-9aa4-9dfb8abac9aa" class="">We add the annotation to our repository setter:</p><pre id="daee54a2-84b9-4083-a10b-a95868152a73" class="code"><code>@Autowired
+public void setSpeakerRepository(SpeakerRepository speakerRepository){
+		this.repository = speakerRepository;
+}</code></pre><p id="86547f30-439c-4f3a-9329-b138629d8048" class="">Afterward, you can just use the no-arguments constructor to instance the <code>SpeakerService</code>. You are no longer required to invoke the setter. Because it is autowired, once the Bean is invoked, the setter will automatically run and inject the <code>SpeakerRepository</code> Bean into its parameters:</p><pre id="a3416b25-930d-49ba-9b4c-a5e54b6c94fe" class="code"><code>@Bean(name=&quot;speakerService&quot;)
+@Scope(value=BeanDefinition.SCOPE_SINGLETON)
+public SpeakerService getSpeakerService(){
+		SpeakerService ss = new SpeakerServiceImpl();
+		// ss.setSpeakerRepository(getSpeakerRepository());
+		return ss;
+}</code></pre><figure id="0ff1f8d7-9a49-405f-b907-35fc90611097" class="image"><a href="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%205.png"><img style="width:779px" src="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%205.png"/></a></figure><h2 id="37bb5f79-d902-414d-8788-74934db29ec3" class="">Stereotype Annotations</h2><p id="fdef8b3c-503e-40a7-9348-0f892c1a5514" class="">To fully autowire our applications and not just single methods, we need stereotype annotations. There are several stereotype annotations we can use to define Beans while fully autowiring them:</p><ul id="a3cb5945-0b29-4a29-b85e-8fa180954a1a" class="bulleted-list"><li style="list-style-type:disc"><code>@Component</code> - just a normal Bean;</li></ul><ul id="d4aaffda-eba8-4e86-ae42-1f3b93c7b93a" class="bulleted-list"><li style="list-style-type:disc"><code>@Repository</code> - denotes a class that is used as a repository object;</li></ul><ul id="c5c97ba3-f782-4c2a-83fa-28299300579b" class="bulleted-list"><li style="list-style-type:disc"><code>@Service</code> - denotes a class where you put your business logic in.</li></ul><p id="7d391e67-55c0-40a1-a613-42f7b41c0fc5" class="">To autowire our applications using the Java configuration, we simply need to add a component scan to our configuration file with an annotation that looks like this:</p><pre id="24fda333-121b-4a84-b0f3-36eb375a12c7" class="code"><code>@ComponentScan({&quot;com.shodan&quot;})</code></pre><p id="460cc3fe-25e8-48d2-900e-1cab79654a04" class="">The text inside specifies where Spring should begin looking for autowired and stereotype annotations.</p><p id="f64ba06c-daa8-495f-9ea1-b1ae8f6ffe3b" class="">Because we are fully autowiring the application, we no longer need any of these Bean definitions in the <code>AppConfig</code>. Even if I wanted to, the <code>@Bean</code> annotation is only declarable at a method level and not at a class level.</p><p id="8d192ffc-ee0d-4ecb-bf12-0efd81485e05" class="">That being said, after deleting the methods and annotations of the Beans inside your <code>AppConfig</code> you can now go to the implementations of your Beans and add stereotype annotations to the class signatures. For example, to declare that <code>SpeakerServiceImpl</code> is a Bean (and to make it easier to look for stuff, that it is a Service), we add the <code>@Service</code> annotation:</p><pre id="3786f3dc-a321-4b97-8700-3f13867c7fc2" class="code"><code>@Service(name=&quot;speakerService&quot;)
+public class SpeakerServiceImpl implements SpeakerService { ...</code></pre><p id="a10e3eed-aa35-446e-843a-a7ad35b938f9" class="">Remember, you need the annotation in the implementation class, not on the interface. Do the same on the repository like so:</p><pre id="6ab9ccb3-b82f-4662-994b-212bdcce6643" class="code"><code>@Repository(name=&quot;speakerRepository&quot;)
+public class HibernateSpeakerRepositoryImpl implements SpeakerRepository { ...</code></pre><p id="b0e825d7-fee1-47d2-a169-596d6f053fad" class="">In the class level, you can also declare a specific scope if you want using the <code>@Scope</code> annotation.</p><p id="efff6e1a-85e0-4097-b414-9e858fdffafd" class="">When performing autowiring, you can use whichever method of injection you want by placing the <code>@Autowired</code> annotation on either the setter or the constructor (but never both).</p><h1 id="b5d8c674-d433-4004-bb86-48f22ffcea41" class="">Spring Configuration Using XML</h1><p id="878ebbda-1441-4d45-8dae-d66c4550aae1" class="">This chapter is optional. You’re not going to be performing XML Configuration on Spring in your lifetime, but if you want to read for reading’s sake, you can stick around and see what’s in store.</p><h2 id="d3cb05ac-4bd0-48e9-b171-d28e9e678546" class="">applicationContext.xml</h2><p id="c6b04ce7-a608-4a8e-bf62-c9cac841ab20" class="">The applicationContext file really is the root of an application configured with Spring. And just like we had in our Java configured application, the <code>AppConfig</code> is the same thing.</p><p id="0e4ea1c1-8d65-45ca-a433-556ba9004883" class="">The name of the file doesn’t matter but <code>applicationContext.xml</code> is a standard. By default, Spring will look for a file named <code>applicationContext.xml</code>.</p><p id="2f6e2725-d441-49a8-8672-140979dcf111" class="">A simple view of Spring is that it’s just a HashMap of objects, and we define that Hashmap inside of our <code>applicationContext.xml</code> or <code>AppConfig.java</code>. The objects we have inside are just name-value pairs.</p><p id="d07abab9-cd77-44fa-8109-ee842004e97b" class="">All of our XML configurations begin here.</p><p id="e0aa1984-5241-4037-9d77-074f3add3999" class="">There are some namespaces that the Spring developers have put together that help us in our configuration and validation of our files and make things a lot easier.</p><p id="f21b71f7-5bac-4d69-becd-f63d05304d7b" class="">Let’s get started. Head to <code>src/main/resources</code> and create a file called <code>applicationContext.xml</code>.</p><p id="0e23ae6d-61fd-44d6-96ae-e746b16a52ae" class="">With the file created, let’s first add the XML header and the namespaces. Namespaces are needed by an XML parser to understand what tags can be used and how they are used.</p><pre id="cecfdbf0-c088-40d2-b318-2ae61ca2812f" class="code"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+&lt;/beans&gt;</code></pre><p id="23ebe4bb-01fc-4c1f-a5be-da50940d26be" class="">Now, to add a bean to our <code>applicationContext.xml</code>, we use the <code>bean</code> tag. It has some required properties, like <code>name</code> and <code>class</code>.</p><pre id="8a3d39e4-fb58-4642-836a-999be441fc3a" class="code"><code>		&lt;bean name=&quot;speakerRepository&quot;
+					class=&quot;com.shodan.repository.HibernateSpeakerRepositoryImpl&quot;/&gt;</code></pre><p id="30489ea5-3aef-4ded-931f-f560ec3c1ecb" class="">This tag has to be placed inside the <code>beans</code> tag.</p><h3 id="9de41535-c5af-4b97-a4d1-73b02cc0b967" class="">Setter Injection</h3><p id="8fe7609c-af6a-4088-82e1-00e4a70375d0" class="">To specify that we’re doing Setter Injection in XML Configuration, we add a <code>property</code> tag to the bean.</p><pre id="5ca16d3a-5629-4b06-98bd-9d7f3c1773f6" class="code"><code>		&lt;bean name=&quot;speakerService&quot;
+					class=&quot;com.shodan.service.SpeakerServiceImpl&quot;&gt;
+				&lt;property name=&quot;speakerRepository&quot; ref=&quot;speakerRepository&quot; /&gt;
+		&lt;/bean&gt;</code></pre><p id="be853470-c75a-494e-98bf-a2e04ce92795" class="">The property <mark class="highlight-orange_background"><code>name</code></mark> has to be the same as the parameter name in your setter. The property <mark class="highlight-blue_background"><code>ref</code></mark>erence needs to be the same as the name of the Bean we’re injecting.</p><h3 id="662bd0c0-862c-4217-b4bd-e1269d3f301b" class="">Constructor Injection</h3><p id="0453b6d4-093c-4783-993e-239743238de2" class="">In this case, constructor injection guarantees a contract for us. Our code and contract are defined when we create an instance because of the constructor. A <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>disadvantage </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>is that you need to define a constructor for each scenario you want to guarantee a contract for.</p><p id="b456e72f-17c5-4f1d-9d9f-010cdca617d1" class="">In XML Configuration, Construction Injection is index based and not name based as setter injection is.</p><p id="6e82a804-a3e2-41ff-8918-003219756511" class="">To specify that we’re doing Constructor Injection in XML Configuration, we add a <code>constructor-arg</code> tag to the bean:</p><pre id="a1f9bf3e-70f6-48aa-bd99-b34a87dcf7f8" class="code"><code>		&lt;bean name=&quot;speakerService&quot;
+					class=&quot;com.shodan.service.SpeakerServiceImpl&quot;&gt;
+				&lt;constructor-arg index=&quot;0&quot; ref=&quot;speakerRepository&quot; /&gt;
+		&lt;/bean&gt;</code></pre><p id="b65506cc-0fc9-480d-bf3e-a4f5ceed5192" class="">The constructor <code><mark class="highlight-orange_background">index</mark></code><mark class="highlight-default"> needs to have the index of the constructor argument. Then you can either have a </mark><mark class="highlight-purple_background"><code>ref</code></mark><mark class="highlight-default">erence or a pair of </mark><mark class="highlight-red"><code>type</code></mark><mark class="highlight-red"> </mark><mark class="highlight-default">and </mark><mark class="highlight-red"><code>value</code></mark><mark class="highlight-red"> </mark><mark class="highlight-default">attributes where </mark><mark class="highlight-red"><code>type</code></mark><mark class="highlight-red"> </mark><mark class="highlight-default">is the classname of the value being passed to the argument, and </mark><mark class="highlight-red"><code>value</code></mark><mark class="highlight-red"> </mark><mark class="highlight-default">is the value being passed to the argument. If no </mark><mark class="highlight-red"><code>type</code></mark><mark class="highlight-red"> </mark><mark class="highlight-default">is specified, it will be </mark><mark class="highlight-red"><code>java.lang.String</code></mark><mark class="highlight-default"> by default.</mark></p><h2 id="3837b39c-ceed-4b18-b458-d6ebb4d6ed4e" class="">Linking applicationContext.xml</h2><p id="91cd15f4-5f34-48e0-96a9-c7e7a3b5cf88" class="">We link it with the <code>ApplicationContext</code> interface, just like in the Java configuration, but we instead use the <code>ClassPathXmlApplicationContext</code> implementation, which extracts the configuration from an XML file. You can define this just like so:</p><pre id="3a2fc988-362f-43d9-8f5c-464444339994" class="code"><code>ApplicationContext appContext
+		= new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);</code></pre><p id="27449127-0a05-4158-89d8-6b18e7dabd3a" class="">You can then use this <code>ApplicationContext</code> object just like in the Java Configuration to get beans and other resources.</p><h2 id="b2af613a-f9d0-4f84-88e7-d519b64c5286" class="">Autowiring</h2><p id="2595b150-7b43-4214-8178-34a45db619c7" class="">In XML Configuration, there are four types of autowiring that you can do on a bean:</p><ul id="4abb5430-31c8-4a98-b9d8-ce3e4869cb99" class="bulleted-list"><li style="list-style-type:disc"><code>byType</code>: Allows a property to be autowired if exactly one bean of that property type exists in a container (it will raise an exception if there are two beans with the same class but different names).</li></ul><ul id="c16b93c9-9cbf-4b07-9816-b2fb4baebcfd" class="bulleted-list"><li style="list-style-type:disc"><code>byName</code>: Allows a property to be autowired if exactly one bean with the same property name exists in a container.</li></ul><ul id="7a32cf62-ecc3-4704-b7bc-dd722f30f9e3" class="bulleted-list"><li style="list-style-type:disc"><code>constructor</code>: Allows autowiring into a constructor.</li></ul><ul id="94e68495-daa2-44fd-b6d1-d5110aff53e2" class="bulleted-list"><li style="list-style-type:disc"><code>no</code>: no autowiring</li></ul><p id="519fc1c9-f4ae-460a-96a9-f99a242ac81a" class="">These are equivalent:</p><div id="a6c60152-8e96-4eb1-8910-5be81ca08b10" class="column-list"><div id="436397f6-4592-4e13-a5a8-b269158d5372" style="width:50%" class="column"><pre id="a31920f5-11cd-4946-98ce-4577e7bcf2aa" class="code"><code>&lt;bean name=&quot;speakerService&quot;
+			class=&quot;com.shodan.service.SpeakerServiceImpl&quot;&gt;
+		&lt;constructor-arg index=&quot;0&quot; ref=&quot;speakerRepository&quot; /&gt;
+&lt;/bean&gt;</code></pre></div><div id="1659c09a-caef-47ba-bf47-71bc9eda19e6" style="width:50%" class="column"><pre id="76bf5e0e-5a07-42ad-9978-526b2599bd52" class="code"><code>&lt;bean name=&quot;speakerService&quot;
+			class=&quot;com.shodan.service.SpeakerServiceImpl&quot;
+			autowire=&quot;constructor&quot;/&gt;
+</code></pre></div></div><p id="566c5a8c-5eba-4e2c-8919-35eb1882b05f" class="">It is the same thing as placing an <code>@Autowired</code> annotation on a constructor.</p><p id="03975f3e-2539-477b-afb7-bbdbc2e5924f" class="">For Setter Injection, you can use <code>autowire=&quot;byType&quot;</code> or <code>autowire=&quot;byName&quot;</code>.</p><h1 id="0dbc3b62-5cb3-4f48-8c3e-5bfcb9f87480" class="">Advanced Bean Configuration</h1><h2 id="09a70bca-b6ea-4811-a0d9-77b3677ab927" class="">Bean Lifecycle</h2><table id="759c1344-5d1d-4607-9079-5b83dd473387" class="simple-table"><tbody><tr id="fb87149d-c4f8-4c8d-8afb-096f88f6ed3d"><td id="lMWq" class="" style="width:206px">Instantiation</td><td id="GBvF" class="" style="width:586px">The Bean is instantiated by Spring.</td></tr><tr id="7ef05235-7e02-4244-8065-daf7dcb08787"><td id="lMWq" class="" style="width:206px">Populate Properties</td><td id="GBvF" class="" style="width:586px">The Bean’s properties are populated from a properties file or injected by other resources.</td></tr><tr id="2cbc7934-7aa4-4836-96e0-0088b6b2bc19"><td id="lMWq" class="" style="width:206px">BeanNameAware</td><td id="GBvF" class="" style="width:586px">The framework sets the Bean name and makes it aware of other resources.</td></tr><tr id="ed782c7c-876a-488e-8e35-1946e27d35d8"><td id="lMWq" class="" style="width:206px">BeanFactoryAware</td><td id="GBvF" class="" style="width:586px"></td></tr><tr id="e84abfc4-872b-4a8a-87e6-2bb4712e08d8"><td id="lMWq" class="" style="width:206px">Pre Initialization - BeanPostProcessors</td><td id="GBvF" class="" style="width:586px"></td></tr><tr id="a9de7ffa-6b2e-498c-9d14-26ad26d775e6"><td id="lMWq" class="" style="width:206px">InitializeBean</td><td id="GBvF" class="" style="width:586px">The Bean is initialized utilizing properties that were just set.</td></tr><tr id="4a806d8a-3558-4f3b-a0a2-1e19e760eeb3"><td id="lMWq" class="block-color-orange_background" style="width:206px">initMethod</td><td id="GBvF" class="block-color-orange_background" style="width:586px">An initialization method that can be defined by the user.</td></tr><tr id="19406403-cf79-4a2f-97b7-f255b7bfc0a8"><td id="lMWq" class="" style="width:206px">PostInitialization - BeanPostProcessors</td><td id="GBvF" class="" style="width:586px"></td></tr></tbody></table><p id="9be3edb1-ea5a-4a3c-94b4-c551b25e5ede" class="">To create initMethods, you’ll need to add a dependency to your project, <code>javax.annotation-api</code>. You can add it to your project with the following XML:</p><pre id="53e2c2d2-0518-42ae-9983-f0fb8840d7ea" class="code"><code>&lt;dependency&gt;
+		&lt;groupId&gt;javax.annotation&lt;/groupId&gt;
+		&lt;artifactId&gt;javax.annotation-api&lt;/artifactId&gt;
+		&lt;version&gt;1.3.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><p id="f8b68c16-f344-4c93-af85-76b5fe954533" class="">In any Spring configured Bean, you can add initMethods. There are two types:</p><ul id="f22dd318-61b0-4d01-bb60-5af26ee722dc" class="bulleted-list"><li style="list-style-type:disc"><code>PostConstruct</code> methods always run after a bean’s constructor finishes running. The method can have any name you want, but you have to add the <code>@PostConstruct</code> annotation:<pre id="c47b7d59-1d69-4db6-a6f2-5dc4a4f0a32f" class="code"><code>@PostConstruct
+public void initialize() {
+		System.out.println(&quot;I run after being constructed!&quot;);
+}</code></pre></li></ul><ul id="cb76a589-a4e6-45a2-9415-bd35028a5b14" class="bulleted-list"><li style="list-style-type:disc"><code>PreDestroy</code> methods run before a bean is destroyed. The annotation is <code>@PreDestroy</code>:<pre id="e2e70cd9-e87c-4e56-ae10-9a469302fbfc" class="code"><code>@PreDestroy
+public void destruction(){
+		System.out.println(&quot;OH NO THE HORROR&quot;);
+}</code></pre></li></ul><h2 id="882d6efd-3f84-4cfa-aabd-403466e7c6b9" class="">FactoryBean</h2><p id="dd836586-a552-4e69-a52f-86eb70577e30" class="">FactoryBean configuration is very similar to the init method configuration. It builds on the factory method design pattern and its functionality is built to work the same way.</p><p id="0e5f5fa9-bd0d-4dbf-a19d-399c2a0999fd" class="">It’s a great way to integrate legacy code into your application. You can enforce a contract in how your code is configured without creating a specific constructor for it.</p><p id="b3597abd-4b5c-42b7-a7c3-0a96287703df" class="">Let’s examplify this. Based on our sample application, I’m going to create a new class called <code>com.shodan.util.CalendarFactory</code>, and I’m going to make it implement the <code>FactoryBean</code> interface. Since <code>FactoryBean</code> is typed, I’ll say its type is <code>Calendar</code>.</p><pre id="8c6ec1ee-4ecb-4d37-bf6f-9342bf89c4cc" class="code"><code>package com.shodan.util;
+
+import org.springframework.beans.factory.FactoryBean;
+import java.util.Calendar;
+
+public class CalendarFactory implements FactoryBean&lt;Calendar&gt; {
+		private Calendar instance = Calendar.getInstance();
+
+		@Override
+		public Calendar getObject() throws Exception {
+				return instance;
+		}
+
+		@Override
+		public Class&lt;?&gt; getObjectType() {
+				return Calendar.class;
+		}
+
+		public void addDays(int num) {
+				instance.add(Calendar.DAY_OF_YEAR, num);
+		}
+}</code></pre><p id="d762ea2a-3573-4831-92b6-f9238b706bf5" class="">Now let’s move to our Java configuration at <code>AppConfig</code>. First, I’ll create the Bean for the <code>CalendarFactory</code>:</p><pre id="e107278a-de15-437d-876f-260e3f10322d" class="code"><code>...
+
+@Bean(name=&quot;cal&quot;)
+public CalendarFactory calFactory(){
+		CalendarFactory factory = new CalendarFactory();
+		factory.addDays(2);
+		return factory;
+}
+
+...</code></pre><p id="33d64e31-fb4f-409e-a8af-78ec350e3564" class="">And now I’ll create a Bean for the <code>Calendar</code> itself:</p><pre id="83ea5757-4fd2-4c20-9641-13b68793cab5" class="code"><code>...
+
+@Bean(name=&quot;cal&quot;)
+public CalendarFactory calFactory(){
+		CalendarFactory factory = new CalendarFactory();
+		factory.addDays(2);
+		return factory;
+}
+
+@Bean
+public Calendar cal() throws Exception {
+		return calFactory().getObject();
+}
+
+...</code></pre><p id="beae9365-14a7-4d1e-a42f-10d619b5c498" class="">Notice for a minute what we’re doing here. Through this factory we now have a Bean for the <code>Calendar</code>. And through that factory, we can modify how the Calendar is constructed before its Bean is initialized.</p><h2 id="118fd673-b0d6-412c-8e2f-bd36066670cf" class="">SpEL</h2><p id="d98d020c-b597-433b-9b68-3a25fd4627f2" class="">The <strong><strong>Sp</strong></strong>ring <strong>E</strong>xpression <strong><strong><strong><strong>L</strong></strong></strong></strong>anguage (<strong>SpEL</strong>) is a powerful expression language from the Spring Framework. It’s typically used in libraries but it can also be used to do some convenient changes to code.</p><p id="82ab9c5f-037f-4324-8c7c-93581bb42ded" class="">You can use SpEL to:</p><ul id="e7e76f95-a0df-4068-849c-0339ef19294b" class="bulleted-list"><li style="list-style-type:disc">Manipulate Objects;</li></ul><ul id="70a3d786-f128-49d0-8d27-3820fec83aa7" class="bulleted-list"><li style="list-style-type:disc">Evaluate values at Runtime and change the behavior of code accordingly;</li></ul><ul id="556f317f-9839-4f2d-9a2b-409e5573075e" class="bulleted-list"><li style="list-style-type:disc">Evaluate and manipulate Application Configuration.</li></ul><p id="b7f72627-77cd-48ba-9242-56622d5d182f" class="">Let’s say we want to add a seed number to our <code>Speaker</code> model object.</p><pre id="9ccb7209-4102-4161-868f-5fccbc214abe" class="code"><code>private double seedNum;
+
+public double getSeedNum() {
+		return seedNum;
+}
+
+public void setSeedNum(double seedNum) {
+		this.seedNum = seedNum;
+}</code></pre><p id="6fb8d9ec-9dcb-491f-8f4b-0e29ed6ea4d3" class="">Let’s say I want to define that <code>seedNum</code> at runtime. Let’s modify our Repository:</p><pre id="b0b4d654-f514-4955-aae2-43dedf99f948" class="code"><code>@Value(&quot;#{ T(java.lang.Math).random() * 100 }&quot;)
+private double seedNum;
+
+public List&lt;Speaker&gt;findAll(){
+		...
+		speaker.setSeedNum(seedNum);
+		...
+}</code></pre><p id="24defc65-2d92-4341-8264-a7f314438cd8" class="">As you can see, we can dynamically inject values into our beans using the <code>@Value</code> and SpEL, even if its values are based on other dependencies that we don’t want to autowire. In fact, you can even use this method if you want to inject values based on methods or properties of <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>other Beans.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><h2 id="75bf25bd-b0a3-4024-a952-7a167ab7f2dd" class="">Bean Profiles</h2><p id="bc99bb6c-92ea-4b13-8c50-c9b5b50aa7b7" class="">Bean Profiles were implemented later in the Spring code base to help you adapt to environments.</p><p id="c6c21103-ffb7-4eb0-ad57-484af0ff50a4" class="">They allow you to set up code that gets ran only in a specific environment which means you can swap configurations at runtime.</p><p id="e49938e5-547b-4fc7-82e0-78f8bc84c843" class="">To add Bean Profiles, we just need to give our Bean a <code>@Profile</code> annotation and the name of the profile. There are no specific keywords, but principles should be followed as per usual. For example, if you want a Bean to only be used in dev environments, such as our mock <code>HibernateSpeakerRepositoryImpl</code> you could do something like this:</p><pre id="a7d0e5d3-14ff-4ffa-8e2c-3438b6cd33b1" class="code"><code>...
+@Repository(&quot;speakerRepository&quot;)
+@Profile(&quot;dev&quot;)
+public class HibernateSpeakerRepositoryImpl implements SpeakerRepository {
+		...</code></pre><p id="91f05511-9e8f-4d1d-b855-91850f186301" class="">Then you can either set in your application’s configuration VM options…</p><figure id="dc9440a0-a1d3-4a74-b5af-6656dae11204" class="image"><a href="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%206.png"><img style="width:914px" src="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%206.png"/></a></figure><p id="447770fe-2452-4c36-bf15-f2e6b9fd73bc" class="">… or in the command line …</p><figure id="04c72242-fd54-4f6c-9759-c72f71b467e8" class="image"><a href="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%207.png"><img style="width:862px" src="Spring%205%20Fundamentals%203532fc242f7448a99f1ebeb931ee5d6b/Untitled%207.png"/></a></figure><p id="b69fdd28-742f-44df-9203-df7453e2847e" class="">… the option <code>-Dspring.profiles.active=&lt;profile_name&gt;</code>, where <code>profile_name</code> is the name of the environment you want to run on.</p></div></article></body></html>
