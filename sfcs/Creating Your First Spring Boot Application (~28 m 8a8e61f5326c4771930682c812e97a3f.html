@@ -1,0 +1,1142 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Creating Your First Spring Boot Application (~28 min read)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8a8e61f5-326c-4771-9306-82c812e97a3f" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">3️⃣</span></div><h1 class="page-title">Creating Your First Spring Boot Application (~28 min read)</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="59a7ba19-4a81-43f8-9bc0-8a19d730f5ea"><div style="font-size:1.5em"><span class="icon">😎</span></div><div style="width:100%">Finished on <time>@August 21, 2023</time>. Written by Nuno Dias, <em><em><em>aka</em></em></em>, Shodan. Based on the <a href="https://app.pluralsight.com/library/courses/creating-first-spring-boot-application/table-of-contents">Pluralsight course</a> of the same name by <strong><strong><strong><strong><strong>Dan Bunker</strong></strong></strong></strong></strong>.</div></figure><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Table of Contents</summary><div class="indented"><nav id="22f30d69-e262-4e56-868a-b9328a99bee7" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2e671425-b63c-4a30-b524-c154daf1e6fe">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e7ee0a28-ffe7-4977-b1c7-4f3d35a9cabb">Pre-requisites</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#120b750e-ff20-4dbd-adc2-a967a7e9fe6a">Version Check</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e2f5b9a9-966f-44fe-8c84-854430d8dc4a">1. Using Spring Boot to Create Applications</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#91c8e441-967b-4b13-82f2-f3ba979b21a4">1.1. What is Spring Boot?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3d32749e-3a50-46ab-a2cd-95511e96e648">1.2. Creating a Spring Boot App With Spring Initializr</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a1f27f72-6fac-4d23-a507-fa6fd43b5d4b">1.3. Overview of a Spring Boot App</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#02daa330-e927-411e-a6cf-15941321ce9e">1.4. Understanding Spring Boot Starters</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9feff97f-75b4-40cc-a489-a068689823e3">2. Building Apps with Spring Boot</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3106fdb9-563b-4bf6-8aa2-5ed5f43ef33a">2.1. Setting up the database</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b69f569e-7fdd-47de-82da-eac8b9d4dc01">2.2. Connecting to the database</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cfcd8662-1fec-4bea-b1ca-66ad4f97bab3">2.3. Creating JPA Models</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ff6d8f4e-d577-4f37-a3f1-24a88014b0ae">Solution</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#20018728-2ce1-4da2-a1bc-69ded451301a">2.4. Working with JPA Relationships</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7c1be68e-68a6-417a-85dc-c5c0b963addc">2.5. Working with Binary Data Types</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#41680ab0-91c6-4853-ae2a-26a1dcb2e80b">2.6. Creating JPA Repositories</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7a61a790-4655-4a63-8510-0fca8a3573d0">2.7. Creating Spring API REST Controllers</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a3e74c8a-1c60-458d-8fd6-929fe489544a">2.9. Handling Serialization Issues and Running the App</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e38855cc-3a2d-4f3e-82df-eac4c020dc11">3. Working with Spring Boot Configuration and Environment Needs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a137a4b8-8e76-4141-8266-74105fa5c582">3.1. How to Customize and Override Spring Boot</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bed1314c-d425-4f73-aa15-80203fa64d16">3.2. Using Environment Variables as External Configuration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e78b65bd-3d5b-4c83-a972-1bd5c736e2ce">3.3. How to Handle Different Environments</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a0f1092c-45de-4bd5-a030-91db3a8fd59c">3.4. Setting Properties with YAML</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b6aa4260-3fee-4073-a3a5-0ea48ae39bf3">3.5. Using Spring Properties in Code</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#80c11dd9-899c-4273-8b60-5280196025af">3.6. Overriding Spring Boot with Java Configuration</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#63755b4f-164b-4125-9470-ff10be7d0e25">4. Deploying Spring Boot Applications</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ad7e7911-d0e4-401d-b82d-0ff7b82d1806">4.1. Spring Boot Containerless Architecture</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1ee6a731-73c0-4d55-9918-a8b3e3f9e7a6">4.2. Switching out the Spring Boot Embedded Container</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ed6065c2-5c6a-4460-89a8-98fc5e1d0868">4.3. Creating Executable JAR Deployments</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ca323233-57a7-4374-8d1f-6c1694f49365">4.4. Common Cloud Supported Platforms</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#85007fec-f302-401f-baf0-64d039ec244b">4.5. What About WAR Deployments?</a></div></nav></div></details><h3 id="e7ee0a28-ffe7-4977-b1c7-4f3d35a9cabb" class="">Pre-requisites</h3><p id="0076b460-99f6-41a4-abc4-acee586e3bea" class="">Familiarity with:</p><ul id="9a2ecec6-ba14-401e-8891-ebd5fcd4b0a2" class="bulleted-list"><li style="list-style-type:disc">Basic Java</li></ul><ul id="cddfa31f-9fa3-4a2b-94a3-50bbaa395e99" class="bulleted-list"><li style="list-style-type:disc">Maven build tool</li></ul><ul id="ddbe85f6-383c-4242-9ac2-10ebb6454fc6" class="bulleted-list"><li style="list-style-type:disc">Web application fundamentals (Endpoints, REST, relational databases, etc.)</li></ul><p id="e8b5b3a4-56f3-4cb4-b2e3-96a0ab06eed4" class="">Tools:</p><ul id="528b7cc4-60e7-4fa0-b90a-9acd72c3f7ab" class="bulleted-list"><li style="list-style-type:disc">JDK 11</li></ul><ul id="4e0bb949-1612-4730-bccb-5bb46785299f" class="bulleted-list"><li style="list-style-type:disc">An IDE (We’ll be using IntelliJ IDEA)</li></ul><h3 id="120b750e-ff20-4dbd-adc2-a967a7e9fe6a" class="">Version Check</h3><p id="e7912d84-8cbc-4d66-8364-6cc8ec8bef75" class="">This couse was written using Spring Boot 2.1.9.RELEASE and Java 8.</p><p id="a58212ba-039d-4ac2-89c7-013870ffaa28" class="">Java versions are whatever but the course is 100% applicable to Spring Boot 2.0 through 2.7.</p><h1 id="e2f5b9a9-966f-44fe-8c84-854430d8dc4a" class="">1. Using Spring Boot to Create Applications</h1><h2 id="91c8e441-967b-4b13-82f2-f3ba979b21a4" class="">1.1. What is Spring Boot?</h2><p id="7891f385-bf9a-4f4f-9c0e-6d43c5d4e085" class="">Before Spring Boot, it wasn’t uncommon for a developer to spend a few days wiring an MVC framework to a persistence framework and getting that talking to a database, all of this before any coding can actually take place. That’s way too much delay time.</p><p id="d768282e-8694-406c-87c2-d435f3b5ab79" class="">Spring Boot takes an opinionated view on how a Spring application should be built. By doing so, you can now stand up a fully-wired up application from controller to database in just a matter of seconds.</p><p id="fadd72e8-4b14-4dff-b1d3-609e8531d5d6" class="">Spring Boot makes building applications very quick, like Ruby-on-Rails, or Python.</p><p id="76933d96-8d48-437f-a42c-1a331b9bdb14" class="">Spring Boot got away from container dependence and really wants applications to be standalone Java apps.</p><h2 id="3d32749e-3a50-46ab-a2cd-95511e96e648" class="">1.2. Creating a Spring Boot App With Spring Initializr</h2><p id="da88e038-62a4-45be-ad52-aff6c27c0eb3" class="">Spring Initializr is a web application made by Spring that creates base Spring Boot projects that you can then import and work on. You just fill in your project details, pick your options and download a bundled up project as a zip file.</p><p id="ad2ba4b2-6c66-47ff-965c-ecd5efeb6bcd" class="">Initializr can be accessed at <a href="http://start.spring.io">http://start.spring.io</a>. Open it up:</p><figure id="2cab7c26-5676-40c3-bd20-9a56ac1644a5" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled.png"><img style="width:1538px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled.png"/></a></figure><p id="1b4593f4-576e-4631-9e57-670a49e51bce" class="">Throughout this course we will be building a conference scheduling app, which will hold different sessions and allow speakers to be assigned as the presenter of a session. A speaker can present more than one session.</p><p id="8d0cc013-f64f-48fd-98a4-fc9892121b32" class="">Let’s modify some of the options.</p><div id="58aafb8e-7946-4db7-a3cf-63292a08c6e3" class="column-list"><div id="f6badff1-243e-4546-a4e1-1aa645340ef6" style="width:50%" class="column"><p id="49e3db34-8c4b-4937-8372-3776e7ee76c1" class="">Select “Maven” as the Project Type <strong><strong><strong>(1)</strong></strong></strong>, as we want to use Maven as the build tool. Set the Language to “Java” <strong><strong><strong>(2)</strong></strong></strong> and set the Spring Boot version to<strong><strong> “2.7.14”</strong></strong>. As of right now, this is the most recent compatible version with the course so, we’ll be using that.</p><p id="d0801f50-1ce2-436c-9215-818c2445204c" class="">I’ll set the project’s groupId to <code>com.shodan</code> <strong><strong><strong>(4)</strong></strong></strong> and the artifactId to <code>conference-demo</code> <strong><strong>(5).</strong></strong></p><p id="8540d0ef-8d11-4333-9eef-6a1bd80eb58e" class="">Set the Packaging type to “Jar” <strong><strong><strong>(6)</strong></strong></strong> and the Java version to 11 <strong><strong><strong>(7)</strong></strong></strong>.</p></div><div id="e9af7c6c-fee5-4753-a429-22514be7cd68" style="width:50%" class="column"><figure id="e7277c54-d3c0-4d5f-8bd3-d650b6eed9cd" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%201.png"><img style="width:765px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%201.png"/></a></figure></div></div><p id="075859a2-5f95-4198-9b11-18dfb6e01293" class="">Next, we want to add our dependencies to the project. This will be a basic Web application so we’ll use Spring Web.</p><p id="acd3f967-a085-4bcc-897f-389e1e162196" class="">In the dependencies pane, click on “Add Dependencies”:</p><figure id="1bbbe046-3748-4b94-9d3a-fdc0783a1086" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%202.png"><img style="width:741px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%202.png"/></a></figure><p id="0ff00b62-7755-4b12-b65c-ae2d900d342f" class="">Then, search for and select “Spring Web”:</p><figure id="7b54ea63-f041-4e07-b335-a476f2ed4769" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%203.png"><img style="width:880px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%203.png"/></a></figure><p id="2d521040-76a2-40b2-a365-2d67f73a82bd" class="">The dependency will have been added to the project’s dependencies:</p><figure id="02555f11-f46c-4336-9401-08b3c5cc910b" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%204.png"><img style="width:742px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%204.png"/></a></figure><p id="752dc871-0111-4f31-87a9-dd79b23aacd2" class="">Click Generate and the project will have been downloaded.</p><p id="66997acf-7c23-4816-a593-c0291173c01f" class="">To import this project and setting it up, you’ll first need to extract the zip file of the project.</p><p id="82f20ad6-8ec3-45a4-89f8-3b47f72e3298" class="">Then, you can open IntelliJ and select “Open” to open a project:</p><figure id="b93e4908-9998-4e72-b1f3-d54c75c950a2" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%205.png"><img style="width:1173px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%205.png"/></a></figure><p id="b5901cc0-0460-44b3-9a2a-69b6840d2b19" class="">Then select the directory of your project:</p><figure id="520c3808-5421-42cd-b7fe-d1e2aa019c6d" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%206.png"><img style="width:571px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%206.png"/></a></figure><h2 id="a1f27f72-6fac-4d23-a507-fa6fd43b5d4b" class="">1.3. Overview of a Spring Boot App</h2><p id="1908f23e-9f7e-4f09-8756-e29a5b01c34b" class="">Let’s a take a quick close look at the project that Spring Initializr created for us.</p><p id="ee28df0e-7931-4d77-ba71-d6f311e40cd5" class="">The first place to look at, in a Maven project, is at our <code>pom.xml</code>:</p><pre id="aca246fa-965f-4ed8-9def-c3f3afd4c27c" class="code"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;parent&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+		&lt;version&gt;2.7.14&lt;/version&gt;
+		&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+	&lt;/parent&gt;
+	&lt;groupId&gt;com.shodan&lt;/groupId&gt;
+	&lt;artifactId&gt;conference-demo&lt;/artifactId&gt;
+	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+	&lt;name&gt;conference-demo&lt;/name&gt;
+	&lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+	&lt;properties&gt;
+		&lt;java.version&gt;11&lt;/java.version&gt;
+	&lt;/properties&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+
+	&lt;build&gt;
+		&lt;plugins&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+				&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+			&lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/build&gt;
+
+&lt;/project&gt;</code></pre><p id="bf79ddb5-f230-4d6c-b146-3ed58aed2421" class="">First, there’s the <mark class="highlight-teal_background"><code>parent</code></mark><mark class="highlight-default"> tag. It defines a parent </mark><code><mark class="highlight-default">pom.xml</mark></code><mark class="highlight-default"> from which to base this one off of. We can see it is basing itself off of a starter Spring Boot project </mark><code><mark class="highlight-default">pom.xml</mark></code><mark class="highlight-default">. We can also see the </mark><mark class="highlight-red_background">project properties</mark><mark class="highlight-default"> we’ve defined in Initializr!</mark></p><p id="3034fe8f-359f-4fe7-aa4a-fad0f6a31cd4" class="">Now let’s look at the sample code generated, in <code>com.shodan.conferencedemo.ConferenceDemoApplication</code>:</p><pre id="75067c40-ddef-4e21-b3ae-607987591778" class="code"><code>package com.shodan.conferencedemo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ConferenceDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ConferenceDemoApplication.class, args);
+	}
+
+}</code></pre><p id="d400842d-85e5-47b4-b0f1-932f9b41177c" class="">Notice how this entrypoint class has the <code>@SpringBootApplication</code> annotation. This tells the Spring Boot loader to run the application as a Spring Boot app and configure it like a Spring Boot app.</p><p id="b442fb25-9b3d-484a-93cb-64dc5be9cb6c" class="">Let’s structure our project. I’ll be creating some new packages:</p><ul id="8b64c4b3-3d8e-4bff-8222-ba3d38237a7a" class="bulleted-list"><li style="list-style-type:disc"><code>com.shodan.conferencedemo.controllers</code>: will hold the API controllers</li></ul><ul id="e0407bcf-432c-4dfc-b5d7-f698c83d0d14" class="bulleted-list"><li style="list-style-type:disc"><code>com.shodan.conferencedemo.models</code>: will hold the JPA entities and other persistence info</li></ul><ul id="a9d34951-b711-40ac-b12a-66d7692cd19b" class="bulleted-list"><li style="list-style-type:disc"><code>com.shodan.conferencedemo.repositories</code>: will hold JPA repositories</li></ul><ul id="ee7298cb-9689-44e4-8d31-d177d1239ed5" class="bulleted-list"><li style="list-style-type:disc"><code>com.shodan.conferencedemo.services</code>: will hold classes with business logic</li></ul><h2 id="02daa330-e927-411e-a6cf-15941321ce9e" class="">1.4. Understanding Spring Boot Starters</h2><p id="142fc080-da7e-4f0f-b166-edb912ea2a7d" class="">Starters are a way to integreate a dependency on your project to get it all set up and ready to run by simply declaring it as a dependency. All Spring-based apps need to specify what pieces of the Spring Framework they’re going to utilized.</p><p id="ae5c68f0-df73-4a2d-8c30-905c01476833" class="">If you have a really complex app, you will also have a lot of dependencies, and those dependencies will have dependencies and so forth. This makes version mismatch and other headaches appear.</p><p id="9f1fac01-00dd-46ac-b094-d5c6863eee61" class="">Spring Boot startes solve these headaches by allowing you to simply declare the started and it will take care of getting all the right dependencies and versions in place.</p><p id="054c3723-faa4-482a-b878-c85a5adba550" class="">All dependencies in Maven-based Spring projects are declared in the <code>pom.xml</code> file:</p><ul id="45f2a075-2c3c-48ee-b787-9805d25e2741" class="bulleted-list"><li style="list-style-type:disc">Spring Boot Starter Test, for testing Spring Boot apps with testing libraries like JUnit;</li></ul><ul id="28bd8b45-d529-4a2e-961c-64dcbb778fd9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Spring Boot Starter Web</mark><mark class="highlight-default">, the dependency we chose in Spring Initializr.</mark></li></ul><h1 id="9feff97f-75b4-40cc-a489-a068689823e3" class="">2. Building Apps with Spring Boot</h1><p id="1f210fdc-855f-4988-a1bd-261aa53dd822" class="">Let’s get building this application. We’ll be building a basic Web application with data persistence  on a Postgres database.</p><h2 id="3106fdb9-563b-4bf6-8aa2-5ed5f43ef33a" class="">2.1. Setting up the database</h2><p id="aa6bcdc3-e275-4e52-acf7-f5ed89faf2b6" class="">The table scheme will be as follows:</p><figure id="dc101e3a-1bf2-44e4-b420-706ec9329d00" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%207.png"><img style="width:1293px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%207.png"/></a></figure><p id="2ca0b147-3d14-4dc2-a6fc-8b9b0d13cacd" class="">This is the table scheme for the database of a more fleshed out conference scheduling app. Because this is just a basic app, we’ll only be focusing on data, tables and operations regarding the tables circled in red.</p><p id="af654ba9-3b83-4461-b178-c3c7a0328e70" class="">Let’s set up our database. Unfortunately, this is where I say that we have the pre-requisite of having Docker installed in your machine, or having a pre-configured Postgres instance, but if you don’t, i’ll get you up to speed.</p><p id="2fbd9730-f14f-40f2-a055-e22b8069ee86" class="">First, download the following two files:</p><figure id="fd8d14b3-3537-4fa3-8443-fa5dc8c63453"><div class="source"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/create_tables.sql">create_tables.sql</a></div></figure><figure id="9887ed6e-c149-4e67-9107-3325b7341a0d"><div class="source"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/insert_data.sql">insert_data.sql</a></div></figure><p id="2837685e-a0e8-423c-8db2-c11d0c64e7f7" class="">Then, with your terminal open, type the following command to create a docker container with the postgres database:</p><pre id="1794e7cf-0ca7-4a8b-9a77-7647e32c6e92" class="code"><code>docker create --name postgres-demo -e POSTGRES_PASSWORD=&lt;password&gt; -p 5432:5432 postgres:11.5-apline</code></pre><p id="d299d2ec-352f-4201-bef7-c2e2c676fa05" class="">Where <code>&lt;password&gt;</code> is the password to the container user.</p><p id="896f2c2f-8a5a-463b-8ab9-4593ef23ede6" class="">Then, start the container:</p><pre id="2dfd9448-d59d-49c2-8d8d-211844d81928" class="code"><code>docker start postgres-demo</code></pre><p id="44af4c56-5547-4471-90fb-a255eab84c03" class="">From here on, the connection info will be as follows:</p><ul id="43553838-740f-4c64-ab75-0064d019d825" class="bulleted-list"><li style="list-style-type:disc">JDBC URL: <code>jdbc:postgresql://localhost:5432/conference_app</code></li></ul><ul id="1c8c77bd-8fea-4b0e-81f4-9e2f41fb1fb6" class="bulleted-list"><li style="list-style-type:disc">Username: <code>postgres</code></li></ul><ul id="5069ffe0-3890-46c4-97e1-bb1691b0c2e1" class="bulleted-list"><li style="list-style-type:disc">Password: <code>Welcome</code></li></ul><p id="454e994b-b67f-42dc-b71b-7cf13c7a53ed" class="">Now, let’s copy those .sql files to the container. Assuming that you’re in the same directory as the files, run:</p><pre id="a00376c5-72b9-41bb-8835-7b42ea039293" class="code"><code>docker cp create_tables.sql postgres-demo:/create_tables.sql
+docker cp insert_data.sql postgres-demo:/create_tables.sql</code></pre><p id="2cbb701f-bfd1-4e23-bfce-ccbd83df016f" class="">You’ll want to connect to the container:</p><pre id="ba5c5072-cb00-446a-8bf3-375d075d84d7" class="code"><code>docker exec -it postgres-demo psql -U postgres</code></pre><p id="5e55b913-eb0a-401a-b465-ddb00104f1e5" class="">Once that is run, a Postgresql shell will open. Now, these steps are important and must be followed sequentially.</p><ol type="1" id="4c4f35a1-1bb7-4020-a4e6-391ae60c9fb2" class="numbered-list" start="1"><li>First, run the following command on the psql shell to create the database itself. We’ll call it <code>conference_app</code>. Then, exit:<pre id="d4623f2d-a7b9-4c7e-af84-0d5042f143b3" class="code"><code>psql&gt; create database conference_app;
+psql&gt; \q</code></pre></li></ol><ol type="1" id="c1c418d8-1c78-4c06-8ad6-fdf4a9be39b0" class="numbered-list" start="2"><li>Next, we’ll send two more <code>docker exec</code> commands to make psql execute those two .sql files on the database. The first one is <code>create_tables.sql</code> which, just like the name suggests, is going to create the tables in the database:<pre id="df6b52e8-2c7d-4b5d-b456-d341939f8cbb" class="code"><code>docker exec -it postgres-demo psql -d conference_app -f create_tables.sql -U postgres</code></pre></li></ol><ol type="1" id="9e73835c-eb5d-4b2e-b532-65fa8987b27f" class="numbered-list" start="3"><li>The second and last one is <code>insert_data.sql</code> which inserts data into the tables we just created:<pre id="defa6af4-c24a-4729-a670-9606dd0d8627" class="code"><code>docker exec -it postgres-demo psql -d conference_app -f insert_data.sql -U postgres</code></pre></li></ol><p id="a630769a-19a3-4043-9c3f-71e5a2df1d18" class="">After doing that, your database should be set up and good to go.</p><h2 id="b69f569e-7fdd-47de-82da-eac8b9d4dc01" class="">2.2. Connecting to the database</h2><p id="6b8e078c-27f6-4b13-91e0-3c17a201b628" class="">Now that we have both a base Spring Boot app and a Database set up, we need to connect the two so they can talk to each other.</p><p id="0eedf0ba-e4b4-4857-bd37-7fbf75549ed5" class="">We’ll first add a new started dependency to our app that will include Spring Data JPA, and then we’ll configure it to connect to the database. Let’s go to <code>pom.xml</code> and add a dependency to our dependencies. It’s another Spring Boot dependency whose artifactId is <code>spring-boot-starter-data-jpa</code>:</p><pre id="587393e1-9a7f-424c-ad32-7148ff457025" class="code"><code>...
+&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;
+...</code></pre><p id="5e5909fe-8d08-4baf-9615-b97b4da41c37" class="">Another dependency we’ll need, because we’re using a Postgres database, is the Postgres JDBC Driver. Its groupId is <code>org.postgresql</code> and its artifactId is <code>postgresql</code>. There’s an additional property called <code>scope</code>. The scope of a dependency declares at which points of the applications lifecycle a dependency should be present. JDBC drivers’ scope is usually <code>runtime</code>. JDBC drivers are not required to compile our application, but they will be required at runtime for the database connection.</p><pre id="a0cc6566-a2ca-4699-aa1d-3f6a2c8aad9b" class="code"><code>...
+&lt;dependency&gt;
+		&lt;groupId&gt;org.postgresql&lt;/groupId&gt;
+		&lt;artifactId&gt;postgresql&lt;/groupId&gt;
+		&lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+...</code></pre><p id="d2ee86d4-aad8-4c24-99fa-fa0ef6a3527d" class="">Now, all we need to do is set up the database connection for our Spring Boot application. These properties can usually be added/modified in the <code>src/main/resources/application.properties</code> file.</p><p id="93825123-0d07-493c-9d9a-da05553315b4" class="">You’ll want to add the following properties:</p><pre id="9762a025-72cc-4961-a6eb-33dd8264d183" class="code"><code>spring.datasource.url=jdbc:postgresql://localhost:5432/conference_app
+spring.datasource.username=postgres
+spring.datasource.password=&lt;password&gt;
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.hibernate.show-sql=true</code></pre><h2 id="cfcd8662-1fec-4bea-b1ca-66ad4f97bab3" class="">2.3. Creating JPA Models</h2><p id="74b679c3-6736-4bf6-91a2-3e47ce337b90" class="">Let’s take a bottom-up approach and start with the Models for this application. We’ve just finished connecting to our database, so let’s apply some JPA entities so that we can talk to the database structures.</p><p id="695843e4-2347-48f8-8d47-31dfa4216f87" class="">We’ll be adding classes to the <code>com.shodan.conferencedemo.models</code> package. The first one is the <code>Session</code> class, which will map to the conference sessions.</p><p id="a63b314f-6676-460a-add7-fc5533cda941" class="">Before moving forward, I should explain what Entities are. I am diverting from the content of the course, but this needs to be explained, as Alcides didn’t properly, and he can suck my d-<div class="indented"><h3 id="40c6ba5e-63d9-403d-ba2e-ae4cf2414bbe" class="">JPA Entities</h3><p id="ef0d37db-2a91-4868-bc4e-c93ba31236b8" class="">Entities in JPA are just Plain Old Java Objects representing data that can be persisted in the database. An entity represents a table stored in a database. Every instance of an entity represents a row in the table.</p></div></p><p id="d6a89005-3945-41d5-ab89-16039bb55868" class="">Let’s take a look at our Session class. We can define it as an entity by using the <code>@Entity</code> annotation:</p><pre id="ed5c297b-628a-4213-8383-4fbd77b2ed94" class="code"><code>package com.shodan.conferencedemo.models;
+
+import javax.persistence.Entity;
+
+@Entity(name = &quot;sessions&quot;)
+public class Session {
+}
+</code></pre><p id="95f5224f-92cd-4cc6-bab1-5d5fc2eab2f2" class="">The <code>name</code> property of the annotation must be the same as the name of the table in the database that this entity corresponds to. Now, let’s check the fields in that table and create the matching attributes in our class.</p><div id="2c09e86a-952b-4a95-acbd-e480d2098dea" class="column-list"><div id="67025ed7-3201-4327-bb21-3aa6556b5d32" style="width:50%" class="column"><pre id="072abd0a-4286-464f-beaf-ca889ade6600" class="code"><code>CREATE TABLE sessions
+(
+	session_id          SERIAL PRIMARY KEY,
+	session_name        varchar(80)   NOT NULL,
+	session_description varchar(1024) NOT NULL,
+	session_length      integer       NOT NULL
+);</code></pre></div><div id="2838df8e-9113-466c-ae8b-b0d584cf44f6" style="width:50%" class="column"><pre id="ea9286bd-9214-45ed-9ab8-4c09c8663cd5" class="code"><code>@Entity(name=&quot;sessions&quot;)
+public class Session {
+    private Long    session_id;
+    private String  session_name;
+    private String  session_description;
+    private Integer session_length;
+}</code></pre></div></div><p id="3860f1de-3190-4961-90c5-15be5fec116f" class="">Notice how, in our class I used, the exact same variable names as the column names in the table. By doing this, JPA will auto-bind to those columns, without needing to annotate them. If I wanted to use standard variable names, you would need to annotate them using the <code>@Column</code> annotation.</p><pre id="71be4cd6-c732-469b-a276-e60be537664b" class="code"><code>@Entity(name=&quot;sessions&quot;)
+public class Session {
+    // not annotating this one, you&#x27;ll see why
+		private Long id;
+
+		@Column(name=&quot;session_name&quot;, length=80, nullable=false, unique=false)
+    private String name;
+
+		@Column(name=&quot;session_description&quot;, length=1024, nullable=false, unique=false)
+    private String description;
+
+		@Column(name=&quot;session_length&quot;, nullable=false, unique=false)
+    private Integer length;
+}</code></pre><p id="bb0fefba-d0a4-4e52-b05a-96fed6f8c75b" class="">Two annotations you will have to add in any case are the <code>@Id</code> and <code>GeneratedValue</code> annotations. The first annotation denotes an attribute as being the table’s primary key, and the second denotes the way an ID is generated for a row. Both of these are always required.</p><pre id="b67fdbe6-6adf-4d6f-a2be-becc1c3126da" class="code"><code>@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long session_id;
+
+// or
+
+@Id
+@Column(name=&quot;session_id&quot;)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;</code></pre><p id="52940973-9655-40f3-ab88-c6ba20a729eb" class="">There are different types of value generation:</p><ul id="8f67a59e-4031-49ed-9945-8b692a433dd0" class="bulleted-list"><li style="list-style-type:disc"><code>AUTO</code>: used by default - JPA will chose the most adequate strategy in accordance with the database;</li></ul><ul id="c4d1948f-90de-420a-b263-88d6653b0df3" class="bulleted-list"><li style="list-style-type:disc"><code>IDENTITY</code>: JPA is informed that the values to be attributed to the unique ID are generated by an auto-increment constraint in the database.</li></ul><ul id="126c53ec-61ff-4e88-a24f-ec044b36bd50" class="bulleted-list"><li style="list-style-type:disc"><code>SEQUENCE</code>: JPA is informed that the generated values come from a Sequence in the database. If a sequence name is not specified, the default one will be used, global to all entities. If a Sequence name is specified, the provider will adopt this sequence to create primary keys for that table.</li></ul><ul id="91c77700-c78e-4578-a77c-65439f8e1ccd" class="bulleted-list"><li style="list-style-type:disc"><code>TABLE</code>: a table is used to manage primary keys. This strategy is not recommended because of the overhead caused by reads and writes to the table.</li></ul><p id="a825a950-626f-4dd1-b9cc-0eaf15387584" class="">Now let’s create a no-args contructor and getters and setters for our class. You can do this quickly by:</p><ul id="f566a991-b56a-4483-9753-a32a80b52b31" class="bulleted-list"><li style="list-style-type:disc">Right click&gt;”Generate”<figure id="02dad2ad-82a0-40a6-a5d1-1c5393ac4050" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%208.png"><img style="width:621px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%208.png"/></a></figure></li></ul><ul id="f7e62ea9-6941-44c6-96b2-ebbc9355d751" class="bulleted-list"><li style="list-style-type:disc">“Getter and Setter”<figure id="08734ccd-7a72-4a0c-a85d-a3d5459bd9f1" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%209.png"><img style="width:294px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%209.png"/></a></figure></li></ul><ul id="b23b5f74-01f4-4ce2-b186-4593fe02c9b0" class="bulleted-list"><li style="list-style-type:disc">Select all fields except the id and press “Ok”:<figure id="aef05f1b-3ea2-4958-a03a-a84ef36b8892" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2010.png"><img style="width:445px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2010.png"/></a></figure></li></ul><ul id="9b066c58-b482-4176-b60c-d0045cd10bba" class="bulleted-list"><li style="list-style-type:disc">Create a getter for the id. You can do this manually or Right Click&gt;”Generate”&gt;”Getter”, selecting the id attribute and “Ok”.</li></ul><p id="4ebc6fb2-b306-4774-aa2d-7152654dbffc" class="">Your class should now do something like this:</p><pre id="ebdcd8fd-123f-464a-92b7-9cb949c67f4f" class="code"><code>package com.shodan.conferencedemo.models;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity(name=&quot;sessions&quot;)
+public class Session {
+    @Id
+    @Column(name=&quot;session_id&quot;)
+    @GeneratedValue()
+    private Long id;
+
+    public Session() {
+    }
+
+    @Column(name=&quot;session_name&quot;, length=80, nullable = false, unique = false)
+    private String name;
+
+    @Column(name=&quot;session_description&quot;, length=1024, nullable = false, unique = false)
+    private String description;
+
+    @Column(name=&quot;session_length&quot;, nullable = false, unique = false)
+    private int length;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fa089fe6-4add-4199-9b14-4854b3960630"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Here’s a challenge!
+</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>Create the Speaker JPA Entity!
+- Add all fields except <code>speaker_photo</code>
+- Annotate the class (optionally, the columns) and primary key
+- Default constructor
+- Getters and Setters</div></figure><table id="bd93f4ea-8c4f-4111-85ff-6135255092e0" class="simple-table"><thead class="simple-table-header"><tr id="fec02509-3274-47f9-b28d-e75e1bf48ad9"><th id="rm&gt;Z" class="simple-table-header-color simple-table-header" style="width:130px"><strong>Speakers</strong></th><th id="X=sf" class="simple-table-header-color simple-table-header" style="width:349px"></th></tr></thead><tbody><tr id="6bd02a7e-e043-4784-9686-06ba5260a0ff"><td id="rm&gt;Z" class="" style="width:130px"><code>speaker_id</code></td><td id="X=sf" class="" style="width:349px">SERIAL PRIMARY_KEY</td></tr><tr id="cffd44ef-b5bc-4778-928b-2ac3377257a1"><td id="rm&gt;Z" class="" style="width:130px"><code>first_name</code></td><td id="X=sf" class="" style="width:349px">VARCHAR(30)</td></tr><tr id="87415ff0-1c2b-4f28-9025-043a6071b921"><td id="rm&gt;Z" class="" style="width:130px"><code>last_name</code></td><td id="X=sf" class="" style="width:349px">VARCHAR(30)</td></tr><tr id="1475ca1e-9edb-4bc6-b235-bae41daafc8a"><td id="rm&gt;Z" class="" style="width:130px"><code>title</code></td><td id="X=sf" class="" style="width:349px">VARCHAR(40)</td></tr><tr id="2214d1e0-6ef3-4e0f-8241-d86ffcee9837"><td id="rm&gt;Z" class="" style="width:130px"><code>company</code></td><td id="X=sf" class="" style="width:349px">VARCHAR(50)</td></tr><tr id="56c87803-b526-4eea-a6b4-12567a561712"><td id="rm&gt;Z" class="" style="width:130px"><code>speaker_bio</code></td><td id="X=sf" class="" style="width:349px">VARCHAR(2000)</td></tr></tbody></table><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Solution</summary><div class="indented"><pre id="471dc74d-23c7-400c-8475-eff5fb05e2d2" class="code"><code>package com.shodan.conferencedemo.models;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name=&quot;speakers&quot;)
+public class Speaker {
+    public Speaker(){}
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long speaker_id;
+    private String first_name;
+    private String last_name;
+    private String title;
+    private String company;
+    private String speaker_bio;
+
+    public Long getSpeaker_id(){
+        return speaker_id;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getSpeaker_bio() {
+        return speaker_bio;
+    }
+
+    public void setSpeaker_bio(String speaker_bio) {
+        this.speaker_bio = speaker_bio;
+    }
+}</code></pre></div></details><h2 id="20018728-2ce1-4da2-a1bc-69ded451301a" class="">2.4. Working with JPA Relationships</h2><p id="e4f67a2c-f4e6-44ba-83ed-d8dacf324178" class="">Now that we have two entity models in place, we can tie them together with a JPA relationship that will match the database table relationship.</p><p id="3372a337-4422-4f65-91b8-c7c108ada0e4" class=""><code>Speaker</code>s and <code>Session</code>s are connected via a UNION or JOIN table, so, we need to set up a many-to-many relationship in our models that will match that database relationship.</p><p id="3d039997-6d79-443d-8de9-14d02086bda3" class="">You need to pick one side of your relationship to be the owner or main definition point of the relationship. I’ll choose the <code>Session</code> entity, as sessions have speakers.</p><p id="7f3e0b1e-30b1-4747-96cc-8ebfeea42a1c" class="">I’ll add a new attribute, a <code>List</code> of associated speakers, i.e.:</p><pre id="4e0af216-e9b3-49ca-b9cd-d307ef53050f" class="code"><code>private List&lt;Speaker&gt; speakers;</code></pre><p id="98058f2c-a37d-4b3e-8e90-edf323389f9d" class="">There are annotations that denote relationships between entities. The relationship between <code>Session</code> and <code>Speaker</code> is many-to-many, so we’ll use the <code>@ManyToMany</code> annotation.</p><p id="ffe31d62-2fd1-429b-b170-4efc7dc19c9c" class="">And because both entities are connected via a Join table, so we use the <code>@JoinTable</code> annotation to denote that. Inside, we’ll need to specify the <code>name</code> of the Join Table, the <code>joinColumns</code>, which are the columns belonging to the owning entity and the <code>inverseJoinColumns</code>, which are the columns belonging to the referring entity.</p><div id="8822e884-03da-48bf-9850-7d031b226e8b" class="column-list"><div id="8310ac2c-c131-4f56-b549-ca4b07488f3d" style="width:50%" class="column"><pre id="a87cdc6b-b109-4ac1-9f2a-d976867f62cd" class="code"><code>@ManyToMany
+@JoinTable(
+				name = &quot;session_speakers&quot;,
+				joinColumns = @JoinColumn(name=&quot;session_id&quot;),
+				inverseJoinColumns = @JoinColumn(name = &quot;speaker_id&quot;))
+private List&lt;Speaker&gt; speakers;</code></pre></div><div id="03729425-ce12-44a2-852d-3b215c5373ec" style="width:50%" class="column"><pre id="e7b8b68b-4686-43a4-862e-c044b4950b07" class="code"><code>
+CREATE TABLE session_speakers
+(
+    session_id integer NOT NULL REFERENCES sessions (session_id),
+    speaker_id integer NOT NULL REFERENCES speakers (speaker_id)
+);</code></pre></div></div><p id="0b7ea24d-801c-4421-9b42-37c72df54ff5" class="">Now we also need to define the relationship on the <code>Speaker</code>&#x27;s, so we can make this relationship bidirectional. </p><p id="c68ad560-706f-404f-824d-a836ca70c91a" class="">We’ll create a list of sessions on the speaker, with getters, setters and a <code>@ManyToMany</code> annotation, but instead of having to define the entire relationship all over again, we can just specify which entity mapped the relationship:</p><pre id="37dcec66-23a9-43ce-a913-a974e320ab82" class="code"><code>@ManyToMany(mappedBy = &quot;speakers&quot;)
+private List&lt;Session&gt; sessions;</code></pre><h2 id="7c1be68e-68a6-417a-85dc-c5c0b963addc" class="">2.5. Working with Binary Data Types</h2><p id="72c17eb8-5b28-4df5-b349-42239a6e65e0" class="">Working with binary data can be a pain, so we need to handle a couple of “gotchas” to get things running correctly. Binary data comes in many different standards and formations, but at the end of the day, it’s all a bunch of bytes. Thankfully, Java has a primitive data type called <code>byte</code> that represents, well, a byte. We can use a <code>byte</code> array for any sort of binary data.</p><p id="371daf10-f966-4801-a4db-c257f5dcc265" class="">Let’s define the field for the speaker’s photo:</p><pre id="d69c9232-5f59-4bda-96c2-0e8ed4fcfb85" class="code"><code>...
+private byte[] speaker_photo;
+...</code></pre><p id="fd7de566-f02a-40a2-a1b2-84467f62cef9" class="">Next we’ll specify some characteristics of this field through annotations. The first is <code>@Lob</code>, which stands for <strong>L</strong>arge <strong><strong>Ob</strong></strong>ject. Binary data can get extense, and this annotation notifies JPA that it is dealing with a field that usually stores large amounts of data.</p><p id="61fca399-fc27-4591-8be1-c39824900f12" class="">Then there’s the <code>@Type</code> annotation, which we need to tell Hibernate (the JPA implementation we’re using) that the field holds binary data. It takes one parameter called <code>type</code>. To tell Hibernate this is a binary data field, we specify the type as <code>org.hibernate.type.BinaryType</code>.</p><pre id="ced3d3a2-f5f0-4625-b439-8f487d1251a2" class="code"><code>...
+@Lob
+@Type(type=&quot;org.hibernate.type.BinaryType&quot;)
+private byte[] speaker_photo;
+...</code></pre><p id="db2a0439-4959-4304-b3b5-6be2c803cc9b" class="">Don’t forget to define getters and setters for it too.</p><p id="33885699-632b-40d1-a807-4c61611838a1" class="">Finally, we need to defined something in our <code>application.properties</code>:</p><pre id="18a8f54c-121d-4f40-8855-60675fabd86e" class="code"><code>...
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true</code></pre><p id="f9aaabe5-0aed-480b-9f1a-7cff257389cf" class="">This property is needed so the Postgres JDBC driver can create a Lob correctly on the application side.</p><h2 id="41680ab0-91c6-4853-ae2a-26a1dcb2e80b" class="">2.6. Creating JPA Repositories</h2><p id="d460947c-160b-41db-94a1-331b0d4cf952" class="">Let’s create some repositories for our project. These should go on their own package, i.e., <code>com.shodan.conferencedemo.repositories</code>.</p><p id="cf4ecb0a-ac6b-40e2-b7d8-6258f544dc56" class="">Creating a repository is fairly easy. We create interfaces extending from <code>JpaRepository</code>. I’ll create one for the Session entity called <code>SessionRepository</code>:</p><pre id="e1f3af06-1af1-42c0-9c32-9a8f61154c06" class="code"><code>package com.shodan.conferencedemo.repositories;
+
+import com.shodan.conferencedemo.models.Session;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SessionRepository extends JpaRepository&lt;Session, Long&gt; {
+}</code></pre><p id="8074f07b-f475-4c25-ae68-c740b7d86e94" class="">You can repeat the same for the Speaker entity (<code>SpeakerRepository</code>).</p><h2 id="7a61a790-4655-4a63-8510-0fca8a3573d0" class="">2.7. Creating Spring API REST Controllers</h2><p id="688a1c5c-cb09-4b3f-8615-08487f243505" class="">Now we create controllers for our application, to deal with requests and process business logic. In our case, these controllers will be REST based. There’s a package for these too, <code>com.shodan.conferencedemo.controllers</code>.</p><p id="ddb3c097-3a2a-485c-b5ae-cad7cf46a656" class="">I’m going to first create one for the Sessions, so <code>SessionController</code>:</p><pre id="eb1f6eeb-e8fd-45b9-aba9-c1156f0e95c2" class="code"><code>package com.shodan.conferencedemo.controllers;
+
+import com.shodan.conferencedemo.models.Session;
+import com.shodan.conferencedemo.repositories.SessionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(&quot;/api/v1/sessions&quot;)
+public class SessionsController {
+		@Autowired
+		private SessionRepository sessionRepository;
+
+		@GetMapping
+		public List&lt;Session&gt; list() {
+				return sessionRepository.findAll();
+		}
+
+		@GetMapping
+		@RequestMapping(&quot;{id}&quot;)
+		public Session get(@PathVariable Long id){
+				return sessionRepository.getOne(id);
+		}
+
+		@PostMapping
+		@ResponseStatus(HttpStatus.CREATED)
+		public Session create(@RequestBody final Session session){
+				return sessionRepository.saveAndFlush(session);
+		}
+
+		@RequestMapping(value=&quot;{id}&quot;, method=RequestMethod.DELETE)
+		public void delete(@PathVariable Long id) {
+				sessionRepository.deleteById(id);
+		}
+
+		@RequestMapping(value=&quot;{id}&quot;, method=RequestMethod.PUT)
+		public Session update(@PathVariable Long id, @RequestBody Session session) {
+				// TODO: Add validation that all attributes are passed in, otherwise
+				//       return 400 Bad Payload
+				Session existingSession = sessionRepository.getOne(id);
+				BeanUtils.copyProperties(session, existingSession, &quot;session_id&quot;);
+				return sessionRepository.saveAndFlush(existingSession);
+		}
+}</code></pre><p id="037df063-c68b-4bcf-8e80-6adb12ab0acb" class="">Let’s take a look at this Controller one component at a type and see what annotations and techniques were used.</p><ol type="1" id="bc8ce668-c828-4209-a887-12c0d502a343" class="numbered-list" start="1"><li>The class header:<pre id="2e89c818-fe35-40e7-99b8-feb857ae1cd8" class="code"><code>...
+@RestController
+@RequestMapping(&quot;/api/v1/sessions&quot;)
+public class SessionsController {
+...</code></pre><p id="2053bd5e-5aac-48b2-80d6-1145b7b99bae" class="">We’re using two annotations here:</p><ul id="835f2a92-267f-4ec2-8cac-13074afd9403" class="bulleted-list"><li style="list-style-type:disc"><code>@RestController</code> defines that this class is going to be a REST-based controller;</li></ul><ul id="7b91ecb8-6c03-4027-88f0-36b05fbe867d" class="bulleted-list"><li style="list-style-type:disc"><code>@RequestMapping</code> tells Spring’s Web Application router what kind of path should be reserved for this controller. For example, when you interact with the path <code>/api/v1/sessions</code>, you’ll be interacting with the <code>SessionsController</code> and none other.</li></ul></li></ol><ol type="1" id="f2f67c55-3cd4-4532-b186-1b11883c1d13" class="numbered-list" start="2"><li>The repository:<pre id="3a16ef11-9f1b-430c-ba0e-47c7c4202ce2" class="code"><code>...
+		@Autowired
+		private SessionRepository sessionRepository;
+...</code></pre><p id="603e8a90-293f-411a-956b-30795b6c3cdf" class="">Spring will make use of autowiring to autowire a repository from the interface we created before. We will then be able to use all of the methods present in the JpaRepository we’re extending from.</p></li></ol><ol type="1" id="945ac082-d491-4aac-a77e-5869f8681877" class="numbered-list" start="3"><li><code>list()</code> is a method that is supposed to return a list of all the Sessions stored in the database:<pre id="c33ed6b4-7a77-4a02-8e8c-0c3bcb58acab" class="code"><code>...
+		@GetMapping
+		public List&lt;Session&gt; list() {
+				return sessionRepository.findAll();
+		}
+...</code></pre><p id="af9e5020-0d6e-4805-a619-02432e483ee7" class="">Two things to note:</p><ul id="829a6aa8-a536-45e3-87de-b9b3b9210f46" class="bulleted-list"><li style="list-style-type:disc">The <code>@GetMapping</code> annotation, which denotes that this method will be executed and its contents returned when the application receives a get request on the default mapped route (<code>/api/v1/sessions</code>);</li></ul><ul id="fa26c3a9-8ad1-4c5a-987a-faa79faf0562" class="bulleted-list"><li style="list-style-type:disc">The <code>sessionRepository.findAll()</code> method. The <code>JpaRepository</code>, when configured with an entity and its ID data type automatically configures itself to be able to query the database, and offers a variety of default methods with which to do so, despite being just an interface.</li></ul></li></ol><ol type="1" id="3e7192bb-f4cf-4790-96b9-a841e111670f" class="numbered-list" start="4"><li>The <code>get()</code> method, receives an ID and looks for a Session with that ID:<pre id="034d5642-85f4-4052-8d78-5214e54179a8" class="code"><code>...
+		@GetMapping
+		@RequestMapping(&quot;{id}&quot;)
+		public Session get(@PathVariable Long id){
+				return sessionRepository.getOne(id);
+		}
+...</code></pre><p id="bef46574-753d-49c2-b874-8e329b29f731" class="">Just like before it has a <code>@GetMapping</code> annotation, which means it will execute when a GET request is received, but it also has a <code>@RequestMapping</code> annotation, just like the class. The only difference is that now we’re defining a sort of sub-route for this method only. Notice how <code>id</code> is between curly braces. It’s set so that the method parameter can then be identified by the <code>@PathVariable</code> annotation. The repository has a method called <code>getOne()</code> that looks for one entity with a specific id.</p></li></ol><ol type="1" id="5559ba6e-27d6-4efd-a369-aeb21eade763" class="numbered-list" start="5"><li>The <code>create()</code> method receives Session data through the request and then creates the Session in the database:<pre id="5d8c0c46-2e20-40de-bbaf-1e78c2804e99" class="code"><code>...
+		@PostMapping
+		@ResponseStatus(HttpStatus.CREATED)
+		public Session create(@RequestBody final Session session){
+				return sessionRepository.saveAndFlush(session);
+		}
+...</code></pre><p id="c447f3ad-c9ef-48ea-8935-84d61fa35b56" class="">Let’s look at this one closely:</p><ol type="1" id="8a512943-7646-4614-a7c0-7d249a95cb92" class="numbered-list" start="1"><li>The <code>@PostMapping</code> annotation denotes that this method will execute when a POST request is made. There are not <code>@RequestMapping</code> annotations on this one, so it will execute on the default route.</li></ol><ol type="1" id="ebcf2576-dc26-469a-9f66-5b54bb2a81c1" class="numbered-list" start="2"><li>The <code>@ResponseStatus</code> annotation defines a custom success HTTP status code to be returned to the user. By default, Spring sends 200 OK on POST success. However, POST is usually used for creation of entities, and in those cases, its actually better to send a 201 Created code. That’s why the status code sent is <code>HttpStatus.CREATED</code></li></ol><ol type="1" id="72df98a8-c0d6-4bb4-bdf2-0e2b860b5c36" class="numbered-list" start="3"><li>Notice how the parameter for the method takes the <code>@RequestBody</code> annotation. This means that the data pertaining to the mentioned parameter comes in the Request’s Body. The body will contain JSON data. When the web application routes to this method and sees that parameter, the JSON in the body will be automatically marshalled into a Session object and injected into the method.</li></ol></li></ol><ol type="1" id="68ef1eeb-441b-4b15-bbbf-2c152b6a6ed2" class="numbered-list" start="6"><li>The <code>delete()</code> method deletes a Session with a specific ID:<pre id="5166bad5-ed36-41c9-9660-58ea8e3bca3b" class="code"><code>...
+		@RequestMapping(value=&quot;{id}&quot;, method=RequestMethod.DELETE)
+		public void delete(@PathVariable Long id) {
+				sessionRepository.deleteById(id);
+		}
+...</code></pre><p id="73a4d9c8-f218-438c-b455-4e418ece18ef" class="">This is very similar to how we performed our <code>get()</code> method, but we’re not using the <code>@GetMapping</code> annotation. We’re also not defining a <code>@DeleteMapping</code> annotation, and there’s a good reason for it: <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>it doesn’t exist. </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>Spring only has <code>@GetMapping</code> and <code>@PostMapping</code> annotations. To make use of other HTTP request methods, we need to specify them in the <code>@RequestMapping</code> annotation, as it can take a parameter called <code>method</code> that specifies what request method to use.</p></li></ol><ol type="1" id="1f277dc5-046e-4547-b052-80ca99704519" class="numbered-list" start="7"><li>The <code>update()</code> method updates a Session with a specific ID with new values for attributes:<pre id="4183ca46-08fc-4663-8555-1bf8c7f3eb05" class="code"><code>...
+		@RequestMapping(value=&quot;{id}&quot;, method=RequestMethod.PUT)
+		public Session update(@PathVariable Long id, @RequestBody Session session) {
+				// TODO: Add validation that all attributes are passed in, otherwise
+				//       return 400 Bad Payload
+				Session existingSession = sessionRepository.getOne(id);
+				BeanUtils.copyProperties(session, existingSession, &quot;session_id&quot;);
+				return sessionRepository.saveAndFlush(existingSession);
+		}
+}</code></pre><p id="4eae45c4-08ad-440a-876d-eb7eb65b6af6" class="">We’ve done essentially the same as we did for <code>delete()</code>, but we are doing some other things.</p><ol type="1" id="dc5b76d3-5c5c-4bac-ac9e-d6da140a4b47" class="numbered-list" start="1"><li>We’re using the <code>copyProperties</code> method from <code>BeanUtils</code>, which is a class with static convenience methods for Java Beans. In this case, we’re using a specific signature of <code>copyProperties</code> that takes 3 parameters: a source (the <code>session</code> object with updated attributes), the target (the <code>existingSession</code> in the database), and a string defining which properties should be ignored in the copy (<code>”session_id”</code>).</li></ol><ol type="1" id="984299c2-a31e-4e15-93ac-5cf3d8c6a00a" class="numbered-list" start="2"><li>We have a comment specifying that we should “Add validation that all attributes are passed in, otherwise return 400 Bad Payload”. Now this is actually good practice, and there are ways to do this. One way is to define a custom exception and give it a <code>@ResponseStatus</code> annotation, so that its Response Code is the one returned. When none is specified and the method fails, Spring only returns <code>500 Internal Server Error</code>. Which is not nothing, but we prefer to know something about the error. For the purposes of this one segment, that is not the course, I will examplify:<ol type="a" id="c09fabc5-b3c4-46c0-a649-e32be24dc71b" class="numbered-list" start="1"><li>Let’s create a package called <code>com.shodan.conferencedemo.exceptions</code>, where we will store our custom exceptions.</li></ol><ol type="a" id="26a4e4d5-5208-4c7a-93e7-2b5f3b4a0f7e" class="numbered-list" start="2"><li>Then, let’s create our own exception, you can do that by creating a class and extending it off of the <code>RuntimeException</code> class:<pre id="6beb16de-51b0-41a1-b37d-964b20b813ba" class="code"><code>import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class BadUpdateException extends RuntimeException {
+		public BadUpdateException(String exception){
+				super(exception);
+		}
+}</code></pre></li></ol><ol type="a" id="55a0ffd0-873a-4b02-a340-0ea9a0c6e028" class="numbered-list" start="3"><li>Then, in the controller class, import the exception by adding the following line to your imports:<pre id="eff2e222-c07d-42b3-9065-d63410e27f65" class="code"><code>...
+import com.shodan.conferencedemo.exceptions.BadUpdateException;
+...</code></pre></li></ol><ol type="a" id="fa1d43fb-f573-4ede-9203-9d4d05e7949f" class="numbered-list" start="4"><li>Finally, let’s write some code for that method to add that validation. If the attributes are not all defined, then an exception has to be raised:<pre id="5c2f3f65-e2c8-47f1-afe3-1031f5bea0cb" class="code"><code>...
+		@RequestMapping(value=&quot;{id}&quot;, method=RequestMethod.PUT)
+		public Session update(@PathVariable Long id, @RequestBody Session session) {
+				{
+						boolean b1 = session.name == null;
+						boolean b2 = session.description == null;
+						boolean b3 = session.length == null;
+						if (b1 || b2 || b3) {
+								throw new BadUpdateException();
+						}
+				}
+
+				Session existingSession = sessionRepository.getOne(id);
+				BeanUtils.copyProperties(session, existingSession, &quot;session_id&quot;);
+				return sessionRepository.saveAndFlush(existingSession);
+		}
+}</code></pre></li></ol></li></ol></li></ol><p id="99ea1e0a-76c1-4ff0-911f-cb35acca14ef" class="">All these methods fill out all of the CRUD operations for a proper REST controller. You can apply what was learned here to make a controller for the Speakers.</p><h2 id="a3e74c8a-1c60-458d-8fd6-929fe489544a" class="">2.9. Handling Serialization Issues and Running the App</h2><p id="cd40ab97-4faa-4166-8fa0-b6060e760560" class="">Let’s finally run our application, by running our main method in <code>com.shodan.conferencedemo.ConferenceDemoApplication</code>. If everything goes well, you should see this output:</p><figure id="f7bcbb5d-452d-4f8a-8f72-95810170e15e" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2011.png"><img style="width:1823px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2011.png"/></a></figure><p id="84145929-87c3-4b4d-9a9c-5832352c6c3a" class="">As you can see, our application server is now running on <a href="http://localhost"><code>localhost</code></a> at port 8080.</p><p id="7ee3f999-6b11-4436-aadd-dee31db377cf" class="">We can use a utility like Postman to interact with the API we just wrote. You can get it at <a href="http://getpostman.com">getpostman.com</a>.</p><p id="d95f2188-97fe-4c5e-92ed-19dbeefde1de" class="">Let’s try sending a simple GET request to <code>/api/v1/sessions</code>. This is supposed to list all of the sessions stored in the database.</p><figure id="0127df7a-307e-49f6-93f7-bd873ae8cc21" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2012.png"><img style="width:843px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2012.png"/></a></figure><p id="a2df1a72-6b2d-4cf7-bbbc-5f2aa204979a" class="">Ok… seems we might have a problem. Let’s check the terminal output to see what happened in our server.</p><figure id="5d9fa939-6538-47c0-8b63-1718399eadaa" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2013.png"><img style="width:1920px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2013.png"/></a></figure><p id="abcdbbea-3ecd-4116-bfc3-c23852e687a8" class="">Woah! That’s a big error. Let’s look in closer and try seeing what’s going on.</p><figure id="6ae2f711-2c8c-4828-abee-c70f875019ff" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2014.png"><img style="width:856px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2014.png"/></a></figure><p id="3d14d721-0f03-4a14-bbe6-03b4bb0c646e" class="">We have something referring “Infinite recursion”. This seems to me like a serialization problem, and you might have noticed why.</p><p id="144f7473-6a8c-43c3-a21e-8667d52da24a" class="">You know how our Session and Speaker entities have a many-to-many <strong><strong><strong><strong>bidirectional </strong></strong></strong></strong>relationship? Well, when Spring’s built-in JSON serializer gets data from the database and tries putting it into JSON, it writes to a session’s speaker list, and then each speaker in that list has their session list populated as well, so on and so forth. This is why the error refers “Infinite recursion”.</p><p id="b37329b2-4a7e-44d3-aaf1-44052f58896b" class="">In a many to many relationship like this one, one way you can fix this is by adding annotations that the JSON serializer will use to ignore attributes in certain entities. We can use the <code>@JsonIgnoreProperties</code> annotation to ignore properties in certain attributes. Let’s for example ignore the <code>speakers</code> list inside of the <code>sessions</code> list of the Speaker entity, which can cause infinite recursion.</p><pre id="b54decc7-863a-49fb-9621-8fc20946944a" class="code"><code>...
+@ManyToMany(mappedby=&quot;speakers&quot;)
+@JsonIgnoreProperties({&quot;speakers&quot;})
+private List&lt;Session&gt; sessions;
+...</code></pre><p id="88520be2-0161-4e92-82d2-693bc1c7f71b" class="">And let’s do the same thing for the Session entity, but in the <code>speakers</code> list, ignore the internal <code>sessions</code> list instead:</p><pre id="59f4550e-ef14-43bd-9376-639d51d255a1" class="code"><code>...
+@ManyToMany
+@JoinTable(
+				...
+)
+@JsonIgnoreProperties({&quot;sessions&quot;})
+private List&lt;Speaker&gt; speakers;
+...</code></pre><p id="c585b536-c743-4642-86f2-a4e459ebcad6" class="">Let’s try re-running the server and then sending that request again.</p><figure id="2ef404a5-5956-4e76-b727-d69c960bea22" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2015.png"><img style="width:1507px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2015.png"/></a></figure><p id="020e029f-5968-43f0-ab96-a281af5d320b" class="">Aha! Much better now! Let’s keep testing our endpoints to see if we catch more of these serialization errors. Let’s try looking up <code>/api/v1/sessions/1</code>, where <code>1</code> is the id of a session.</p><figure id="2989b123-58d1-4c85-85ff-17e25a7be108" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2016.png"><img style="width:501px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2016.png"/></a></figure><p id="28c53339-15d9-4df6-9532-aad9f30cfa46" class="">Well here’s another serialization problem. Let’s see what’s causing this one.</p><figure id="224fd39c-8899-4ef4-a85c-fc8152bfe38b" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2017.png"><img style="width:826px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2017.png"/></a></figure><figure id="19c1fa6c-1cde-4c76-b3fc-784a1917b888" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2018.png"><img style="width:1035px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2018.png"/></a></figure><p id="2569c5ab-447c-4cf2-a59a-4bf1466698f2" class="">So it seems that the JSON serializer is trying to serialize something called <code>hibernateLazyInitializer</code> in our <code>Session</code> entity. But we didn’t put anything like that in there. What gives?</p><p id="ff4f94d1-70f8-469d-b4b0-9c99fe12d8b6" class="">We didn’t, but Hibernate did. When it identifies an entity, it creates some additional methods inside it for lazy and eager loading of data. We can’t have those serialized because they cause problems. We can use <code>@JsonIgnoreProperties</code> again.</p><pre id="f5e9b0b4-db5a-4730-9cd1-48997d56759b" class="code"><code>...
+@Entity(name=&quot;speakers&quot;)
+@JsonIgnoreProperties({&quot;hibernateLazyInitializer&quot;,&quot;handler&quot;})
+public class Speaker{
+...</code></pre><p id="a804c380-a9d0-43f0-8eee-37ec24644c5e" class="">You might have noticed we’re also ignoring something called the <code>handler</code>. This is an extra field used by Hibernate for those lazy loading operations we’ve talked about.</p><p id="f3d1e64b-717f-4032-8de6-e2930e833594" class="">Add that annotation to the class signature of both entities, then re-run the server and send the request again.</p><figure id="a989ec90-f717-4e55-8a50-ae2c63bdfd7d" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2019.png"><img style="width:522px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2019.png"/></a></figure><p id="24d9e0c6-679e-49ce-b277-a0a5e4e87a8e" class="">Seems fixed. Test the speaker endpoints to check this.</p><h1 id="e38855cc-3a2d-4f3e-82df-eac4c020dc11" class="">3. Working with Spring Boot Configuration and Environment Needs</h1><h2 id="a137a4b8-8e76-4141-8266-74105fa5c582" class="">3.1. How to Customize and Override Spring Boot</h2><p id="ef509524-9114-4720-9db2-e5ae3d3902e0" class="">Spring Boot provides a lot of ways to override and customize your application. However, there is a specific order of precedence that Spring and Spring Boot use to properly set property values.</p><p id="df1fc3df-82eb-4fd9-824e-e5e5eb6a664b" class="">There are two places where configurations can be placed:</p><ul id="4ef64517-aabb-4532-a155-b95a8fa21cd8" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>External Sources</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="71c0fc4f-c440-4e66-b7b5-27defcde36e0" class="bulleted-list"><li style="list-style-type:circle">Command line parameters</li></ul><ul id="9b3234a4-8e51-4ccf-a1cb-8248f54151fa" class="bulleted-list"><li style="list-style-type:circle">JNDI</li></ul><ul id="941f68cd-8fef-4855-b374-483472f4e411" class="bulleted-list"><li style="list-style-type:circle">OS environment variables</li></ul></li></ul><ul id="883aaafb-d964-422e-b0b4-905605d3434b" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong>Internal Sources</strong></strong></strong><ul id="3594b731-ee19-44af-ba0d-40312a568077" class="bulleted-list"><li style="list-style-type:circle">Servlet parameters</li></ul><ul id="2e6bf4ff-1ea1-4c1f-a040-b460bc15ec1d" class="bulleted-list"><li style="list-style-type:circle">Property files</li></ul><ul id="a20b1b35-d409-4bac-b5f5-3c8d151d4205" class="bulleted-list"><li style="list-style-type:circle">Java configuration</li></ul></li></ul><p id="500a7991-1279-4e1a-a0ad-d0184429c4c5" class="">Here is the order of precedence with which Spring Boot checks for application properties:</p><ol type="1" id="4ebf4c43-0a4b-4f53-b436-c7ca9cf33170" class="numbered-list" start="1"><li>Command line arguments</li></ol><ol type="1" id="206e1ece-9849-401e-af86-b8c1b68e0a33" class="numbered-list" start="2"><li>SPRING_APPLICATION_JSON arguments</li></ol><ol type="1" id="589eb817-d380-4f53-862b-466ad9e8d189" class="numbered-list" start="3"><li>Servlet parameters</li></ol><ol type="1" id="5026c63c-1a43-48a7-b467-3b316d61b617" class="numbered-list" start="4"><li>JNDI</li></ol><ol type="1" id="cf4fd42f-2888-4648-aa56-92d696dd3226" class="numbered-list" start="5"><li>Java System Properties</li></ol><ol type="1" id="88b56ff8-d0b7-4a39-a912-7232c72766d0" class="numbered-list" start="6"><li>Environment Variables</li></ol><ol type="1" id="dcedb5ed-de20-402f-ab0c-7e0d6f0c3f2c" class="numbered-list" start="7"><li>Profile properties</li></ol><ol type="1" id="1446a736-ee4e-4406-b832-9532cf24db9b" class="numbered-list" start="8"><li>Application properties</li></ol><ol type="1" id="72932fad-02e9-4a1c-889f-db04cbb2f666" class="numbered-list" start="9"><li><code>@PropertySource</code> annotations</li></ol><ol type="1" id="6437be74-cf21-407a-adfc-9c841a19316a" class="numbered-list" start="10"><li>Default properties</li></ol><p id="be959202-914f-4648-b528-9b61a56da1f6" class="">Good practice is to <strong>pick one internal source, like property files, to set up application default properties</strong>, and then <strong>pick one external source to provide application property override values for specific environments</strong>.</p><p id="f99a7c61-be59-47bb-8cd5-8cd9d6fe4dee" class="">For the purposes of this course, we’ll use the <code>application.properties</code> file as our internal source, and we’ll use environment variables for external configuration.</p><p id="015abcfe-05cc-4330-911b-2c70b9c6e8db" class="">We’ve already looked at how to change the <code>application.properties</code> file, so we don’t need to go over that. For more properties to change, however, you can check <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html">https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html</a>.</p><h2 id="bed1314c-d425-4f73-aa15-80203fa64d16" class="">3.2. Using Environment Variables as External Configuration</h2><p id="f64fa8f4-5e3a-4edf-8100-b557ee9c5ad3" class="">In our <code>application.properties</code> file, we can set certain properties to get their values from environment variables. Say the datasource URL for example. Instead of plopping the JDBC URL in our properties file, we can set it like this:</p><pre id="672a3ed5-4017-4eb3-81e8-dd52637ec61c" class="code"><code>spring.datasource.url=${DB_URL}
+...</code></pre><p id="4592f765-b927-4b56-ab40-aad8ad052887" class="">Now, once Spring Boot starts, it will look for something called <code>DB_URL</code>. Following our order of precedence, it won’t be found anywhere above the environment variables. You can set one for your OS if you want, but you can also set your own for testing purposes in your IDE. For example, in IntelliJ IDEA:</p><ol type="1" id="8e22dccf-7769-45d4-b744-b85b6addcac6" class="numbered-list" start="1"><li>Go to “Run”&gt;”Edit Configurations”<figure id="acc2b20e-f0d9-44c0-b864-bc9043fef9c5" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2020.png"><img style="width:795px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2020.png"/></a></figure></li></ol><ol type="1" id="6680555f-1698-4819-aa5a-99ea5d73c15c" class="numbered-list" start="2"><li>Click on the little box in the “Environment Variables” field:<figure id="780e3036-a428-41ee-b70c-4254926c7e24" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2021.png"><img style="width:772px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2021.png"/></a></figure></li></ol><ol type="1" id="4327004f-ce37-46f5-b2d4-f9913b093810" class="numbered-list" start="3"><li>To add a new Environment Variable, press the Cross in “User environment variables”:<figure id="c9997465-007b-4397-a426-ea3031a7818b" class="image" style="text-align:center"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2022.png"><img style="width:486px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2022.png"/></a></figure></li></ol><ol type="1" id="1c2ac1ce-7b88-495b-a2a4-6755c7591592" class="numbered-list" start="4"><li>Give it a name and a value. For our example, the name would be <code>DB_URL</code> and the value is the JDBC URL.</li></ol><ol type="1" id="cb6a9643-514a-4ac0-b2d1-9333ba40c629" class="numbered-list" start="5"><li>Press OK, then Apply and then exit the configuration edit menu.</li></ol><p id="c2978116-1406-47e2-849b-6029926df219" class="">To test that this configuration is indeed working, restart your application server and then send it a GET request. If a reply with all of the sessions/speakers was received, then your environment variable override is working.</p><h2 id="e78b65bd-3d5b-4c83-a972-1bd5c736e2ce" class="">3.3. How to Handle Different Environments</h2><p id="f299275d-bc43-40e6-9b33-b231ce039bac" class="">Setting different environments for different stages of a project’s lifetime is crucial. How can someone work with an app in development locally, then deploy to a nightly test server, staging and then into production?</p><p id="b91ab4d8-94ca-49be-afd7-01f79b52318b" class="">Spring Boot uses a combination of Spring profiles and profile-specific application property files to accomplish this. Simply add any profile suffix to <code>application-{profile}.properties</code> and Spring Boot will use those properties instead of the ones in the default properties file.</p><p id="52c30b20-fe96-435f-b72a-c9ee903a6b4a" class="">Then, to use any of those profiles, you need to run your application with the <code>-Dspring.profiles.active={profile}</code> argument, and replace <code>{profile}</code> with your profile name. For example, if an application was started with <code>-Dspring.profiles.active=dev</code>, then Spring Boot would, on start up, look for a file named <code>application-dev.properties</code>.</p><p id="1cdd2c1c-5651-4f11-a657-580db9cc9b08" class="">You can use that argument when starting the application from CLI directly. For using an IDE, you can set the argument on your “Run”&gt;”Edit Configurations” and then changing your “VM options” field:</p><figure id="a48aeb9a-ba7a-471a-b196-d1aa848d6142" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2023.png"><img style="width:737px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2023.png"/></a></figure><p id="1310504b-7d28-4fbc-8e3e-02b1013f62bd" class="">Look at the output of our server:</p><figure id="94d0eb65-32f4-48b0-a61c-6ab52b89982d" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2024.png"><img style="width:1799px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2024.png"/></a></figure><p id="8a683893-7ca0-4c60-bd1e-e4ceba9ca080" class="">As you can see, it is outputting a LOT of <code>INFO</code> logs. To demonstrate, I will create and use a <code>prod</code> profile, with only <code>WARN</code> level logging.</p><p id="94ad53de-c104-41a8-8d18-f9b2e042368f" class="">After changing the command line argument to use the <code>prod</code> profile, I will now create a new file called <code>application-prod.properties</code> on <code>src/main/resources</code>:</p><pre id="90de3fc6-aee0-4818-aff4-f5080329bde7" class="code"><code>logging.level.org=WARN</code></pre><p id="204c708f-8b61-44ea-87e2-8313b3abe929" class="">When we run the application…</p><figure id="e8fc0dfb-76c9-4a7a-a13c-d66b9db1d26e" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2025.png"><img style="width:1435px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2025.png"/></a></figure><p id="f046a0d0-060d-405b-adc8-346b63985772" class="">As you can see, the output has been severely reduced. There are still some  INFO logs, but that’s because the <code>org</code> in <code>logging.level.</code><a href="http://logging.level.org"><code><strong><strong><strong><strong>org</strong></strong></strong></strong></code></a><strong><strong><strong><strong><strong><strong><strong><strong><strong> </strong></strong></strong></strong></strong></strong></strong></strong></strong>means that the setting of the logging level only applies to classes that start on <code>org</code>. For example, our classes start on <code>com</code>, so that logging level won’t apply to those.</p><h2 id="a0f1092c-45de-4bd5-a030-91db3a8fd59c" class="">3.4. Setting Properties with YAML</h2><p id="5b37d25f-9703-420c-ae01-e2de4bb75124" class="">Application properties can also be set in YAML. The default is <code>application.yml</code>. Here’s an example and comparison:</p><div id="bfd4242c-64aa-4ffc-81f4-281c00bf9c9e" class="column-list"><div id="5959a367-b44a-45e0-bf5c-796c4884d781" style="width:50%" class="column"><pre id="feefdc2d-122e-406b-ae30-cc8407c396be" class="code"><code>spring.datasource.url=jdbc:postgresql://localhost:5432/conference_app
+spring.datasource.username=postgres
+spring.datasource.password=Welcome
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.hibernate.show-sql=true
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
+
+
+
+
+
+</code></pre><ul id="f17aadd7-8ad7-4115-8d36-f28fba6b9f38" class="bulleted-list"><li style="list-style-type:disc">Shorter</li></ul><ul id="e7271178-c14c-416a-be93-849a8d01ec2f" class="bulleted-list"><li style="list-style-type:disc">More verbose</li></ul><ul id="df9b4cc1-8a78-40ca-9e1e-1f269ff6f2c9" class="bulleted-list"><li style="list-style-type:disc">Kind of confusing</li></ul></div><div id="4094db5e-ad4d-428b-9e6b-f6fb4325d574" style="width:50%" class="column"><pre id="a5aa50ed-251a-4df4-8515-8a175ea2b459" class="code"><code>spring:
+		datasource:
+				url: jdbc:postgresql://localhost:5432/conference_app
+				username: postgres
+				password: Welcome
+		jpa:
+				database-platform: org.hibernate.dialect.PostgreSQLDialect
+				hibernate:
+						ddl-auto: none
+						show-sql: true
+				properties:
+						hibernate:
+								jdbc:
+										lob:
+												non_contextual_creation: true</code></pre><ul id="33d78f48-f434-41db-b84c-a1043140448e" class="bulleted-list"><li style="list-style-type:disc">More extense</li></ul><ul id="10be4ed2-8a15-4ff9-95d8-597cfc991b2c" class="bulleted-list"><li style="list-style-type:disc">Concise</li></ul><ul id="b2b7636f-c704-4ebc-ab11-01acb57e9ee2" class="bulleted-list"><li style="list-style-type:disc">Easy to follow hierarchies</li></ul></div></div><p id="fb8cefe7-986a-4cab-80fa-6317bf2007aa" class="">Profile prefixes also work on YAML property files. For example, <code>application-prod.yml</code> would serve for the <code>prod</code> profile. You can mix and match <code>yml</code> and <code>property</code> files, but it’s better to use just one format and stick with it.</p><h2 id="b6aa4260-3fee-4073-a3a5-0ea48ae39bf3" class="">3.5. Using Spring Properties in Code</h2><p id="27163e74-c5f1-4c51-85f5-b8d47e58db17" class="">You can set your own custom properties in your code, as long as they don’t used reserved property names. For instance, I could set up my own <code>app.version</code> property, and create a Controller that spits out that version when i visit the root directory <code>/</code>.</p><p id="de9a86a1-517b-4cf9-b4fc-78a754620267" class="">To examplify, I’ll do just that:</p><pre id="29c8cd77-a467-49f6-b581-4182addd6832" class="code"><code>app:
+	version: 1.0.0</code></pre><p id="00b44916-f1fd-434b-a0f6-91dae99186bd" class="">Now, I’ll create a new controller on <code>com.shodan.conferencedemo.controllers</code> called <code>HomeController</code>:</p><pre id="ef5eafd2-ef59-4439-84be-bffcb739f56a" class="code"><code>package com.shodan.conferencedemo.controllers;
+
+import java.util.Map;
+import java.util.HashMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RestController
+public class HomeController{
+		@Value(&quot;${app.version}&quot;)
+		private String appVersion;
+	
+		@GetMapping
+		@RequestMapping(&quot;/&quot;)
+		public Map getStatus(){
+				Map map = new HashMap&lt;String, String&gt;();
+				map.put(&quot;app-version&quot;, appVersion);
+				return map;
+		}
+		
+}</code></pre><p id="d48001cf-6d97-47ff-ae25-c91d77b2584b" class="">Let’s see how this works:</p><ol type="1" id="61ad1d7b-f0c5-4ce1-afeb-8b543768e3a4" class="numbered-list" start="1"><li>First, we’re using the <code>@Value</code> annotation to inject the value of the <code>app.version</code> property into a private attribute. I covered this annotation in the following course:<figure id="3532fc24-2f74-48a9-9f1e-beb931ee5d6b" class="link-to-page"><a href="https://www.notion.so/Spring-5-Fundamentals-20-min-read-3532fc242f7448a99f1ebeb931ee5d6b?pvs=21"><span class="icon">2️⃣</span>Spring 5 Fundamentals (~20 min read)</a></figure></li></ol><ol type="1" id="ff00f29b-8d17-44a4-aa20-17556793230c" class="numbered-list" start="2"><li>Our request handling method returns a <code>Map</code>. This is good for methods like the one I’m writing, because the JSON serializer is very good at taking Maps and converting them to JSON, as JSON is pretty much just a <code>Map&lt;String,String&gt;</code>.</li></ol><ol type="1" id="33f72a29-e45c-4da5-be59-5a0f91cfab98" class="numbered-list" start="3"><li>We put the app version we got from the property into the map and return it.</li></ol><p id="ae7f618e-c1d5-4097-9f50-0de96d4a3ec8" class="">Save and restart your server. For this GET request, you can use Postman or even your browser. Send a GET request to your server and you should get the application version you set:</p><figure id="ff6a156c-f111-48e0-9d1c-75e344987805" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2026.png"><img style="width:607px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2026.png"/></a></figure><h2 id="80c11dd9-899c-4273-8b60-5280196025af" class="">3.6. Overriding Spring Boot with Java Configuration</h2><p id="2db6e01f-a3ad-4a55-8276-fdb0b8702cfa" class="">I won’t be going into details on how to proceed with this. It is well documented in the following course:</p><figure id="3532fc24-2f74-48a9-9f1e-beb931ee5d6b" class="link-to-page"><a href="https://www.notion.so/Spring-5-Fundamentals-20-min-read-3532fc242f7448a99f1ebeb931ee5d6b?pvs=21"><span class="icon">2️⃣</span>Spring 5 Fundamentals (~20 min read)</a></figure><h1 id="63755b4f-164b-4125-9470-ff10be7d0e25" class="">4. Deploying Spring Boot Applications</h1><h2 id="ad7e7911-d0e4-401d-b82d-0ff7b82d1806" class="">4.1. Spring Boot Containerless Architecture</h2><p id="9147b15b-8274-4302-8a6e-3a3a4a0f64ad" class="">If you were a Java developer back in 2005 and you wanted to deploy your application, you’d become very familiar with containers like Tomcat, Glassfish or Websphere.</p><p id="abae88d9-cc11-488c-8014-ee46b97c86b0" class="">These were all containers that complied with the JEE specification at that time, and when you deployed a Java application, a WAR file needed to be created so it could be installed in these containers.</p><p id="9e177b77-d1f1-465a-9a04-18061de854e8" class="">Spring Boot apps are <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>standalone</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>: instead of installing your application into a container, Spring has embedded a container inside of the framework. The default container is Tomcat, but you can switch it for Jetty or Undertow if your prefer a different embedded container.</p><h2 id="1ee6a731-73c0-4d55-9918-a8b3e3f9e7a6" class="">4.2. Switching out the Spring Boot Embedded Container</h2><p id="7cdb4a94-4ff6-4b74-bc3e-2013b4c696aa" class="">Switching out the default container is not difficult. But we need to review some facts first.</p><ul id="87006415-74e1-408c-adf7-6d899b1fefa1" class="bulleted-list"><li style="list-style-type:disc">Normally, the Spring Boot Web Starter comes with Tomcat by default.</li></ul><ul id="2dee5172-27d1-46c6-be40-b6b16396be31" class="bulleted-list"><li style="list-style-type:disc">There’s no point in using two containers at the same time.</li></ul><p id="c769ebaa-8d0b-4ea5-8873-78c3517545c4" class="">Now that we’ve got that settled, we can mess around with the dependencies to switch out the container. Let’s say we want to use Jetty instead of Tomcat. To do this, on our <code>pom.xml</code> we first need to tell Maven to exclude everything from the Tomcat Starter dependency when pulling the Web Starter.</p><pre id="238581c9-5fd8-4f20-94b4-0a7679e77a6f" class="code"><code>...
+&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-web&lt;/groupId&gt;
+		&lt;exclusions&gt;
+				&lt;exclusion&gt;
+						&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+						&lt;artifactId&gt;spring-boot-starter-tomcat&lt;/groupId&gt;
+				&lt;/exclusion&gt;
+		&lt;/exclusions&gt;
+&lt;/dependency&gt;	
+...</code></pre><p id="cabc5236-72b6-43f5-b75c-f3fa168aaa3b" class="">And now, we add the Jetty Starter to the dependencies.</p><pre id="ccd89dfe-becd-4160-9a6f-82ab786d92b8" class="code"><code>...
+&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-jetty&lt;/artifactId&gt;
+&lt;/dependency&gt;
+...</code></pre><p id="fb6bea17-afe0-4218-b5ea-958c533af79e" class="">Have Maven sync up with your <code>pom.xml</code> changes and you’ve pretty much changed the container. Try it out for yourself and run your application again to see if it’s running on the new container.</p><h2 id="ed6065c2-5c6a-4460-89a8-98fc5e1d0868" class="">4.3. Creating Executable JAR Deployments</h2><p id="d01de117-3359-4188-b8cf-078e5acf1086" class="">There are two ways to create a basic standalone JAR file that can be used to run your application:</p><ol type="1" id="45e4642b-fd9d-4120-bf51-2535b6eaaacb" class="numbered-list" start="1"><li><strong>Use Maven to create JAR files that can be run with the Java command.</strong><p id="75afa6e9-df20-4fe5-bf4d-f76481cf1a0e" class="">In your project directory, run the command</p><pre id="3c61d46e-6d5e-4dde-a854-af6d722d8930" class="code"><code>$ mvn package</code></pre><p id="dcb91191-4a55-4389-9583-117f4a942b31" class="">Or, if you’re on IntelliJ (or some other IDE), press the “m” on the side to open the Maven tab:</p><figure id="8dd0379f-5766-466c-a9ad-1fffdd988be3" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2027.png"><img style="width:371px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2027.png"/></a></figure><p id="f0a63f8d-d5ee-42fa-b209-33a18a69937d" class="">Then, select the window icon to “Execute Maven Goal”:</p><figure id="62913e75-b46e-4862-bd72-75859d2eb87e" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2028.png"><img style="width:418px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2028.png"/></a></figure><p id="955209f5-3148-4975-b22e-fb35b709dfe9" class="">And run the same command: <code>mvn package</code></p><figure id="f4d8c312-eea5-449c-8d8c-1685a91d1481" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2029.png"><img style="width:678px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2029.png"/></a></figure><p id="9c87ab8d-a7d7-4f76-86dd-b431f4e3378e" class="">If everything goes right, your application should package up with no problems:</p><figure id="446aae67-fd5a-4073-8c90-86ab8ca7e609" class="image"><a href="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2030.png"><img style="width:1813px" src="Creating%20Your%20First%20Spring%20Boot%20Application%20(~28%20m%208a8e61f5326c4771930682c812e97a3f/Untitled%2030.png"/></a></figure><p id="c394441a-50ec-4114-aea2-b3e47a51505e" class="">You can find your packaged JAR file in the project’s <code>target</code> folder.</p><p id="b2d95d13-4c44-4dc4-8a77-69455d29a0c9" class="">To run the JAR file, you need Java installed:</p><pre id="88219466-786a-4e8c-98a9-6b840a81afdd" class="code"><code>$ java -jar conference-demo-0.0.1-SNAPSHOT.jar</code></pre></li></ol><ol type="1" id="81047e01-2a5d-4e6d-a0c7-919fc3eacb9f" class="numbered-list" start="2"><li><strong>Use Maven to create a standalone executable JAR file.</strong><p id="fc68709e-1cc9-4b87-9b45-334897a377a8" class="">This can be done by going back to your <code>pom.xml</code> and adding a <code>configuration</code> tag to the Spring Boot Maven Plugin:</p><pre id="0f8f6ce8-a955-497e-b82b-092f4b9cd47e" class="code"><code>&lt;build&gt;
+		&lt;plugins&gt;
+				&lt;plugin&gt;
+						&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+						&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+						&lt;configuration&gt;
+								&lt;executable&gt;true&lt;/executable&gt;
+						&lt;/configuration&gt;
+				&lt;/plugin&gt;
+		&lt;/plugins&gt;
+&lt;/build&gt;</code></pre><p id="f46b2450-8e4a-4c77-b16d-80df91c38ea2" class="">Then, package the project the same way as in <strong><strong>1.</strong></strong> The difference is that the JAR file produced in the <code>target</code> directory can now be run straight from the command-line, like so:</p><pre id="248ab45c-a5a7-41de-8b65-ed3ff6c6efb3" class="code"><code>$ ./conference-demo-0.0.1-SNAPSHOT.jar</code></pre></li></ol><p id="6c101068-bf62-4b65-ae23-b5145d9984e3" class="">The second method only works for UNIX or Linux-based systems. If you’re in Windows, this won’t generate an <code>exe</code> file to execute.</p><h2 id="ca323233-57a7-4374-8d1f-6c1694f49365" class="">4.4. Common Cloud Supported Platforms</h2><p id="f710ec9b-2ef0-43cd-b699-e105c843aec8" class="">Common cloud platforms that work with Spring Boot:</p><ul id="ea14ea83-6fcd-4f77-a8db-63ac70974ba6" class="bulleted-list"><li style="list-style-type:disc">Cloud Foundry;</li></ul><ul id="35832b30-fb63-401c-a991-ee2d4b89caa9" class="bulleted-list"><li style="list-style-type:disc">Heroku;</li></ul><ul id="663b46a3-4168-410f-9983-6ce367a1283b" class="bulleted-list"><li style="list-style-type:disc">Google Cloud;</li></ul><ul id="c7343a6d-3669-4398-95dd-706fa3a56d36" class="bulleted-list"><li style="list-style-type:disc">AWS;</li></ul><ul id="e8ddb0c7-1303-43e6-a38e-8e9cb2dcc1cb" class="bulleted-list"><li style="list-style-type:disc">Microsoft Azure.</li></ul><p id="ef8c83d0-2b4f-480b-9303-414b5f6a8563" class="">For more flexibility, you can dockerize your application. Most cloud platforms support Docker.</p><p id="c922d6be-e799-4656-88ba-938e140663b5" class="">If you decide to use a cloud offering, keep these in mind:</p><ul id="7d245a4d-2a35-44b6-962d-1d97046f667f" class="bulleted-list"><li style="list-style-type:disc">Logging can be difficult to track down;</li></ul><ul id="42e93b41-6211-4c1c-aec5-7952b8ec3453" class="bulleted-list"><li style="list-style-type:disc">Service integration may be different;</li></ul><ul id="26b0e783-04c4-4f71-aae9-d83a56b4321a" class="bulleted-list"><li style="list-style-type:disc">Firewall and security have to be set up.</li></ul><h2 id="85007fec-f302-401f-baf0-64d039ec244b" class="">4.5. What About WAR Deployments?</h2><p id="0052b315-c17b-4328-9226-117d05643566" class="">To make a WAR deployment on a Maven project, we need to modify our <code>pom.xml</code> once again, and flag the embedded container as provided. This will tell Maven to not package Tomcat or any other container as the embedded container. Remove the Jetty dependency and the Tomcat exclusion from the Web Starter. Then add the Tomcat dependency but flag it as “Provided” in the scope:</p><pre id="0a434605-a0c1-447b-9e15-229fbaa4bc49" class="code"><code>...
+&lt;/dependency&gt;
+&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-tomcat&lt;/groupId&gt;
+		&lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+...</code></pre><p id="83d690b8-1d09-43c9-addc-0d156f783044" class="">Afterwards, we also want to tell Maven to package our app as a WAR instead of a JAR file:</p><pre id="33b520ae-ef34-48db-81e1-98c3d115a1db" class="code"><code>...
+&lt;name&gt;conference-demo&lt;/name&gt;
+&lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+&lt;packaging&gt;war&lt;/packaging&gt;
+...</code></pre><p id="a7bb64ab-8161-47d4-a72c-ad8e3219ba8f" class="">One last change has to be made in the application code for it to be able to run as a WAR. We need to turn the Spring Boot Application from a Standalone application to a simple Servlet. We can do that by making the main class (the one with the <code>@SpringBootApplication</code> annotation) extend from <code>SpringBootServletInitializer</code>:</p><pre id="12fd8b90-8d9c-413e-b4cf-933dc0f62ddd" class="code"><code>...
+@SpringBootApplication
+public class ConferenceDemoApplication extends SpringBootServletInitializer {
+		...</code></pre><p id="71e04b1d-f145-4ea8-93dc-db69579fae6b" class="">Once you run <code>mvn package</code> again, you’ll find a WAR file in your <code>target</code> directory.</p><p id="9f169029-31b9-4bec-ab2c-d8b613931d5c" class="">Actually using this file to deploy to something like Tomcat is out of scope for this course, in my opinion.</p></div></article></body></html>
