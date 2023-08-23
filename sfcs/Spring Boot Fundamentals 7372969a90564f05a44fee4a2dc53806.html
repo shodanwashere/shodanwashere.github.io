@@ -1,0 +1,1290 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Spring Boot Fundamentals</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><a href="../sfcs.html" style="display: block; padding: 5px; color: white; background-color: black; width: 100px">Go Back To Learning Plan Menu!</a><article id="7372969a-9056-4f05-a44f-ee4a2dc53806" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1580894908361-967195033215?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 30.55%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">4️⃣</span></div><h1 class="page-title">Spring Boot Fundamentals (~36 min read)</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="8ff4fda3-f6f3-488a-9f39-234d7918e26a"><div style="font-size:1.5em"><span class="icon">😎</span></div><div style="width:100%">Finished on <time>@August 23, 2023</time>. Written by Nuno Dias, <em><em><em>aka</em></em></em>, Shodan. Based on the <a href="https://app.pluralsight.com/library/courses/spring-boot-fundamentals/table-of-contents">Pluralsight course</a> of the same name by <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Kesha Williams</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.</div></figure><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Table of Contents</summary><div class="indented"><nav id="9013ab57-a4f8-4d2b-bae8-d28d82e86af2" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d0fbd483-5b11-474c-a5db-7c9b9afbc740">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#681bfc7b-3b04-4662-8aa6-bd2383adcd4d">Version Check</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1bc1f5cb-d339-40e5-b0b7-0e2a0bf8c9ea">Pre-Requisites</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0c5f1a73-cae5-4a71-ae93-df3b900a90f7">1. Introducing <del>Spring Boot and its Benefits</del> The Course</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3b19b01c-3eb5-4bc0-8ca0-df41aac5dde4">2. Bootstrapping a Simple Application</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9175dee6-4460-47db-9212-1cc07d3bde8c">2.1. Spring Initializr</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7d506758-2614-41a0-95d5-029ccbdc8975">2.2. Spring Boot CLI</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#24936189-9b58-49ed-bb0f-b47934fa5f06">2.3. Auto-configuration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1371bb46-e75d-4976-b9b2-111b4b709aa0">2.4 Spring Boot Annotations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#50b91235-8b2d-46a8-a162-9659cb348d21">2.5. Spring Boot Properties</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7fa33b6d-2fd4-4885-801d-d8e64ce2ac08">2.6. Spring Boot Profiles</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e8c94298-16c4-478c-ab5e-a2d9f536ac26">3. Accessing Data with Spring Boot and H2</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7bd74fbc-5409-4c58-97e6-f572b258eee9">3.1. The H2 Database</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3366339b-38fe-4e7d-8a82-aaa08f9f4596">3.2. ORM with JPA</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d83cbecd-2c46-44c7-b0c1-7794e050808c">3.3. Entities</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7d17b905-4604-4f2b-93a0-1f6299f1b5ce">3.3.1. Relationships</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9af9561a-7ea0-48cb-a9dc-ef53af79406d">3.3.2. Repositories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7a7aae65-4d30-45a1-85ac-844def138d10">4. Configuring a Spring MVC Application with Spring Boot</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7aff62f7-6598-4744-93b4-eda86c86cca8">4.1. The Model-View-Controller Design Pattern</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8f18349a-bcb4-4550-b3f2-2f7ccd8779c5">4.1.1. The Model</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#4e439c72-40f0-4581-b906-70e47489c62c">4.1.2. The View</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1946f798-fc14-4371-b106-2affe0bcede8">4.1.3. The Controller</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#191dd88f-cad6-46f5-9c90-6fec3afef2e2">4.2. Using MVC in a Spring Boot Project</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#81e05368-1c56-4562-a64b-a7333a9e50f6">4.3. Packaging and Deploying</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a22eb07d-ed02-46d8-97d3-e62059cb0d0b">5. Building a RESTful Web Application with Spring Boot</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6d42f729-105d-462b-8d8c-3082efc87c51">5.1. REST Architecture</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#36cac962-01ed-4c75-8bed-c95cbbd48d58">5.2. REST on Spring Boot</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#51da48f3-ba3e-484d-b892-8cbf56d8806e">5.3. Testing with cURL</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#343d640a-ec37-4fb3-b59f-1f315be7a95b">5.4. Response Formats</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0a4b0c46-abc3-4d5b-8e7d-71dedb9f3ea9">5.5. Exception Handling</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#65c89a4d-e099-4010-accc-4bb11d1f633e">6. Building a GraphQL Server with Spring Boot</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2f8ad429-f2aa-40f5-bdd2-a209fd6a88b8">6.1. An Overview of GraphQL</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a70f17ee-72ea-4d21-8bbc-2a1ca2dc7c41">6.2. Dependencies</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4df26a18-30bc-4f7a-b048-03b1e7a6b9d4">6.3. GraphQL Schemas</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#37a5bd9e-0097-4dde-96e9-039b8fac9751">6.4. Query Operations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#62cc43f5-2dc8-41af-a5cf-cb72af1bc8c9">6.5. Mutation Operations</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ecfb5a6-74c4-47ac-a35c-b8b688d8f7d0">6.5. Exception Handling</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c011e74b-848e-4749-902a-792e81a434d8">6.6. Test GraphQL</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d9d6aeda-5d27-4c87-971a-0e1ab5a57d44">7. Enabling Actuators, Metrics and Health Indicators</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#00281a00-7d13-4df0-8967-c6d24f004216">7.1. Actuator</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#53eb2c07-7a0d-4744-b1f9-087310abad99">7.2. Custom Endpoints</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9a400931-23d3-4633-963d-282efdca08f4">8. Testing with Spring Boot</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ac5896c9-f5a0-4610-883a-ada41f0807e8">8.1. An Overview of Testing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2bdf4a64-fcae-4c2b-9358-369d62000c59">8.2. Unit Testing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0468953a-ff4c-40f9-b9c5-483465fb8213">8.3. Integration Tests</a></div></nav></div></details><h3 id="681bfc7b-3b04-4662-8aa6-bd2383adcd4d" class="">Version Check</h3><p id="c937c94b-8e31-4d42-a2a9-8d09ad3d2b25" class="">This course was created using Java 8 and Spring 2.1.5.</p><p id="c76b1483-f793-4b9b-8b7f-a5696b931ef0" class="">It is 100% applicable to Java 1 through 11.</p><h3 id="1bc1f5cb-d339-40e5-b0b7-0e2a0bf8c9ea" class="">Pre-Requisites</h3><p id="8a954688-6914-4f5e-b39a-444836dbcc0f" class="">Equipment:</p><ul id="20fe6bb6-bd44-4b39-a601-4ab68b1aa141" class="bulleted-list"><li style="list-style-type:disc">JDK 1.8+</li></ul><ul id="2835bfcf-c615-4feb-88a6-c8fcb1fc4f55" class="bulleted-list"><li style="list-style-type:disc">A Text Editor (We will use IntelliJ)</li></ul><ul id="dfaea7ae-f919-470e-a8d4-62d25de4048c" class="bulleted-list"><li style="list-style-type:disc">Maven 3.0+</li></ul><ul id="6f8b4e6b-c9bb-4d40-b152-388b8b3795b7" class="bulleted-list"><li style="list-style-type:disc">Git</li></ul><p id="e7d998e8-d987-46fa-a450-a14fcd83120d" class="">Familiarity with:</p><ul id="a8b1d6c8-c90b-4ac7-b144-a6474340a6b6" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot (Beginner Level Understanding)</strong></li></ul><ul id="229581a7-e246-47b5-96b7-501853248c6c" class="bulleted-list"><li style="list-style-type:disc">Java IDE (Choice will be IntelliJ)</li></ul><ul id="c715e7f1-9a28-441b-b52b-1303b00332e7" class="bulleted-list"><li style="list-style-type:disc">Java 8+</li></ul><ul id="b081169d-87bf-42e3-84bb-698000f159e9" class="bulleted-list"><li style="list-style-type:disc">Maven 3+</li></ul><ul id="85509b27-4bb7-47c4-b09c-e68a6a954ee4" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Framework (Beginner Level Understanding)</strong></li></ul><p id="d5efb312-0423-498b-967e-a451feb03003" class="">If you do not cross out at least the requirements in bold, I recommend taking these courses first, as this one is not the best starting point:</p><figure id="f3d626bf-631b-44bf-b7bc-82e03789a38f" class="link-to-page"><a href="https://www.notion.so/The-Big-Picture-11-mins-read-f3d626bf631b44bfb7bc82e03789a38f?pvs=21"><span class="icon">1️⃣</span>The Big Picture (~11 mins read)</a></figure><figure id="3532fc24-2f74-48a9-9f1e-beb931ee5d6b" class="link-to-page"><a href="https://www.notion.so/Spring-5-Fundamentals-20-min-read-3532fc242f7448a99f1ebeb931ee5d6b?pvs=21"><span class="icon">2️⃣</span>Spring 5 Fundamentals (~20 min read)</a></figure><figure id="8a8e61f5-326c-4771-9306-82c812e97a3f" class="link-to-page"><a href="https://www.notion.so/Creating-Your-First-Spring-Boot-Application-28-min-read-8a8e61f5326c4771930682c812e97a3f?pvs=21"><span class="icon">3️⃣</span>Creating Your First Spring Boot Application (~28 min read)</a></figure><h1 id="0c5f1a73-cae5-4a71-ae93-df3b900a90f7" class="">1. Introducing <del>Spring Boot and its Benefits</del> The Course</h1><p id="5b8aefb3-7da2-4fd1-a985-b4078ffd3538" class="">I will be skipping this module as its contents have already been addressed in the following courses:</p><figure id="3532fc24-2f74-48a9-9f1e-beb931ee5d6b" class="link-to-page"><a href="https://www.notion.so/Spring-5-Fundamentals-20-min-read-3532fc242f7448a99f1ebeb931ee5d6b?pvs=21"><span class="icon">2️⃣</span>Spring 5 Fundamentals (~20 min read)</a></figure><figure id="8a8e61f5-326c-4771-9306-82c812e97a3f" class="link-to-page"><a href="https://www.notion.so/Creating-Your-First-Spring-Boot-Application-28-min-read-8a8e61f5326c4771930682c812e97a3f?pvs=21"><span class="icon">3️⃣</span>Creating Your First Spring Boot Application (~28 min read)</a></figure><p id="0674e451-6506-46b3-8945-bf71ce5e02be" class="">However, I will be giving you at least what you’re getting into. This course covers Application Bootstrapping, Data Access, MVC, RESTful API Development, GraphQL, Spring Boot Actuator and Unit Testing. It teaches all of this using a case study called TrackZilla, a bug tracking application that will help you develop using Spring Boot.</p><p id="e73a0292-3343-4529-a95b-534116839aa8" class="">Before moving on, I recommend cloning the following GitLab repository, as the course will make use of it: <a href="https://gitlab.com/videolearning/spring-fundamentals.git">https://gitlab.com/videolearning/spring-fundamentals.git</a></p><pre id="76eff2b8-79cb-4e01-b9b3-5c711ccbfac6" class="code"><code>$ git clone https://gitlab.com/videolearning/spring-fundamentals.git</code></pre><h1 id="3b19b01c-3eb5-4bc0-8ca0-df41aac5dde4" class="">2. Bootstrapping a Simple Application</h1><h2 id="9175dee6-4460-47db-9212-1cc07d3bde8c" class="">2.1. Spring Initializr</h2><p id="a30dd253-75ba-41ef-ba8b-9fd1aeaf5963" class="">I will also skip this section, using Spring Initializr has already been done in this course:</p><figure id="8a8e61f5-326c-4771-9306-82c812e97a3f" class="link-to-page"><a href="https://www.notion.so/Creating-Your-First-Spring-Boot-Application-28-min-read-8a8e61f5326c4771930682c812e97a3f?pvs=21"><span class="icon">3️⃣</span>Creating Your First Spring Boot Application (~28 min read)</a></figure><p id="51813368-ec67-482c-8acc-51846c4724f1" class="">Just know that you want to set up a project on Initializr that uses Spring Boot, Maven, Java, and has the Web Starter set as a dependency.</p><h2 id="7d506758-2614-41a0-95d5-029ccbdc8975" class="">2.2. Spring Boot CLI</h2><p id="2155947e-fce1-4ca6-87ec-c54e529986fa" class="">Instead of using the Spring Initializr to generate a project, we can also use the Spring Boot’s CLI. You do not need to use the CLI to work with Spring Boot, but some developers prefer this instead of using Spring Initializr.</p><p id="47258b9d-8d77-4624-a577-a382f0c380c8" class="">From the perspective of a Linux user (WHICH IS WHAT YOU SHOULD BE USING TO CODE YOU FILTHY GAIJIN), you can install SDKMAN by running this command:</p><pre id="c7f27e3a-aa95-4ae7-9abe-b3778279503a" class="code"><code>$ curl -s &quot;https://get.sdkman.io&quot; | bash</code></pre><p id="9d8a587d-72d6-4938-8a2d-375b787f53cc" class="">Then, install the Spring Boot CLI utility and confirm it works:</p><pre id="fb65fcde-81f1-4b60-bf24-2fca395caac6" class="code"><code>$ sdk install springboot
+$ spring --version
+Spring CLI v3.1.2</code></pre><p id="2a3b8ff2-ce09-4f0a-b82c-d0dfa1d23fde" class="">You can initialize a new project using the <code>init</code> command:</p><pre id="92c37ab6-ac19-4461-ace3-c2afa7b97a3b" class="code"><code>$ spring init {project-name}
+Using service at https://start.spring.io
+Project extracted to &#x27;/home/shodan/{project-name}&#x27;</code></pre><p id="9db895ab-53fc-4179-a885-07da3cb75b45" class="">Where <code>{project-name}</code> is the name you want to give your project. Essentially, it is calling Spring Initializr to create the project.</p><p id="228f1b95-a033-4077-b1ed-20ed41a956c8" class="">To add dependencies, use the <code>--dependencies=</code> flag. You define your dependencies like <code>--dependencies=dep1,dep2,dep3,...</code></p><p id="dd9895e6-25ae-49a8-a23f-4f70f4a8630a" class="">So for instance, let’s say I want to create a project named <code>fundamentals</code> with both the Web and Data JPA Starters. The command would be as follows:</p><pre id="e0820cc5-0059-4e6e-8043-6cd6a078c1e3" class="code"><code>$ spring init --dependencies=web,data-jpa fundamentals</code></pre><p id="e8661573-8d9c-4889-9f46-4d050dd89b16" class="">You can also run applications with the CLI using Groovy scripts. The Spring Boot CLI is completely self-contained so you do not need any external Groovy installation. Let’s review this very simple Groovy script to be used with Spring Boot CLI:</p><pre id="0e718ed7-3357-4919-a2f9-b5794f4ccbc4" class="code"><code>@RestController
+class app{
+		@RequestMapping(&quot;/&quot;)
+		String home(){
+				&quot;Hello Class of 2023/2024!&quot;
+		}
+}</code></pre><p id="f37b9e9d-9985-4b91-b053-ff2c626c98ba" class="">What this script does is create a REST API Controller, and routes the root directory (<code>”/”</code>) to the <code>home()</code> method, which just outputs a <code>String</code>. You can run this script on Spring CLI like so:</p><pre id="3e00f1ca-3c87-41a4-800c-8df29f50abd0" class="code"><code>$ spring run app.groovy
+...
+  .   ____          _            __ _ _
+ /\\ / ___&#x27;_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | &#x27;_ | &#x27;_| | &#x27;_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  &#x27;  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v3.1.2)
+...
+2023-08-21 17:27:58.223 INFO 46116 --- [        runner-0] ... : Tomcat started on port(s): 8080 (http)
+2023-08-21 17:27:58.323 INFO 46116 --- [        runner-0] ... : Started application in 7.407 seconds (JVM running for 9.687)</code></pre><h2 id="24936189-9b58-49ed-bb0f-b47934fa5f06" class="">2.3. Auto-configuration</h2><p id="1c8d476b-5742-44d5-857a-60cc57d6866f" class="">Auto-configuration is a very useful and powerful feature of Spring Boot, which takes a convention-over-configuration approach.</p><p id="e43b5a97-ed88-43af-b75c-54bc6de756b4" class="">Auto-configuration looks at the JARs on the class path and auto-configures beans automatically. It is designed to be non-invasive. For example, if you add your own beans, like a data source bean, the default embedded data-source backs off and Spring uses what you’ve provided. Auto-configuration is always applied after user-defined beans have been registered.</p><ul id="d7cfb153-5ae8-404b-b019-b133599c414a" class="bulleted-list"><li style="list-style-type:disc">If you need to find out what auto-configuration is currently being applied and why, start your application with the <code>--debug</code></li></ul><ul id="112274dd-1487-4301-b762-e9669560bbe1" class="bulleted-list"><li style="list-style-type:disc">An equivalent would be setting the <code>logging.level.org.springframework</code> property to <code>DEBUG</code></li></ul><ul id="3bee8bd0-138c-4c7f-b5a8-2292eed6b17b" class="bulleted-list"><li style="list-style-type:disc">You can also use the Spring Boot Actuator to achieve this, which will be talked about in later chapters.</li></ul><h2 id="1371bb46-e75d-4976-b9b2-111b4b709aa0" class="">2.4 Spring Boot Annotations</h2><p id="9e3d8e08-2b06-4a9d-9ef1-d74ee0278157" class="">The <code>@SpringBootApplication</code> annotation is a very important annotation that has to be added to the main application class to indicate that the application should utilize Spring Boot. It is a shortcut annotation that applies 3 annotations in 1 statement:</p><ul id="ab65a4c6-43f1-4763-8dd8-f6035e901a94" class="bulleted-list"><li style="list-style-type:disc"><code>@SpringBootConfiguration</code> - Replaces <code>@Configuration</code> and annotates a class as a configuration</li></ul><ul id="22a519e3-73e8-4cd0-a3d4-377d5d758809" class="bulleted-list"><li style="list-style-type:disc"><code>@EnableAutoConfiguration</code> - Tells SpringBoot to configure beans</li></ul><ul id="105150f2-a4ff-4412-ac3a-f930f7b53d7f" class="bulleted-list"><li style="list-style-type:disc"><code>@ComponentScan</code> - Tells Spring Boot to scan the current package and subpackages</li></ul><h2 id="50b91235-8b2d-46a8-a162-9659cb348d21" class="">2.5. Spring Boot Properties</h2><p id="d50a05ce-edcb-4ffa-a3b7-65db5f006e1a" class="">This was talked about in this course:</p><figure id="8a8e61f5-326c-4771-9306-82c812e97a3f" class="link-to-page"><a href="https://www.notion.so/Creating-Your-First-Spring-Boot-Application-28-min-read-8a8e61f5326c4771930682c812e97a3f?pvs=21"><span class="icon">3️⃣</span>Creating Your First Spring Boot Application (~28 min read)</a></figure><h2 id="7fa33b6d-2fd4-4885-801d-d8e64ce2ac08" class="">2.6. Spring Boot Profiles</h2><p id="2abe81e7-262e-4809-8f3d-a7ff3a4fa6aa" class="">This was talked about in these courses:</p><figure id="3532fc24-2f74-48a9-9f1e-beb931ee5d6b" class="link-to-page"><a href="https://www.notion.so/Spring-5-Fundamentals-20-min-read-3532fc242f7448a99f1ebeb931ee5d6b?pvs=21"><span class="icon">2️⃣</span>Spring 5 Fundamentals (~20 min read)</a></figure><figure id="8a8e61f5-326c-4771-9306-82c812e97a3f" class="link-to-page"><a href="https://www.notion.so/Creating-Your-First-Spring-Boot-Application-28-min-read-8a8e61f5326c4771930682c812e97a3f?pvs=21"><span class="icon">3️⃣</span>Creating Your First Spring Boot Application (~28 min read)</a></figure><h1 id="e8c94298-16c4-478c-ab5e-a2d9f536ac26" class="">3. Accessing Data with Spring Boot and H2</h1><p id="70e657c4-5af1-4017-8e81-01d39678f1aa" class="">Now that the TrackZilla team has bootstrapped a simplea application, in this scenario, they have a need to persist data, for example, maintain a list of applications or create a list of tickets or a list of releases or tickets assigned to a release. Let’s talk a bit about this process of Data Persistence.</p><h2 id="7bd74fbc-5409-4c58-97e6-f572b258eee9" class="">3.1. The H2 Database</h2><ul id="df320f06-89a0-4edc-b257-b46af1588730" class="bulleted-list"><li style="list-style-type:disc">It is an open-source database engine written in Java;</li></ul><ul id="680f720d-e14d-462d-8bc8-da386a987c07" class="bulleted-list"><li style="list-style-type:disc">It is an in-memory database, which means that data is stored in memory and will not persist to the disk;</li></ul><ul id="d7e29510-8b8e-463b-876f-e1cd597f8c00" class="bulleted-list"><li style="list-style-type:disc">Good for Proofs of Concept and Dev environments for being a simple database</li></ul><ul id="3596d882-10cd-4d5d-9bf7-f12db53f2e25" class="bulleted-list"><li style="list-style-type:disc">Can be administered via the H2 Console</li></ul><p id="73794c60-dd6d-4a5a-a3ea-0bae7d6f1345" class="">It can be included in a project by adding its dependency in <code>pom.xml</code>:</p><pre id="8d309109-731f-4b8d-95fc-4aaee46d2f0b" class="code"><code>...
+&lt;dependency&gt;
+		&lt;groupId&gt;com.h2database&lt;/groupId&gt;
+		&lt;artifactId&gt;h2&lt;/artifactId&gt;
+		&lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+...</code></pre><p id="4443cc61-2e4a-47eb-a1ef-5695c3b8cc79" class="">Thanks to auto-configuration, since we are adding H2 as a dependency, Spring Boot knows that in this project, we will be connecting to the H2 database, so it auto configures H2 related properties like the database URL, username, password, etc.</p><p id="154036a2-97f8-46b5-9db1-b788a812918b" class="">The default properties are as follows:</p><pre id="b3a0ece5-a346-4695-a397-fb2a222f55a4" class="code"><code>spring:
+		datasource:
+				url: jdbc:h2:mem:testdb
+				driverClassName: org.h2.Driver
+				username: sa
+				password:
+		h2:
+				console:
+						enabled: false</code></pre><p id="8353616a-9ab6-438c-b942-af979a4b71f5" class="">What changes should be made for our demos?</p><pre id="60a6f245-dca0-4d91-bdee-a528dc872d44" class="code"><code>spring:
+		datasource:
+				url: jdbc:h2:mem:bugtracker
+				driverClassName: org.h2.Driver
+				username: sa
+				password:
+		h2:
+				console:
+						enabled: true
+						path: /h2</code></pre><p id="f6133ab9-58bf-491d-85c9-d251457791fa" class="">We’re using H2 because it’s a simple to configure, on-prem, on-machine data base that can be used for testing purposes. In a real production environment, you should use a proper database engine like Postgres, Oracle SQL, MongoDB, etc. You can also use one of those in this and the following modules if you so prefer.</p><h2 id="3366339b-38fe-4e7d-8a82-aaa08f9f4596" class="">3.2. ORM with JPA</h2><p id="e3b9d924-90a9-47c0-adb4-fdff41c6d0ea" class="">Let’s talk about <strong>O</strong>bject-<strong>R</strong>elational <strong>M</strong>apping with the <strong>J</strong>ava <strong>P</strong>ersistence <strong>A</strong>PI.</p><p id="81525d99-7eba-4269-ac12-d0a973f6ae3c" class="">There are several layers of abstraction in this process and I will list them in the order that they appear.</p><ol type="1" id="1ab15930-0a1b-444b-b1a7-d030264d1c03" class="numbered-list" start="1"><li>First comes the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Persistence Data Store</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. This is your database. It can be an H2 in-memory database or a server running MySQL, Postgres, MongoDB, etc.</li></ol><ol type="1" id="1b2661e5-42f2-49d0-8c04-5d36d39ec19b" class="numbered-list" start="2"><li>Above comes <strong><strong><strong><strong>JDBC</strong></strong></strong></strong>. It is a Java API to connect and execute queries against the database.</li></ol><ol type="1" id="01833351-a637-4108-bfb7-3330a6d82a3e" class="numbered-list" start="3"><li><strong>JPA </strong>is an abstraction on top of JDBC that makes it easy to map Java objects to relational databases and vice-versa. It is just a specification or guidelines.</li></ol><ol type="1" id="aaa79df2-1a55-4d60-8bad-4258aee4fa7e" class="numbered-list" start="4"><li>JPA needs an implementation or instance provider. Spring uses <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Hibernate</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> as an implementation.</li></ol><p id="6ec067c3-4887-4943-992d-f01a37b3c7dc" class="">Spring Boot selects a recent version of Spring Data modules for you. In the <code>pom.xml</code>, we’ve included the Data JPA starter. It comes with the following modules:</p><ul id="8c8872eb-88ae-4d9a-aa0e-a66af0617b7a" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong>Hibernate</strong></strong></strong></strong></strong></strong></strong></strong></strong>, one of the most popular JPA implementations;</li></ul><ul id="2b225832-bd06-4ab2-baf6-7c4db98468a9" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Data JPA</strong>, which makes it easy to implement JPA-based repositories;</li></ul><ul id="8ef0bce1-8d98-4ded-a649-6124aeaa0f8e" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Spring ORM</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, which is the core-module that allows for Object-Relational Mapping in the Spring Framework.</li></ul><h2 id="d83cbecd-2c46-44c7-b0c1-7794e050808c" class="">3.3. Entities</h2><p id="1344574f-656e-419a-99d6-ade0a3f7fdaf" class="">Entities are objects that live in a database and they have the ability to be mapped to a database.</p><p id="26b66b7c-1a31-4af3-afce-b7d8860ebee3" class="">Entities are defined by the <code>@Entity</code> annotation.</p><p id="23bd7075-b44d-45ba-9d24-3f6487c5417a" class="">Traditionally, JPA entity classes are specified in a <code>persistence.xml</code> file. However, with Spring Boot, this is not necessary. Instead, Enteties are scanned, just like Beans are. By default, all the packages below the main configuration class (<code>@SpringBootApplication</code>)</p><p id="ec95ea80-3c24-46f5-8638-5ad01baeaf04" class="">Let’s see an example. We’ll be making use of the Module 4 code from the GitLab repository. Let’s take a look at the <code>pom.xml</code> file:</p><pre id="52947fba-e473-4fd5-aef2-ab1e1b7e16df" class="code"><code>...
+&lt;dependency&gt;
+		&lt;groupId&gt;com.h2database&lt;/groupId&gt;
+    &lt;artifactId&gt;h2&lt;/artifactId&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;
+...</code></pre><p id="568abfee-6579-48c9-93f2-169066b58b1a" class="">We have two important dependencies: the H2 database, which is set to only be present at runtime, and the Data JPA Starter. So far so good.</p><div id="ae454992-96f7-45cf-97de-c31ddb8eceda" class="column-list"><div id="8937e366-b447-461a-97f2-50d8a251135e" style="width:37.5%" class="column"><p id="09f9928b-20c0-4227-85bb-ba0ef5e03876" class="">Let’s look at Trackzilla’s project structure. It has 3 domain entities that represent the business data captured by the system. There are <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Application</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>s, <strong><strong><strong><strong><strong><strong>Release</strong></strong></strong></strong></strong></strong>s and <strong><strong><strong><strong><strong><strong>Ticket</strong></strong></strong></strong></strong></strong>s.</p><p id="fad08906-0a23-430d-9a6e-219999493684" class="">Let’s take a look at each of these 3 entities and see how they’re set up and how they’re related to each other.</p></div><div id="ae8b2208-444e-42e1-b49a-9735ff64a614" style="width:62.5%" class="column"><figure id="06406953-0d0e-4d60-a417-ee5571f66cc8" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled.png"><img style="width:610px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled.png"/></a></figure></div></div><p id="9b28cff5-e93f-4037-a887-462353f4353e" class="">First we’ll take a look at <code>Application</code>:</p><pre id="5eff7198-7bf5-499a-8a0a-fa4dcc04d1aa" class="code"><code>package com.pluralsight.entity;
+
+import javax.persistence.*;
+
+@Entity
+public class Application {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name=&quot;application_id&quot;)
+    private Integer id;
+
+    @Column(name = &quot;app_name&quot;, nullable = false)
+    private String name;
+
+    @Column(length = 2000)
+    private String description;
+    private String owner;
+
+    public Application() {
+    }
+
+    public Application(String name, String owner,
+                       String description) {
+        this.name = name;
+        this.owner = owner;
+        this.description = description;
+    }
+    // ... getters and setters
+
+    @Override
+    public String toString() {
+        return &quot;Application{&quot; +
+                &quot;id=&quot; + id +
+                &quot;, name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +
+                &quot;, owner=&quot; + owner +
+                &quot;, description=&#x27;&quot; + description + &#x27;\&#x27;&#x27; +
+                &#x27;}&#x27;;
+    }
+}</code></pre><p id="6c83968a-36f2-4e79-b424-3dc7da846bd1" class=""><code>Application</code> represents an Application that a bug or enhancement request or ticket will tracked against. It has an <code>@Entity</code> annotation on its class signature. If we wanted to use a different name for the table, we’d need a <code>@Table</code> annotation specifying that name. As it is not there, this entity will be mapped to a table called <code>application</code>.</p><p id="694ac8eb-50f6-49c1-8a01-0871c01ad579" class="">Let’s look at the <code>id</code> property:</p><pre id="77bfdebe-9d74-47de-bde0-bdceab22c229" class="code"><code>@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+@Column(name=&quot;application_id&quot;)
+private Integer id;</code></pre><p id="aa29cdd4-8e8b-4ca4-a4a6-52962708b644" class="">It is annotated with the <code>@Id</code> annotation so that JPA will recognize it as the object’s ID. The <code>@GeneratedValue</code> annotation specifies that the value is generated automatically. The strategy type is set to <code>AUTO</code> which means JPA will talk to the database and automatically generate the ID in the way it thinks best.</p><p id="8f1f0c54-eecc-47e4-a8c4-ecf82b5a18d5" class="">Let’s look at two other properties in this entity:</p><pre id="aaf92277-914d-49f3-a153-234c77fcd886" class="code"><code>@Column(name = &quot;app_name&quot;, nullable = false)
+private String name;
+
+@Column(length = 2000)
+private String description;</code></pre><p id="57c63145-e852-4308-bad4-613c6b8fdb64" class="">These two properties have been costumized with the <code>@Column</code> annotation. By default, a property is automatically mapped to a column in the table via its name, and its specifications are derived from the defaults set to their data type. However, these specifications - things like data length, the actual column name or whether that column can have no data at all or not - can be overriden using the <code>@Column</code> annotation. For example, the <code>name</code> property has the annotation denoting that it should be mapped to the <code>app_name</code> column and it sets <code>nullable = false</code>, meaning this column must always be filled on any row. The <code>description</code> property also has a <code>@Column</code> annotation, denoting that the <code>description</code> can hold up to 2000 characters.</p><h3 id="7d17b905-4604-4f2b-93a0-1f6299f1b5ce" class="">3.3.1. Relationships</h3><p id="b0437cbc-9012-47ec-bb81-153c10e368bb" class="">Let’s move on to the <code>Ticket</code> entity:</p><pre id="9d786430-238b-4314-bd97-8cb3420e6c59" class="code"><code>package com.pluralsight.entity;
+
+import javax.persistence.*;
+
+@Entity
+public class Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    private String title;
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;application_id&quot;)
+    private Application application;
+
+    @ManyToOne
+    @JoinTable(name =&quot;ticket_release&quot;, joinColumns = @JoinColumn(name = &quot;ticket_fk&quot;), inverseJoinColumns = @JoinColumn(name = &quot;release_fk&quot;))
+    private Release release;
+
+    private String status;
+
+    public Ticket() {
+    }
+
+    public Ticket(String title, String description,
+                  Application application, Release release, String status) {
+        this.title = title;
+        this.description = description;
+        this.application = application;
+        this.release = release;
+        this.status = status;
+    }
+
+		//... getters and setters
+}</code></pre><p id="f26861a2-fbf1-44fe-9b26-403943cb9803" class=""><code>Ticket</code> represents a submission of an enhancement request or bug tracking issue to the system for a given application. I see some interesting things here and I will talk to you about them: relationships.</p><p id="bc0b1591-0215-44b8-81bd-fa6790341e89" class="">If you’re not familiar with Entity Relationships, get out and go study. But if you are, you know there are three different types of relationships two entities can have with each other: <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>One-To-One</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>One-To-Many</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> and <strong><strong><strong><strong><strong><strong><strong><strong><strong>Many-To-Many</strong></strong></strong></strong></strong></strong></strong></strong></strong>.</p><p id="b1b9b4c8-7d51-4540-9dd2-ed64610b69aa" class="">How do we define these relationships with JPA? With annotations of course, and I will describe how they’re used:</p><ul id="b855b517-ad7b-4a91-b91d-4b6e71078bf8" class="bulleted-list"><li style="list-style-type:disc"><code>@ManyToOne</code>: One entity references another several times. For example:<figure id="6bae596c-1511-4eef-a6ce-6b36d796a50c" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%201.png"><img style="width:580px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%201.png"/></a></figure><p id="03c4555c-fe54-4ec5-89f9-e925ce8e6087" class="">This is a many-to-one relationship because several employees can have the same department ID but every Department has an unique ID.</p></li></ul><ul id="188499d5-29c3-4e79-8eb1-1b4b1e9271ef" class="bulleted-list"><li style="list-style-type:disc"><code>@OneToMany</code>: One entity is referenced by another several times. This is essentially the other side of the <code>@ManyToOne</code> relationship, and they’re used in conjunction when making bidirectional relationships;</li></ul><ul id="63072260-c3cf-4a8e-94f1-f3baa4916fb7" class="bulleted-list"><li style="list-style-type:disc"><code>@OneToOne</code>: One entity is referenced by one and only one entity.</li></ul><ul id="211dc438-87ae-4b98-80b7-cf6b5d268bf1" class="bulleted-list"><li style="list-style-type:disc"><code>@ManyToMany</code>: One or more rows of one entity are referenced by one or more in another.</li></ul><p id="4c52fccd-10af-4f75-aebb-9e99e87b75c9" class="">Normally, to define a relationship, we just define a property on an entity whose class is from another entity, and we use one of the relationship annotations. Let’s look at <code>Ticket</code>&#x27;s <code>application</code> field:</p><pre id="42f1c917-b269-46d8-88c9-97d74ebea22f" class="code"><code>@ManyToOne
+@JoinColumn(name = &quot;application_id&quot;)
+private Application application;</code></pre><p id="c7d29c21-c698-444c-b8af-840494b539d9" class="">As you can see, the <code>@ManyToOne</code> annotation is used, so this is a One-to-Many relationship. We’re giving the property the name <code>application</code>. If it was the same name used in the Application table for the entity ID, JPA would map it automatically. It isn’t, so we need to tell JPA how to map it.</p><p id="dc7393b5-4cd0-48fd-b1cb-cf06f3251535" class="">For this case, since it is just a unidirectional relationship, we can just use the <code>@JoinColumn</code> annotation and define the name of the column that is being referenced on the target entity.</p><p id="995c2d4e-aa42-4b51-afd6-2c6ae2d30d26" class="">There’s another reference made in the <code>release</code> property:</p><pre id="24b15a1b-047e-464d-9bd2-6008dc0041b4" class="code"><code>@ManyToOne
+@JoinTable(
+				name =&quot;ticket_release&quot;,
+				joinColumns = @JoinColumn(name = &quot;ticket_fk&quot;),
+				inverseJoinColumns = @JoinColumn(name = &quot;release_fk&quot;)
+)
+private Release release;</code></pre><p id="1f804a99-11e4-4416-9f9d-a6d9de7e5cf1" class="">There’s some interesting appendages here. Aside from being <code>@ManyToOne</code>, it’s using the <code>@JoinTable</code> annotation. That means that the relationship is not directly represented by having a reference inside of it, but stored in a new table, where each <code>Ticket</code> is related to a <code>Release</code> for being in the same row.</p><p id="f997ad5c-5f5b-4569-a8ab-5e8bd96cb932" class=""><code>@JoinTable</code> takes 3 attributes by default, the <code>name</code> of the Join Table, the <code>joinColumns</code> which are the columns in the Join Table that reference the source entity - for example, there’s the <code>ticket_fk</code> join column that references a <code>Ticket</code>; it can have a <code>referencedColumnName</code> but if it doesn’t, the name of the property tagged as the <code>@Id</code> is used instead -, and the <code>inverseJoinColumns</code>; same conceptas the <code>joinColumns</code> but they’re the columns in the Join Table that reference the entity on the other end of the relationship - for example, the <code>release_fk</code> join column references a <code>Release</code> and will be mapped to its ID.</p><p id="78c558b6-355d-4089-83ed-db38fa8b86cf" class="">Finally, a relationship annotation can have a few notable properties:</p><ul id="56d20094-6ccd-4244-8548-ea6af0ef0b65" class="bulleted-list"><li style="list-style-type:disc"><code>targetEntity</code>: should be used if the data type of the attribute you’re setting is not exactly the same as the other entity class, and its value should be the class of the other entity, i.e., <code>targetEntity = Release.class</code>;</li></ul><ul id="81c2d39c-33fc-4369-a17a-50eb0c6c27e3" class="bulleted-list"><li style="list-style-type:disc"><code>cascade</code>: defines Cascade properties, i.e., what happens if a field that’s referenced another is deleted. There are diffent types of Cascade:<ul id="68ba41b8-3c3b-43a4-986b-adcc161813cf" class="bulleted-list"><li style="list-style-type:circle"><code>ALL</code> - all operations are propagated from parent to child entity;</li></ul><ul id="f63d0e49-2563-4962-a76c-22bcb6d48778" class="bulleted-list"><li style="list-style-type:circle"><code>PERSIST</code> - only propagates persistence operations (saving an entity) from parent to child entity;</li></ul><ul id="52d2fcc8-a486-4944-b3ef-ca592ca0b42f" class="bulleted-list"><li style="list-style-type:circle"><code>MERGE</code> - only propagates merge operations (copying the state of a given object onto a persistent object with the same ID) from parent to child entity;</li></ul><ul id="07462d19-b501-4632-a80c-7a35204a4632" class="bulleted-list"><li style="list-style-type:circle"><code>DELETE</code> - when a parent entity’s object is deleted, the referenced child row is also removed;</li></ul><ul id="5694dc54-9797-464e-8ca5-92cc08ab33c6" class="bulleted-list"><li style="list-style-type:circle"><code>DETACHED</code> - when a parent entity’s object is detached from the persistent context, then the child is also detached;</li></ul><ul id="99c5348f-a8e5-4ef6-b541-f77a6cf8cfbe" class="bulleted-list"><li style="list-style-type:circle"><code>LOCK</code> - if both parent and child entity objects are detached, when the parent is reattached to the persistent context, then the child is also reattached;</li></ul><ul id="284a9858-cccb-4dc8-ad60-4f790c03b705" class="bulleted-list"><li style="list-style-type:circle"><code>REFRESH</code> - when a parent entity’s instance value is reread from the database, the child’s instance value is also reloaded;</li></ul><ul id="849a7544-456b-4a7a-9150-bb8194a1a2bc" class="bulleted-list"><li style="list-style-type:circle"><code>REPLICATE</code> - for when we have multiple data sources - when a parent entity instance is replicated from data source to another, the child entity instance is also replicated;</li></ul><ul id="a7f8c2d4-542c-4122-a176-b556fb093e62" class="bulleted-list"><li style="list-style-type:circle"><code>SAVE_UPDATE</code> - when a parent entity’s instance value is saved and/or updated, the operation is propagated to the child entity instance.</li></ul></li></ul><ul id="d58f506d-2cb7-4285-8782-a430e6d9a5ca" class="bulleted-list"><li style="list-style-type:disc"><code>fetchType</code>: defines if a property related to a reference should be loaded when the object is loaded (Eager Loading), or only if it is requested (Lazy Loading). Lazy loading is especially good to use when dealing with object collections, as a list of referenced entities can be lazily loaded as you look for objects inside, instead of the entire list being loaded from the get-go - <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>especially</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> if the collection is large.</li></ul><h3 id="9af9561a-7ea0-48cb-a9dc-ef53af79406d" class="">3.3.2. Repositories</h3><p id="4ffc87cf-1f9c-4520-806f-9fe1d3664e82" class="">The Spring Data Repository abstraction greatly reduces the need to have boilerplate code to implement data access for any kind of database. In this module, we have 3 repositories, each for one of the Entities. Let’s look at one of them, say the <code>ApplicationRepository</code>:</p><pre id="0eeca7d8-76d1-4cdc-a178-3f3ada8ef2a9" class="code"><code>package com.pluralsight.repository;
+
+import org.pluralsight.entity.Application;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ApplicationRepository extends CrudRepository&lt;Application, Long&gt; {
+
+}</code></pre><p id="7bd5f181-0ad9-4544-a07a-ca7ae5a86765" class="">The Spring  Data repositories allow us to access data by creating JPA queries automatically from a method’s name. Notice how our repository is an Interface. In fact, all 3 of them are, but they have no implementation. That’s because Spring Boot automatically provides implementations for them.</p><p id="e12d75a0-5794-466f-a041-1db04d2de453" class="">Notice also how the repository <code>extends</code> from <code>CrudRepository</code> and this interface itself is typed. <code>CrudRepository</code> receives two types, the Class of the entity of the repository, and the type of the entity identifier - in this case, it is an <code>Application</code> repository, and the ID type is <code>Long</code>.</p><p id="1543870d-d2a5-49ef-b8e6-352ea6ce0114" class="">After setting that, Spring Data JPA sets up the rest for us.</p><p id="45ddba93-ac5d-4a80-abd0-0d77f1c3c69d" class="">Let’s execute this application to test this out. Let’s look at our entrypoint class:</p><pre id="7b0f72b7-3446-40aa-9384-923610b89e57" class="code"><code>package com.pluralsight;
+
+// imports
+
+@SpringBootApplication
+public class FundamentalsApplication {
+
+	private static final Logger log = LoggerFactory.getLogger(FundamentalsApplication.class);
+
+	public static void main(String[] args) {
+		SpringApplication.run(FundamentalsApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner demo(ApplicationRepository repository) {
+		return (args) -&gt; {
+			repository.save(new Application(&quot;Trackzilla&quot;,&quot;kesha.williams&quot;,&quot;Application for tracking bugs.&quot;));
+			repository.save(new Application(&quot;Expenses&quot;,&quot;mary.jones&quot;,&quot;Application to track expense reports.&quot;));
+			repository.save(new Application(&quot;Notifications&quot;,&quot;karen.kane&quot;,&quot;Application to send alerts and notifications to users.&quot;));
+
+			for (Application application : repository.findAll()) {
+				log.info(&quot;The application is: &quot; + application.toString());
+			}
+		};
+	}
+}</code></pre><p id="43e07b40-dbea-4a23-b1a6-6f52f7616b49" class="">As you can see, in the main class, we’re creating a <code>CommandLineRunner</code> Bean. A <code>CommandLineRunner</code> is essentially a small part of the program that will run when contained within a <code>@SpringApplication</code>, since a <code>@SpringBootApplication</code> is also a <code>@SpringApplication</code>, our <code>CommandLineRunner</code> Bean will always run. You can have more than one runner, but in that case, you also need to give them the <code>@Order</code> annotation, that denotes in which order the runners should run.</p><p id="6b6b111d-0b13-486e-8eee-99b51bb94ac2" class="">It is a Bean, so it will make use of dependency injection and inject an <code>ApplicationRepository</code> bean when it runs, meaning Spring Boot can manage everything. This runner will save 3 rows to the <code>Applications</code> table, pertaining to 3 different applications: “Trackzilla”, “Expenses” and “Notifications”. Then, it will obtain all of the applications and print out their data on the screen.</p><p id="60b06b62-b8f3-4257-a11e-2b2e902804e3" class="">Let’s execute our application and see the results:</p><figure id="2aba8a54-8f85-47f5-9ba7-31acc9a89341" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%202.png"><img style="width:1769px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%202.png"/></a></figure><h1 id="7a7aae65-4d30-45a1-85ac-844def138d10" class="">4. Configuring a Spring MVC Application with Spring Boot</h1><p id="ac277376-885d-45d8-962a-a38893dd802f" class="">Now that the TrackZilla team has persisted the data, the next step is to retrieve that data to display in a browser, essentially allowing the TrackZilla user base to view and interact with the data through a front-end system.</p><p id="ec9d5c03-9574-4842-9b16-5456cdec4b72" class="">For starters, the dependency needed for Spring MVC is the Spring Boot Web Starter:</p><pre id="b2ddae8f-56b2-4735-b0d3-1eba95ffe17b" class="code"><code>&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><p id="f70350b1-1064-4bcf-ac31-809ea0ea5983" class="">When this dependency is added to a project, Spring Boot’s autoconfiguration detects Spring MVC on the class path and provides all of the dependencies and autoconfiguration needed to develop web apps:</p><ul id="c05f36c5-323f-4736-b135-6a70676247e6" class="bulleted-list"><li style="list-style-type:disc">Dispatcher servlet</li></ul><ul id="fda58cd0-2471-435c-ac5c-c2a33ef65d4f" class="bulleted-list"><li style="list-style-type:disc">Error page</li></ul><ul id="40b9fd6d-7066-493e-94d8-7f6e89060242" class="bulleted-list"><li style="list-style-type:disc">Servlet containter (Tomcat by Default)</li></ul><ul id="6f5a88ae-1376-4b7e-88ba-92b2ca5b38ab" class="bulleted-list"><li style="list-style-type:disc">WebJars</li></ul><h2 id="7aff62f7-6598-4744-93b4-eda86c86cca8" class="">4.1. The Model-View-Controller Design Pattern</h2><p id="8ae30e15-c9d7-48b0-a4ff-6b95d754e0be" class="">The <strong><strong><strong>MVC</strong></strong></strong> Design Pattern, which stands for <strong>M</strong>odel-<strong>V</strong>iew-<strong>C</strong>ontroller is one of the most common design patterns used in software development. It decouples major components to promote faster development cycles and works well for developing large-scale web applications that need to be supported by large teams of developers.</p><hr id="4045dc36-0a0c-4732-8e42-d61bbe6b802b"/><h3 id="8f18349a-bcb4-4550-b3f2-2f7ccd8779c5" class="">4.1.1. The Model</h3><p id="3935bc38-2bf3-4108-b052-5cb74c79885f" class="">The <strong><strong><strong><strong><strong><strong>Model </strong></strong></strong></strong></strong></strong>is the representation of data in a system, sometimes called an entity or domain model. It is typically data stored in a database and is programmatically represented as a Java object.</p><p id="4d12be4e-bd26-4537-a015-99bf0343d02e" class="">For example, in TrackZilla, there’s a screen that shows a list of applications. The model contains the list of applications itself.</p><h3 id="4e439c72-40f0-4581-b906-70e47489c62c" class="">4.1.2. The View</h3><p id="fb189765-72c2-4b9d-beaa-b35e4c94fe8d" class="">The <strong><strong><strong><strong><strong>View</strong></strong></strong></strong></strong> is responsible for displaying data, or the model. In Java, the view is typically done in JSP, JSF, etc. In our case study, we are using Thymeleaf which will be talked about at a later time.</p><h3 id="1946f798-fc14-4371-b106-2affe0bcede8" class="">4.1.3. The Controller</h3><p id="76290ec9-61ce-4cfa-8242-31e54320db40" class="">The <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Controller </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>is responsible for directing incoming user requests to the correct resources and sending responses from those resources back to the user.</p><p id="cd276e88-5d44-4232-9dde-1b752e73be70" class="">For example, the controller will get a request to see a list of TrackZilla tickets. Then it will direct that request to the ticket service, which returns the list of tickets, and the controller routes the list of tickets to the view for display.</p><hr id="4d747b51-31a9-43a3-9684-18380bf38fc5"/><p id="59b6676c-e763-4337-9460-3773450b6098" class="">Thymeleaf uses fragments, which allow you to define repeatable chunks of code that can be reused in other Thymeleaf templates. This works great for components which you wish to reuse across your web pages. For example, for a navigation bar.</p><h2 id="191dd88f-cad6-46f5-9c90-6fec3afef2e2" class="">4.2. Using MVC in a Spring Boot Project</h2><p id="d36d220f-f236-4091-b364-b95c4f817577" class="">Let’s open up the <strong><strong><strong><strong><strong><strong><strong><strong>Module 5 </strong></strong></strong></strong></strong></strong></strong></strong>project:</p><figure id="e482d2d2-d7c0-4fce-bbc3-6fdf8604b1cd" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%203.png"><img style="width:419px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%203.png"/></a></figure><p id="9097317f-0e3c-40a5-bf45-76bcdb3fb49c" class="">We’ve already talked thoroughly about the Model layer, so let’s talk about the Controller layer. We only have one controller that, unfortunate and conterintuitively, can be found in the <code>com.pluralsight.web</code> package, and is called <code>TzaController</code>:</p><pre id="f1799977-1f5e-4aef-b070-f796961d8a2e" class="code"><code>package com.pluralsight.web;
+
+// imports
+
+@Controller
+public class TzaController {
+    private ApplicationService applicationService;
+    private TicketService ticketService;
+    private ReleaseService releaseService;
+
+    @Autowired
+    public void setApplicationService(ApplicationService applicationService) {
+        this.applicationService = applicationService;
+    }
+
+    @Autowired
+    public void setTicketService(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
+    @Autowired
+    public void setReleaseService(ReleaseService releaseService) {
+        this.releaseService = releaseService;
+    }
+
+    @GetMapping(&quot;/applications&quot;)
+    public String retrieveApplications(Model model){
+        model.addAttribute(&quot;applications&quot;, applicationService.listApplications());
+        return &quot;applications&quot;;
+    }
+
+    @GetMapping(&quot;/tickets&quot;)
+    public String retrieveTickets(Model model){
+        model.addAttribute(&quot;tickets&quot;, ticketService.listTickets());
+        return &quot;tickets&quot;;
+    }
+
+    @GetMapping(&quot;/releases&quot;)
+    public String retrieveReleases(Model model){
+        model.addAttribute(&quot;releases&quot;, releaseService.listReleases());
+        return &quot;releases&quot;;
+    }
+}</code></pre><p id="14a20791-18ae-4527-b569-52e64f8549b6" class="">This single controller is responsible for handling all incoming HTTP requests. As you can see, we have methods to handle requests like <code>retrieveApplications()</code> which is linked to the Service layerm as it contacts the <code>applicationService</code> to <code>listApplications()</code>.</p><p id="10514f6d-612d-4d15-9203-c24e19fd1ce4" class="">The service layer usually contains the business logic and retrieves the data using the repository layer, which we’re already familiar with, to send that data back to the view.</p><p id="855bc750-2922-4489-9481-b692ed49f449" class="">This class has the <code>@Controller</code> annotation which denotes it as a Spring MVC controller. Spring will consider this class when handling web requests.</p><p id="d820f82d-bf0f-4db9-bcdd-ec3a5759fd80" class="">Let’s take another look at the <code>retrieveApplications()</code> method:</p><pre id="583c4b48-879a-46a3-ab9d-6ac664a9c23d" class="code"><code>@GetMapping(&quot;/applications&quot;)
+public String retrieveApplications(Model model){
+		model.addAttribute(&quot;applications&quot;, applicationService.listApplications());
+		return &quot;applications&quot;;
+}</code></pre><p id="415e3e09-a0ba-420b-95dd-96f82894cd49" class="">The <code>@GetMapping</code> annotation provides routing information. It denotes that any HTTP GET requests that have a particular path (root “/” by default if no path is specified) are mapped to that method.</p><p id="01ea8fb9-3d65-4950-b245-438ff185de42" class=""><strong>How is Spring MVC configured? </strong>Typically, you’d need the <code>@EnableWebMVC</code> annotation to import the Spring MVC configuration, but Spring Boot imports it automatically when it sees the necessary dependencies on the classpath, and autoconfig kicks in.</p><p id="6664066c-d99f-4db8-a6ff-56fbef0eb033" class="">Let’s talk about the View layer, which in this application is just a simple front-end using Thymeleaf, which is a templating engine that provides support for serving HTML. To use Thymeleaf, you need only two things: Thymeleaf itself, the templates and the fragments.</p><p id="db0a13a1-1298-42ec-b74c-5993005f2820" class="">To get Thymeleaf, you can add it to your <code>pom.xml</code> dependencies:</p><pre id="fc10f35e-1bae-43aa-aea3-bb4af744f3b5" class="code"><code>&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><p id="d5383bb9-b816-4586-a657-a54aef33e059" class="">Once it is inserted, there’s really no extra configuration necessary, but if needed you can configure it in your application properties:</p><pre id="c0015021-f1b9-4752-8c09-cef2299fc0b7" class="code"><code>spring:
+		...
+		thymeleaf:
+				template-loader-path: classpath:/templates
+				suffix: .html
+				cache: false</code></pre><p id="855fde54-b1d1-4bb1-b58d-1b2f9df5a1a5" class="">Now let’s take a look at our templates. I’ll show you <code>index.html</code>:</p><pre id="b25157b6-1762-484c-9a43-a11b5a90802b" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Pluralsight - Spring Fundamentals&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css&quot; integrity=&quot;sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T&quot; crossorigin=&quot;anonymous&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div th:insert=&quot;fragments/navbar.html&quot;&gt; &lt;/div&gt;
+
+    &lt;div class=&quot;jumbotron&quot;&gt;
+
+        &lt;div class=&quot;row text-center&quot;&gt;
+            &lt;div class=&quot;&quot;&gt;
+
+                &lt;h3&gt;Defect and Enhancement Tracking&lt;/h3&gt;
+
+                &lt;p&gt;
+                    The demonstration vehicle for this course will be based on a use case from Keysoft Inc., a fictitious company, that needs to quickly develop an application to help manage bug fixes and enhancement requests for their applications. Keysoft’s engineering team has decided to utilize Spring Boot to make development faster and deployment easier with minimal boilerplate code and configuration. During the course, you walk through the use case of creating the bug tracking application, Trackzilla, using Spring Boot.
+                &lt;/p&gt;
+            &lt;img src=&quot;/images/virus.png&quot; style=&quot;width:25%&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://code.jquery.com/jquery-3.2.1.slim.min.js&quot; integrity=&quot;sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js&quot; integrity=&quot;sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js&quot; integrity=&quot;sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p id="814b9f76-f12e-42a9-906e-0c3e46c7d67b" class="">Let’s see a few notable characteristics. HTML on Thymeleaf is never really pure HTML. It’s XHTML, which means it’s like a sort of mixture between HTML and XML, and thus, things need to be properly defined, or XHTML documents will be rendered invalid. Thankfully, to add Thymeleaf options, we add a DTD to this template with the proper Thymeleaf namespace: </p><pre id="4b276db2-3d71-4333-b5d7-d7c3f20145b6" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+...</code></pre><p id="7560c90d-615b-469e-9ad0-86b565d18a83" class="">Next, take a look at this line:</p><pre id="0f74174e-dd18-4ed4-9136-580aee873c22" class="code"><code>...
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div th:insert=&quot;fragments/navbar.html&quot;&gt; &lt;/div&gt;
+...</code></pre><p id="0e140368-d3fb-408f-9e40-179b2a95159b" class="">It seems to have a <code>div</code> for the navigation bar, but it’s empty. Well yes, but actually no. You see, we’re inserting the navigation bar fragment instead. Remember when I said we could do this to reuse code? Now you know. You don’t want to see it, by the way. The navigation bar is big.</p><p id="2d1ebeb0-83d4-45a9-90d4-317d25ab245c" class="">If you want to test it out, you can start the application on the entrypoint class and head to <a href="http://localhost:8080">http://localhost:8080</a>:</p><figure id="36fd34bb-495f-4d8a-92eb-84d5569b8186" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%204.png"><img style="width:1901px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%204.png"/></a></figure><h2 id="81e05368-1c56-4562-a64b-a7333a9e50f6" class="">4.3. Packaging and Deploying</h2><p id="20944607-6f84-48c5-8f0a-b1a7ab94d1be" class="">This topic is talked about in this course:</p><figure id="8a8e61f5-326c-4771-9306-82c812e97a3f" class="link-to-page"><a href="https://www.notion.so/Creating-Your-First-Spring-Boot-Application-28-min-read-8a8e61f5326c4771930682c812e97a3f?pvs=21"><span class="icon">3️⃣</span>Creating Your First Spring Boot Application (~28 min read)</a></figure><h1 id="a22eb07d-ed02-46d8-97d3-e62059cb0d0b" class="">5. Building a RESTful Web Application with Spring Boot</h1><p id="d6ac0fd3-bd14-4895-b29a-db2b8750c463" class="">Now that TrackZilla has a wide user base, the team has gotten requests from users to provide access to the TrackZilla data outside of the front-end, in API format. A big request is to have access to the list of tickets, along with their assigned release dates to display on custom interla facing reports used by executive leadership.</p><h2 id="6d42f729-105d-462b-8d8c-3082efc87c51" class="">5.1. REST Architecture</h2><p id="aef0ee40-cc4c-427b-b699-f6f34f8d55eb" class=""><strong><strong><strong><strong><strong>REST </strong></strong></strong></strong></strong>stands for <strong><strong><strong>RE</strong></strong></strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer. It’s a set of guidelines that application developers use to design APIs. There are four principles that APIs follow:</p><ol type="1" id="4b0eb745-c23f-4ff0-a762-8e0a745b64eb" class="numbered-list" start="1"><li>Data and functionality are considered resources and identify through a URI.</li></ol><ol type="1" id="b220fbe8-5d41-4339-8c4e-3ac6a1e68078" class="numbered-list" start="2"><li>Resources are manipulated using a fixed set of operations:<ol type="a" id="36ad89de-c920-4bb6-bf87-bb84d35167cd" class="numbered-list" start="1"><li>GET retrieves a resource;</li></ol><ol type="a" id="b4bdd324-6e70-4f05-b300-0fc18b1090e2" class="numbered-list" start="2"><li>POST creates a resource;</li></ol><ol type="a" id="ebec5fda-d98d-45a3-a16a-4424f6e89ce4" class="numbered-list" start="3"><li>PUT updates a resource;</li></ol><ol type="a" id="c496181c-82cc-4f2b-ac4f-918f1c5d7217" class="numbered-list" start="4"><li>DELETE removes a resource;</li></ol></li></ol><ol type="1" id="38bc6299-d771-4cf4-99de-8f7f89d768ae" class="numbered-list" start="3"><li>Resources can be represented in multiple formats, HTML, XML, Plaintext, JSON, among others.</li></ol><ol type="1" id="fd29e441-451b-42c5-ab32-9e6aeff23aee" class="numbered-list" start="4"><li>Communication between the client and endpoint is stateless.</li></ol><p id="abdc68c8-8ad9-4b54-a309-fd24f7c379da" class="">RESTful APIs are easier to create and easier for many clients to consume when we compare them to something like SOAP.</p><h2 id="36cac962-01ed-4c75-8bed-c95cbbd48d58" class="">5.2. REST on Spring Boot</h2><p id="a607be7e-3a12-4e69-abe6-fa8a1977ca43" class="">Let’s take a look at the code for <strong><strong><strong><strong><strong><strong><strong><strong><strong>Module 6:</strong></strong></strong></strong></strong></strong></strong></strong></strong></p><figure id="a8f868cb-71dd-4328-8e0e-7988077dda72" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%205.png"><img style="width:595px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%205.png"/></a></figure><p id="3e3441c6-2fa3-4af3-88e8-d3d996877197" class="">Let’s look at our <code>TzaController</code>:</p><pre id="cfcac3f1-ae0f-4afe-b121-1d37b9d57c66" class="code"><code>package com.pluralsight.web;
+
+import { ... };
+
+@RestController
+@RequestMapping(&quot;/tza&quot;)
+public class TzaController {
+    private ApplicationService applicationService;
+    private TicketService ticketService;
+
+    @Autowired
+    public void setApplicationService(ApplicationService applicationService) { this.applicationService = applicationService; }
+
+    @Autowired
+    public void setTicketService(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
+    @GetMapping(&quot;/tickets&quot;)
+    public ResponseEntity&lt;List&lt;Ticket&gt;&gt; getAllTickets() {
+        List&lt;Ticket&gt; list = ticketService.listTickets();
+        return new ResponseEntity&lt;List&lt;Ticket&gt;&gt;(list, HttpStatus.OK);
+    }
+
+    @GetMapping(&quot;/applications&quot;)
+    public ResponseEntity&lt;List&lt;Application&gt;&gt; getAllApplications() {
+        List&lt;Application&gt; list = applicationService.listApplications();
+        return new ResponseEntity&lt;List&lt;Application&gt;&gt;(list, HttpStatus.OK);
+    }
+
+    @GetMapping(&quot;/application/{id}&quot;)
+    public ResponseEntity&lt;Application&gt; getApplication(@PathVariable(&quot;id&quot;) long id) {
+        try {
+            return new ResponseEntity&lt;Application&gt;(applicationService.findApplication(id), HttpStatus.OK);
+        } catch (ApplicationNotFoundException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, &quot;Application Not Found&quot;);
+        }
+    }
+}</code></pre><p id="f34e5446-e116-4938-bb04-0993e249268d" class="">Some things here definitely look different. Let’s analyze.</p><p id="dfda35f4-0bf7-48d9-9417-cbefcf586555" class="">First, you’ll notice the class is using a <code>@RestController</code> annotation instead of a simple <code>@Controller</code>. This simplifies creating RESTful services. This annotation is essentially a shortcut for two different annotations: <code>@Controller</code> and <code>@ResponseBody</code>.</p><p id="d818404c-015d-4826-a0f2-451ac37d2ded" class="">Now, to note that a <code>@RestController</code> does not work with Thymeleaf, so methods cannot return models.</p><p id="2a7dacb5-5154-429a-bce6-30b95198ceee" class="">With this annotation here, Spring sets this controller up so that it now simply returns object data written directly to the HTTP Response as JSON. We’ve also set up a default route for this controller on <code>/tza</code>. This means that any method in this class must be contacted first on <code>/tza</code>. Say for instance that I wanted a list of all the applications. Then I need to contact <code>/tza/applications</code>. Simple enough.</p><p id="08511b54-2983-42f1-908d-1bceff090db0" class="">Let’s look at two examples now of how we’re using request mapping for our methods.</p><pre id="94a71067-79bf-4d1f-af2e-2e2ed62c0546" class="code"><code>@GetMapping(&quot;/applications&quot;)
+public ResponseEntity&lt;List&lt;Application&gt;&gt; getAllApplications() {
+		List&lt;Application&gt; list = applicationService.listApplications();
+		return new ResponseEntity&lt;List&lt;Application&gt;&gt;(list, HttpStatus.OK);
+}
+
+@GetMapping(&quot;/application/{id}&quot;)
+public ResponseEntity&lt;Application&gt; getApplication(@PathVariable(&quot;id&quot;) long id) {
+		try {
+				return new ResponseEntity&lt;Application&gt;(applicationService.findApplication(id), HttpStatus.OK);
+		} catch (ApplicationNotFoundException exception) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, &quot;Application Not Found&quot;);
+		}
+}</code></pre><p id="f7a92c7d-d610-4445-a248-93e9c892299e" class="">In our <code>getAllApplications()</code> method, we’re giving it the route <code>/applications</code>. So, you’d only need to contact <code>/tza/applications</code> to invoke this method. OK so far.</p><p id="adbe0009-3867-40d4-a1f8-639622684453" class="">On our <code>getApplication()</code> method, however, we’re setting a route with a dynamic value <code>id</code>. This can be setup by giving the respective method parameter the annotation <code>@PathVariable</code> and telling it what’s the name of the path variable that this parameter corresponds to. Thanks to this, we can now search applications by ID. Say for instance that I wanted to lookup the first application in the list. I could by invoking <code>/tza/applications/0</code>.</p><p id="a87ab429-7704-4f2e-b6b5-c1dadd4441ea" class="">As I’ve mentioned before, because <code>@RestController</code> methods cannot return models because a <code>@RestController</code> is a <code>@Controller</code> with a <code>@ResponseBody</code> annotation, which denotes that the return value of a method is to be immediately serialized directly to the body of an HTTP Request. </p><p id="c38d2140-cb4d-4fab-905b-1d0ae4f9c1b4" class="">That’s why we send a <code>ResponseEntity</code>, which represents the entire HTTP response. All we have to do is configure a <code>ResponseEntity</code> to be sent, which not only includes status code and headers, but also how to wrap the model we want to send in the response. Once the <code>ResponseEntity</code> is returned by the method, Spring takes care of the rest.</p><h2 id="51da48f3-ba3e-484d-b892-8cbf56d8806e" class="">5.3. Testing with cURL</h2><p id="f9751836-f6c5-4288-8d72-7fbde77ca1a4" class="">Let’s test out this API with cURL. cURL is a tool for transferring data from or to a server. I like to think it stands for “calling URL”, because that’s what it does. It calls a URL and displays the response.</p><p id="68d67c20-70b5-4d6c-9385-f7415dcb9380" class="">Let’s try it out. First, run your application from the entrypoint class. Should the application start, it will be located at <a href="http://localhost:8080"><code>http://localhost:8080</code></a>.</p><p id="63c133e4-ec61-44c6-baf8-955cffe872d2" class="">Now open a terminal. To use cURL, the syntax is <code>curl &lt;url&gt;</code>, like so:</p><figure id="21198235-e726-48bd-8fe9-19343498cf3c" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%206.png"><img style="width:1239px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%206.png"/></a><figcaption>Example on Windows PowerShell.</figcaption></figure><p id="d1c96869-c538-466f-a40d-c3e0908fd65c" class="">You can also use Postman to test it out:</p><figure id="ad752f3d-5822-47a0-b942-961a2eec4705" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%207.png"><img style="width:595px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%207.png"/></a></figure><h2 id="343d640a-ec37-4fb3-b59f-1f315be7a95b" class="">5.4. Response Formats</h2><p id="553b6a0b-fccf-420a-9821-546040b3fd29" class="">Let’s consolidate some understanding on how we can send a response. Let’s start with the <code>ResponseEntity</code>.</p><p id="87b445da-9dfd-4939-9222-20f6793806e8" class=""><code>ResponseEntity</code> is a generic type. As a result, we can use any type as the response type. For example:</p><pre id="9267b710-49bd-4c10-b40d-86173f3b2926" class="code"><code>return new ResponseEntity&lt;List&lt;Ticket&gt;&gt;(list, HttpStatus.OK);</code></pre><p id="2c95c0aa-b1c9-4a55-b888-8ec812d698dd" class="">This will return a response with a list of tickets serialized in JSON.</p><p id="71c692da-55be-4084-bda5-3de2c436ffbc" class="">Since we specify the response status programmatically, we can return different status codes for different scenarios. There are some generally known status codes such as:</p><ul id="f227b0d5-0086-4330-866e-a768d745ffe7" class="bulleted-list"><li style="list-style-type:disc"><code>HttpStatus.OK</code> - 200 (Everything is OK and the operation was executed successfully);</li></ul><ul id="1ceec5f5-5ae7-419e-bfbb-faa9889d3fc5" class="bulleted-list"><li style="list-style-type:disc"><code>HttpStatus.BAD_REQUEST</code> - 400 (The request was malformed or an error was found during its processing and the operation it describes will not be executed);</li></ul><ul id="34179419-def8-4364-96b6-76fe38834850" class="bulleted-list"><li style="list-style-type:disc"><code>HttpStatus.CONFLICT</code> - 409 (There is some conflict in either the request, or between it and the resource);</li></ul><ul id="77e2a7e2-b21b-4b3c-a019-c9dce72871a0" class="bulleted-list"><li style="list-style-type:disc"><code>HttpStatus.NOT_FOUND</code> - 404 (The requested resource could not be found).</li></ul><p id="7bab4196-54c0-44e4-ac77-47bf0870df88" class="">You can find more status codes here: <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status">https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status</a>.</p><h2 id="0a4b0c46-abc3-4d5b-8e7d-71dedb9f3ea9" class="">5.5. Exception Handling</h2><p id="a6a76249-ba32-4222-aaf3-2f75dcb81ee2" class="">A combination of Spring and Spring Boot provides multiple options to customize responses for errors. For <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>exception handling</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, we use the <code>ResponseStatusException</code>. It is a programmatic alternative to the <code>@ResponseStatus</code> annotation and is the base class for exceptions used to apply a status code to an HTTP Response.</p><p id="c0e7253c-4c38-4586-9a81-b3e377e3761f" class="">We simply create an instance of it by providing an <code>HttpStatus</code> and, optionally, a reason and cause.</p><p id="9d1e1e41-a835-4ada-ba0c-c6794065188c" class="">This approach provides more control over exception handling, as exceptions can be created programmatically.</p><p id="0d4e4854-3700-4a97-aa9a-4e61c85a863e" class="">Spring Boot provides a default error mapping, returning a JSON response with the <code>HttpStatus</code> and the exception message.</p><p id="e33172bf-c894-426d-891d-df3b92f11af7" class="">Let’s take a look at how this can be done. We’ll take another look at the <code>getApplication</code> method, used for looking up applications by ID:</p><pre id="e84a0976-1717-4c99-99bf-d6a4e3134f2b" class="code"><code>@GetMapping(&quot;/application/{id}&quot;)
+public ResponseEntity&lt;Application&gt; getApplication(@PathVariable(&quot;id&quot;) long id) {
+		try {
+				return new ResponseEntity&lt;Application&gt;(
+						applicationService.findApplication(id),
+						HttpStatus.OK
+				);
+		} catch (ApplicationNotFoundException exception) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, &quot;Application Not Found&quot;);
+		}
+}</code></pre><p id="f3d7b5ee-631e-4c59-b2b1-0c01be34665e" class="">The method tries to return a new <code>ResponseEntity</code> that wraps around an <code>Application</code>. However, from inference, it is safe to assume that it expects an exception from the respective service if the application with the specified ID is not found. If so, the REST method raises a <code>ResponseStatusException</code>, whose status code is 404, and also sends a custom message. </p><p id="9ba0ab33-3466-4feb-9bb3-acc8a9d72a60" class="">Let’s test this on Postman:</p><figure id="dcee9de8-1f9d-4894-b673-c5a5a1dd92d1" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%208.png"><img style="width:592px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%208.png"/></a></figure><h1 id="65c89a4d-e099-4010-accc-4bb11d1f633e" class="">6. Building a GraphQL Server with Spring Boot</h1><p id="8f909ff0-f9e3-44b7-996e-183d8db1d0d0" class="">The users of the TrackZilla application appreciate the REST API that was provided, but they now complain that the API returns way more data than they need. With GraphQL, we can leave it up to the users to determine the datapoints they’d like returned, offering extreme flexibility and efficiency.</p><h2 id="2f8ad429-f2aa-40f5-bdd2-a209fd6a88b8" class="">6.1. An Overview of GraphQL</h2><p id="c26fe06c-ebed-48f6-97c3-5947fc1a403f" class="">REST is a popular way to expose data from a server through an API. However, the repsonse returned from a REST API is very rigid and returns all of the data points as designed by the developer. GraphQL offers greater flexibility in the response returned than REST.</p><p id="2c71b013-0756-42ae-917b-31e214f6ab51" class=""><strong><strong><strong><strong><strong><strong><strong>GraphQL</strong></strong></strong></strong></strong></strong></strong> is a query language for APIs or a syntax that describes how to ask for data, and is normally used to load data from a server to a clinet.</p><ul id="4422bdac-8748-4e11-9075-cb0297d02693" class="bulleted-list"><li style="list-style-type:disc">Allows the client to specify the exact data needed;</li></ul><ul id="27dc586a-047f-4a2f-a265-413cf6370ab8" class="bulleted-list"><li style="list-style-type:disc">Allows aggregation of data from multiple backend sources.</li></ul><p id="3f5af6a6-0923-4aaf-9e22-d91915d645bc" class="">Here’s a Sample Query and it’s response:</p><div id="4f885199-5610-4f71-adcd-c11d145a15df" class="column-list"><div id="3e04c851-aa7d-4a15-bdd5-e07293772a71" style="width:50%" class="column"><pre id="f6451897-171c-4cfc-8f44-dc3d216f0ddc" class="code"><code>
+{
+findAllApplications
+		{
+				id
+		}
+}
+</code></pre></div><div id="c0a7a66e-df25-4733-9708-df8a3f4d4035" style="width:50%" class="column"><pre id="793475bf-d3f2-4bec-ba24-471cf8b09309" class="code"><code>{
+		&quot;data&quot;:{
+				&quot;findAllApplications&quot;:[
+						{ &quot;id&quot;: &quot;1&quot; },
+						{ &quot;id&quot;: &quot;2&quot; }
+				]
+		}
+}</code></pre></div></div><h2 id="a70f17ee-72ea-4d21-8bbc-2a1ca2dc7c41" class="">6.2. Dependencies</h2><p id="a8b0d0f1-2070-49bb-a6f7-c5aa72a8c99a" class="">To include GraphQL in your project, a couple of dependencies are needed. You’ll need the Spring Boot GraphQL Starter, which automatically configures a GraphQL Servlet accessible at <code>/graphql</code>,  a scanner for schemas in your class path and an endpoint for POST requests, and the GraphQL Java Tools library, which helps parse the GraphQL schema:</p><pre id="b94d8de5-bca0-4aae-bd58-7e8c90b32563" class="code"><code>&lt;dependency&gt;
+		&lt;groupId&gt;com.graphql-java&lt;/groupId&gt;
+		&lt;artifactId&gt;graphql-spring-boot-starter&lt;/artifactId&gt;
+		&lt;version&gt;5.0.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+		&lt;groupId&gt;com.graphql-java&lt;/groupId&gt;
+		&lt;artifactId&gt;graphql-java-tools&lt;/artifactId&gt;
+		&lt;version&gt;5.2.4&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><h2 id="4df26a18-30bc-4f7a-b048-03b1e7a6b9d4" class="">6.3. GraphQL Schemas</h2><p id="21340c28-b64e-4ead-8177-5bb0feb62a96" class="">The GraphQL schema defines defines the data points offered via API. The schema contains the data types and the relationships between them, and the operations available: things like queries for retrieving data and mutations for creating, updating, reading and deleting data.</p><p id="f8b3e395-9549-4346-8832-0612b2b7c071" class="">Behind the scenes, GraphQL schema files found on the class path are processed and the necessary beans are wired.</p><p id="76fda07a-0f34-4b14-b83a-4b8341c7e8c8" class="">All schema files need the <code>.graphqls</code> extension and can be present anywhere. Let’s examplify this. Open the <strong><strong><strong><strong><strong><strong><strong><strong>Module 7</strong></strong></strong></strong></strong></strong></strong></strong> project:</p><figure id="c9cbd282-bf75-4e96-ba6d-9f6fce890b6a" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%209.png"><img style="width:628px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%209.png"/></a></figure><p id="534d6cea-0b7f-4e04-9aa6-37813aa0d765" class="">For the TrackZilla project, the scehmas are found in <code>resources/graphql</code>. Let’s take a look at our GraphQL schema, <code>application.graphqls</code>:</p><pre id="1ac39084-6447-4156-8cf5-4c11a22b15c6" class="code"><code>type Application {
+  id: ID!
+  name: String!
+  owner: String!
+  description: String!
+}
+
+type Query {
+  findAllApplications: [Application]!
+  countApplications: Long!
+}
+
+type Mutation {
+  newApplication(name: String!, owner: String!, description: String!) : Application!
+  deleteApplication(id:ID!) : Boolean
+  updateApplicationOwner(newOwner: String!, id:ID!) : Application!
+}</code></pre><p id="aa9885e4-7f1e-425f-891e-871b879281ca" class="">Notice there can only be one root <code>Query</code> and one <code>Mutation</code> type. Each file will contain all the query and all the mutation operations for the given type. Do you see it now? This schema applies only for the <code>Application</code> entity!</p><p id="6cc336e4-b5c9-424a-bd2f-fa191ce43c82" class="">The first type, <code>Application</code>, defines the structure of the entity. Mostly like we have in the Java Class, but without annotations, constructors or getters and setters.</p><p id="52eb854a-bb11-4ca3-8781-02ae8bff3e93" class="">Then we have the <code>Query</code> type. This defines the query operations available for this type. You can see we have two: <code>findAllApplications</code> and <code>countApplications</code>.</p><p id="f78c97ff-4631-476e-a7a7-236e2c4e158a" class="">Finally, the <code>Mutations</code> type. While <code>Query</code> defines operations that query the system state, <code>Mutations</code> are operations that make changes to the system’s state, like creating a <code>newApplication</code>, asking to <code>deleteApplication</code> or to <code>updateApplicationOwner</code>.</p><p id="69679236-84ac-4e7f-a149-1d625e7d3962" class="">The schema denotes a lot of things, but that’s all it is and does: a scheme that denotes. There is no exacting specification and no instructions to perform any operations. As such, they have to be defined in code.</p><h2 id="37a5bd9e-0097-4dde-96e9-039b8fac9751" class="">6.4. Query Operations</h2><p id="0cc981f3-f841-4513-9fa9-b0bbefa69f04" class="">Let’s first implement a query resolver, which will use our repository to query the database. You can find ours at <code>com.pluralsight.resolver.Query</code>:</p><pre id="5feb7365-79f4-4c65-b2bb-2c02853a3a39" class="code"><code>package com.pluralsight.resolver;
+
+import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.pluralsight.entity.Application;
+import com.pluralsight.repository.ApplicationRepository;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Query implements GraphQLQueryResolver {
+    private ApplicationRepository applicationRepository;
+
+    public Query(ApplicationRepository applicationRepository) {
+        this.applicationRepository = applicationRepository;
+    }
+
+    public Iterable&lt;Application&gt; findAllApplications() {
+        return applicationRepository.findAll();
+    }
+
+    public long countApplications() {
+        return applicationRepository.count();
+    }
+}</code></pre><p id="24232956-975a-4aa9-8d38-3918edae91ac" class="">The Query Resolver allows Spring to automatically detect and call the right method in response to one of the GraphQL queries defined inside of the schema. Notice that the methods we’ve defined here have the same names as the ones defined in the schema. The query response is typically sent in JSON.</p><h2 id="62cc43f5-2dc8-41af-a5cf-cb72af1bc8c9" class="">6.5. Mutation Operations</h2><p id="ac825450-b174-4c8a-be28-4515979311ae" class="">GraphQL also has the ability to update the data stored on the server by means of mutations, such as creating updating or deleting. This is done via a <strong><strong><strong><strong><strong><strong><strong>Mutation Resolver</strong></strong></strong></strong></strong></strong></strong>. They are defined in code by creating a class that implements the <code>GraphQLMutationResolver</code> Interface. The project has one at <code>com.pluralsight.mutator.Mutation</code>:</p><pre id="dd453c04-b686-450d-893f-fb666711193a" class="code"><code>package com.pluralsight.mutator;
+
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.pluralsight.entity.Application;
+import com.pluralsight.exception.ApplicationNotFoundException;
+import com.pluralsight.repository.ApplicationRepository;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+
+@Component
+public class Mutation implements GraphQLMutationResolver {
+    private ApplicationRepository applicationRepository;
+
+    public Mutation(ApplicationRepository applicationRepository) {
+        this.applicationRepository = applicationRepository;
+    }
+
+    public Application newApplication(String name, String owner,
+                                      String description) {
+        Application app = new Application(name, owner, description);
+        applicationRepository.save(app);
+        return app;
+    }
+
+    public boolean deleteApplication(Long id) {
+        applicationRepository.deleteById(id);
+        return true;
+    }
+
+    public Application updateApplicationOwner(String newOwner, Long id) {
+        Optional&lt;Application&gt; optionalApplication = applicationRepository.findById(id);
+
+        if(optionalApplication.isPresent()) {
+            Application application = optionalApplication.get();
+            application.setOwner(newOwner);
+            applicationRepository.save(application);
+            return application;
+        } else {
+            throw new ApplicationNotFoundException(&quot;Application Not Found&quot;, id);
+        }
+    }
+}</code></pre><p id="e6ad6fbe-bb95-44e6-9e4f-c69c00aed151" class="">The Mutation Resolver allows Spring to automatically detect and call the right method in response in one of the GraphQL mutations defined in the Schema. Just like with the Query Resolver, our mutations have the same names and parameters as was defined in the Schema. </p><h2 id="2ecfb5a6-74c4-47ac-a35c-b8b688d8f7d0" class="">6.5. Exception Handling</h2><p id="b42bb103-2747-44b0-8d11-5ac98dd54d3d" class="">Adding error handling logic is straightforward. Similar to how we handled the errors in the RESTful API by raising an exception.</p><p id="a58e743c-47b2-4b86-9599-595eb7e281f5" class="">For GraphQL, we need an Exception class that implements the <code>GraphQLError</code> interface. This interface requires an <code>extensions</code> map typed to <code>Map&lt;String, Object&gt;</code> and 3 methods to be implemented: <code>List&lt;SourceLocation&gt; getLocations</code>, <code>Map&lt;String, Object&gt; getExtensions</code> and <code>ErrorType getErrorType()</code>. The <code>extensions</code> object serves to store extension information to the reported error. Here’s what was implemented in the TrackZilla project:</p><pre id="aafdc39d-4687-4e78-8860-8e1db16c15e4" class="code"><code>package com.pluralsight.exception;
+
+// imports
+
+public class ApplicationNotFoundException extends RuntimeException implements GraphQLError {
+
+    private Map&lt;String, Object&gt; extensions = new HashMap&lt;&gt;();
+
+    public ApplicationNotFoundException(String message, Long invalidApplicationId) {
+        super(message);
+        extensions.put(&quot;invalidApplicationId&quot;, invalidApplicationId);
+    }
+
+    @Override
+    public List&lt;SourceLocation&gt; getLocations() {
+        return null;
+    }
+
+    @Override
+    public Map&lt;String, Object&gt; getExtensions() {
+        return extensions;
+    }
+
+    @Override
+    public ErrorType getErrorType() {
+        return ErrorType.DataFetchingException;
+    }
+}</code></pre><h2 id="c011e74b-848e-4749-902a-792e81a434d8" class="">6.6. Test GraphQL</h2><p id="8eb85d38-caac-4621-92dc-183118d8c45c" class="">Let’s test the application. Launch the application and open <code>http://localhost:8080/graphiql</code>. You should see a screen like this:</p><figure id="082c9965-5376-4dd1-b7d9-097ee2f779b6" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2010.png"><img style="width:1920px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2010.png"/></a></figure><p id="78dc8484-bcfe-4e3b-b2fb-d27482c47877" class="">From here we can write queries and mutations to GraphQL from a Web Front end. Let’s try it out. The way query is written is:</p><pre id="1a6cd174-0857-467d-95dd-27b87090725a" class="code"><code>{
+	query_name {
+		attr1,
+		attr2,
+		...,
+		attr_n
+	}
+}</code></pre><p id="f7dcc0bb-ad68-4665-b3b5-2b2ca18df306" class="">You don’t need all the attributes, however. Let’s say I wanted to <code>findAllApplications</code>, but I only want the application names:</p><figure id="0cc6a9b1-d48f-44b5-9a79-5f3b1d5c7755" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2011.png"><img style="width:1495px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2011.png"/></a></figure><p id="c3871a68-3b9c-4dda-bbd1-c6347730e5e9" class="">Seems like it worked. Now let’s try a mutation. To execute a mutation, the syntax is a bit different:</p><pre id="9e771d1f-5ea9-4b13-b58d-571dd9119425" class="code"><code>mutation {
+	mutation_name(
+		param_1: val1,
+		param_2: val2,
+		...,
+		param_n: val_n
+	) {
+		attr_1,
+		attr_2,
+		...,
+		attr_n
+	}
+}</code></pre><p id="82f87b92-36b4-4c9f-973e-ebf7402f1b2e" class="">The parameters are passed with their values, and then we specify what attributes we want to see from the mutated resource. For example, let’s create a <code>newApplication</code>. I only want its ID:</p><figure id="f04eacff-6882-45f3-87c2-f535eb014bcd" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2012.png"><img style="width:1383px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2012.png"/></a></figure><p id="f8707138-b4ca-42bb-bab7-83cb64984320" class="">For this example, I renamed the <code>data.sql</code> file on the <code>resources</code> to <code>bak-data.sql</code>, so it’s contents would not be used to populate the database, because the original creator has a weird constraint in it.</p><p id="c3b85969-e9a5-4504-b1b9-fb4e3cdee4e4" class="">Let’s delete this application. We have a mutation for that, <code>deleteApplication</code>:</p><figure id="6eafae6d-f84d-4c34-a545-4fd8118faeee" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2013.png"><img style="width:1112px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2013.png"/></a></figure><h1 id="d9d6aeda-5d27-4c87-971a-0e1ab5a57d44" class="">7. Enabling Actuators, Metrics and Health Indicators</h1><p id="a93b1940-da6a-4df4-bd88-68586825b9d1" class="">Now that the Trackzilla application is finished, let’s get it production ready. In order to support the application while it’s running in production, we will need to monitor and manage it.</p><h2 id="00281a00-7d13-4df0-8967-c6d24f004216" class="">7.1. Actuator</h2><p id="42d59e22-78d5-41f9-bda6-61253230d365" class="">Spring Boot Actuator provides health checkups, auditing, metrics gathering and HTTP tracing by exposing various HTTP or JMX endpoints you can interact with. The easieast way to enable these features is to add the Spring Boot Actuator Starter as a dependency in your Maven <code>pom.xml</code>:</p><pre id="55c58541-377c-4b7c-8321-d80a2c2d4e4a" class="code"><code>&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><p id="f9d5165a-6704-4cb1-a87d-66abe46c3505" class="">Let’s open the code for <strong><strong><strong><strong><strong><strong><strong><strong>Module 8</strong></strong></strong></strong></strong></strong></strong></strong>. The Actuator Starter enables various endpoints that can be used to monitor the application. Let’s launch from the entrypoint class and go to <a href="http://localhost:8080/actuator">http://localhost:8080/actuator</a>:</p><figure id="25bf1e0d-ef98-4c72-8349-d087c94396dd" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2014.png"><img style="width:971px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2014.png"/></a></figure><p id="85105b2c-4fc2-40f3-8663-6b5a35665175" class="">This endpoint shows a list for all the available endpoints accessible by Actuator. There are several.</p><p id="0cd7d708-7342-4a9a-b5e2-02ac659411fc" class="">Let’s try the <code>health</code> endpoint:</p><div id="433ff202-a61f-4ae3-9f98-f9528b2eff93" class="column-list"><div id="32008031-ac7f-4f26-89e6-5b522f626675" style="width:50%" class="column"><figure id="087049e6-9202-444c-a0ed-e979b8276dac" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2015.png"><img style="width:470px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2015.png"/></a></figure></div><div id="ff59a1f4-cf23-43b0-9abd-0031c818ff17" style="width:50%" class="column"><p id="c7e1ffa7-917c-4404-994d-bc5d38af6d5a" class="">We get some information from this endpoint. First, it’s that the general status of the application is <code>DOWN</code>, i.e., the application is inaccessible or not performing as intended. We can also see what specific components are affected, like the <code>PeopleService</code>, which is <code>Not Available</code>. We can at least see that the data base is  <code>UP</code> and, indeed, it recognizes we’re using the <code>H2</code> database. </p></div></div><p id="423a1e66-e637-41fb-9ace-ba7356b1a6fc" class="">A lot of endpoints are usually turned off by default because they report sensitive information. However, if you want to re-enable them, you can in your <code>application.properties</code>:</p><pre id="7af3aef4-bda3-487a-9a64-6af3c03251e9" class="code"><code>management:
+		endpoints:
+				web:
+						exposure:
+								include: info,health,metrics,loggers,beans,mappings
+		endpoint:
+				health:
+						show-details: always</code></pre><p id="72f53dc8-f552-4595-af35-6f17c25eccf5" class="">Let’s talk about some more of these endpoints:</p><ul id="62e7e41c-0403-4ed9-892e-45c291169679" class="bulleted-list"><li style="list-style-type:disc">The <code>metrics</code> endpoints provide several different kinds of metrics. The root route provides a list of all the available metrics. If you use the <code>/metrics/{metric_name}</code> route, it will provide all of the information from a specific metric.</li></ul><ul id="0a5d481a-f033-414e-8dc8-25bdaf67391e" class="bulleted-list"><li style="list-style-type:disc">The <code>loggers</code> endpoints provide information about the application loggers. They allow you to obtain logs from any of the various loggers, and also change their log level at runtime.</li></ul><h2 id="53eb2c07-7a0d-4744-b1f9-087310abad99" class="">7.2. Custom Endpoints</h2><p id="cbf655ea-d896-4463-bedd-422b43f41be8" class="">Spring Boot provides a bunch of ready-to-use health indicators; however, you can add your own custom health indicators. For example, let’s say the TrackZilla application gets a list of people or application owners from the HR API. Let’s add a custom health indicator for us to see if that API or Service is down and not accepting requests.</p><p id="50850abd-b82f-4bc4-97d9-9e0d53f69e37" class="">In the project, it is implemented at <code>com.pluralsight.actuator.PeopleHealthIndicator</code>:</p><pre id="48070d0d-60df-44e9-9706-f778b8c1901d" class="code"><code>package com.pluralsight.actuator;
+
+import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PeopleHealthIndicator implements HealthIndicator {
+    private final String message_key = &quot;PeopleService&quot;;
+
+    @Override
+    public Health health() {
+        if (!isRunningServicePeopleService()) {
+            return Health.down().withDetail(message_key, &quot;Not Available&quot;).build();
+        }
+        return Health.up().withDetail(message_key, &quot;Available&quot;).build();
+    }
+    private Boolean isRunningServicePeopleService() {
+        Boolean isRunning = false;
+        // Add real logic here to test if People Service is running; skipped for demo purposes
+        return isRunning;
+    }
+}</code></pre><p id="e9791a96-88e2-4b58-9baa-5ea20088f679" class="">To create a custom metric, all you need is to create a class that:</p><ul id="aa383f14-82bd-4a95-aceb-5357527f3869" class="bulleted-list"><li style="list-style-type:disc">Implements the <code>HealthIndicator</code> interface;</li></ul><ul id="9fcd0660-682b-424c-9df1-07dae71f958a" class="bulleted-list"><li style="list-style-type:disc"><code>@Override</code>s the <code>health()</code> method.</li></ul><p id="d5fd9372-8cd5-4446-9c05-0fc101460745" class="">This will determine the health of the dependent service. This method returns a <code>Health</code> object, which contains information about the Service’s health.</p><p id="2538e5f8-3140-4b19-b8a1-a954508cf5e7" class="">It also depends on a separate function that checks if the Service is actually running. For this demo, it’s just a mock method that returns false, but in a real life scenario, you’d be expected to add code that tests if the People Service is running.</p><p id="c1818335-0994-4480-afeb-d1f87da48bf2" class="">You’ve already seen this custom health indicator in action. It was that <code>people</code> health check in the <code>health</code> endpoint!</p><h1 id="9a400931-23d3-4633-963d-282efdca08f4" class="">8. Testing with Spring Boot</h1><p id="e207b178-2325-4ec6-b272-471ccecfd342" class="">During the rollout of changes, the TrackZilla product team noticed that one small change seemed to break functionality somewhere else in the system. The developers did test their code and conduct unit testing, but they were unsure of all of the dependencies that needed to be tested.</p><p id="6cb28a2c-8767-456a-aa80-8686c0bc729d" class="">Let’s look at ways to automate testing and increase confidence that minor changes will not break existing functionality.</p><h2 id="ac5896c9-f5a0-4610-883a-ada41f0807e8" class="">8.1. An Overview of Testing</h2><p id="305de621-bbfe-42f3-8728-ccbc31924d8a" class="">In the course, the instructor says:</p><blockquote id="ea6aa105-b48f-4787-adb7-049e716ca6cc" class="">Testing gives you confidence that your application is working when you introduce changes.</blockquote><p id="c68872b9-4644-413c-a80f-1a8c29ea284c" class="">This is a bunch of bullshit and is honestly one of the worst quotes ever produced, so I will give another, as a fellow hacker, in response:</p><blockquote id="f72b6cc9-9c53-4df5-9814-12df03dbaec6" class="">Attitude is no substitute for compentence.</blockquote><p id="4f990a46-0012-400c-b595-b9aa703b0500" class="">With this in mind, I’ll actually explain what Testing is and what it does. It is the process of evaluating and verifying that a piece of software or full application does what it is supposed to do. The benefits of testing include:</p><ul id="729d1fbb-1001-4503-9bb8-4d6923884cbd" class="bulleted-list"><li style="list-style-type:disc">preventing bugs;</li></ul><ul id="e28afd31-03ed-4408-86b4-d894fd467208" class="bulleted-list"><li style="list-style-type:disc">reducing development costs;</li></ul><ul id="8afcc528-718b-4af5-9f75-2339a707fcc7" class="bulleted-list"><li style="list-style-type:disc">improving performance.</li></ul><p id="379759ab-731e-4fce-8c56-e126bdc27849" class="">There’s different types of testing like <strong>Stress testing</strong>, where we test how much strain the system can take before it fails, <strong>Integration testing</strong>, where we ensure that software components or functions operate together, <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Regression testing</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> where we check if new features break or degrade functionality, and much more, but in Software Development, we focus a lot on <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Unit Testing</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, in which we validate that each software unit performs as expected.</p><p id="f3c5d0a8-b687-45fb-b11d-48c24a5d2ada" class="">There’s usually libraries for these, and normally, their dependency is already included in the <code>pom.xml</code> file when you bootstrap an application: it is the Spring Boot Test Starter.</p><pre id="211b7dff-dfbf-40f7-8dc1-aa7f28bb867a" class="code"><code>&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+		&lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre><p id="0af75bab-5a02-4cea-8432-0a37527db87e" class="">This Starter includes libraries like JUnit, AssertJ, Hamcrest, and much more.</p><h2 id="2bdf4a64-fcae-4c2b-9358-369d62000c59" class="">8.2. Unit Testing</h2><p id="c0eeb0ef-7a87-4529-9036-42bc8ed1d12e" class="">Let’s look at unit testing REST APIs using JUnit, Mockito and Spring Test, also known as MockMVC. Like explained above, writing unit tests allows you to test individual units of code. JUnit is by far the most popular unit testing framework, so that’s what we’ll use.</p><p id="800b5d03-7d10-4a69-bc68-9bf4b5c29495" class="">Mockito is a great mocking framework, which we’ll use to provide data to our unit tests. Spring also has the <code>@MockBean</code> annotation, which works well with Mockito and allows to create configurable mock objects.</p><p id="4704a6dc-7b7f-4768-9ee9-1e306635c13a" class=""><code>@WebMvcTest</code> is an annotation used for controller layer unit testing. It’s often used to test one controller class at a time and works in conjunction with Mockito to mock the dependencies.</p><ul id="827cb7bc-3c76-45a6-9240-32326701900b" class="bulleted-list"><li style="list-style-type:disc">It scans only the controllers (<code>@Controller</code> and <code>@RestController</code>);</li></ul><ul id="64986972-cf5b-412c-892c-4bdefc678f5b" class="bulleted-list"><li style="list-style-type:disc">It does not load the full app context;</li></ul><ul id="d48f4e16-0666-4aca-ad14-ee68684a2e00" class="bulleted-list"><li style="list-style-type:disc">Dependent beans must be mocked.</li></ul><p id="2a4a4be6-104d-497c-9c36-7f62b05f9de0" class="">Let’s open the final project, <strong><strong><strong><strong><strong><strong><strong><strong>Module 9</strong></strong></strong></strong></strong></strong></strong></strong>, to see these concepts in action:</p><figure id="f4db92dd-20b3-4508-b0b8-94ad033f2bf5" class="image"><a href="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2016.png"><img style="width:619px" src="Spring%20Boot%20Fundamentals%207372969a90564f05a44fee4a2dc53806/Untitled%2016.png"/></a></figure><p id="e12e1294-0932-4662-9321-739dd8d7a8e2" class="">Let’s open the <code>TzaControllerUnitTest</code>. You can find it at <code>src/test/java/com.pluralsight.web.TzaControllerUnitTest</code>:</p><pre id="595f5545-6fb4-4a90-bc89-1379f26274d0" class="code"><code>package com.pluralsight.web;
+
+// imports
+
+@RunWith(SpringRunner.class)
+@WebMvcTest(TzaController.class)
+public class TzaControllerUnitTest {
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    ApplicationService applicationService;
+
+    @MockBean
+    TicketService ticketService;
+
+    @Test
+    public void getAllApplications() throws Exception {
+        mockMvc.perform(get(&quot;/tza/applications/&quot;))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json(&quot;[]&quot;));
+
+        verify(applicationService, times(1)).listApplications();
+    }
+
+    @Test
+    public void getAllTickets() throws Exception {
+        mockMvc.perform(get(&quot;/tza/tickets/&quot;))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json(&quot;[]&quot;));
+
+        verify(ticketService, times(1)).listTickets();
+    }
+}</code></pre><p id="73628904-76f2-42a1-8a31-19e72fe73f14" class="">Let’s examine this class:</p><pre id="5f3136de-80c4-4e0a-8e56-b4d7c70482cf" class="code"><code>...
+@RunWith(SpringRunner.class)
+@WebMvcTest(TzaController.class)
+public class TzaControllerUnitTest {
+		...</code></pre><p id="a77a46d3-8d8d-4bba-acbb-1f2ff793a33f" class="">It’s using the <code>@RunWith</code> annotation, which denotes the runner class to be used to run test cases.  A runner is a class created for JUnit that provides the functionality of the Spring TestContext Framework.</p><p id="08cbcf4f-fae9-499a-a02f-20fffd141cb2" class="">We also have the <code>@WebMvcTest</code> annotation, and we denot that the class being tested is <code>TzaController</code>. This will start the web application context but the embedded servlet container is not used, keeping testing lightweight.</p><pre id="60498c98-4254-4c8a-8b31-dd0ae25a50b6" class="code"><code>@Autowired
+private MockMvc mockMvc;
+
+@MockBean
+ApplicationService applicationService;
+
+@MockBean
+TicketService ticketService;</code></pre><p id="1c1aa920-0222-4970-aea8-ad43b739e163" class="">We have a <code>MockMvc</code> autowired bean. <code>MockMvc</code> is a powerful way to quickly test MVC controllers without having to start a full HTTP server. It also helps with processing HTTP responses by providing methods for “expectations”. I’ll explain that in a minute.</p><p id="d7730a18-3813-42b3-ac53-1308fa67f017" class="">Notice we have two <code>@MockBean</code>s for the <code>applicationService</code> and the <code>ticketService</code>. These Beans will be created by Mockito and are able to be configured with specific mock behavior in a test. They would have to be included either way because they are dependencies of the <code>TzaController</code>.</p><p id="a6b0aa0e-9433-4743-8401-ff897d4f8d88" class="">Let’s look at our first unit test:</p><pre id="8a9641e7-8f20-4af2-8ca3-4aa96a9112bb" class="code"><code>@Test
+public void getAllApplications() throws Exception {
+		mockMvc.perform(get(&quot;/tza/applications/&quot;))
+		.andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(content().json(&quot;[]&quot;));
+
+		verify(applicationService, times(1)).listApplications();
+}</code></pre><p id="640a3235-f7dd-481f-8d94-a1229f152c6d" class="">First, we call <code>mockMvc</code>&#x27;s <code>perform</code> method, which simulates an HTTP request to the controller. As you can see, it’s simulating a GET request to <code>/tza/applications</code>.</p><p id="12347438-6f4f-49b8-8f5b-a744e4ab0681" class="">Then we use an <code>andExpect</code> method, which sets “expectations” for the response. Think of it as assertions. Whereas in a normal test, you perform your behavior and <strong>assert </strong>that you have a certain result, you simulate a request to the controller and <strong><strong><strong><strong><strong><strong>expect</strong></strong></strong></strong></strong></strong> the response to have specific characteristics, for example, to have returned 200 OK (<code>.andExpect(status().isOk())</code>), the content type to be JSON (<code>.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))</code>) and for it to have an empty list in the response (<code>.andExpect(content().json(&quot;[]&quot;));</code>).</p><p id="8feb6be7-35cb-4407-a402-a0e524c10c53" class="">Finally, it uses the <code>verify</code> method to verify the number of times a mock method has been called. In this instance, we want to verify that the <code>listApplications()</code> method of our mock <code>applicationService</code> has been called exactly once.</p><p id="ba8e7dbf-2d5c-488c-9883-48accc832b18" class="">The entire method is annotated with <code>@Test</code> to denote that it is, well, a test. When you want to run a test, or a battery of tests, Spring will detect it as a Test and run it, recovering and reporting its results.</p><h2 id="0468953a-ff4c-40f9-b9c5-483465fb8213" class="">8.3. Integration Tests</h2><p id="48b8cbc4-b76a-4368-80e6-1a7d5fb18f03" class="">Integration testing allows for testing of the entire application and all of its layers and not just individual units, and it is useful to be able to do this without requiring deployment of the application.</p><p id="a839106f-8bba-4c3e-b572-269f4741058c" class="">The <code>@SpringBootTest</code> annotation is useful for integration testing and is chosen over <code>@WebMvcTest</code> because it starts the full application context, including the servlet, and does not costumize component scanning at all.</p><p id="7117a767-948d-44df-8dc0-9b13ac042036" class="">A <code>@SpringBootTest</code> looks for the main application class annotated with <code>@SpringBootApplication</code>, and uses that to start a Spring Application Context, simulating a client call.</p><p id="606f46b2-c8c6-47e3-8a5d-0d0efb74122d" class="">Let’s look at our <code>TzaControllerIntegrationTest</code>:</p><pre id="2cee32d2-5823-4b42-9fac-76a950f2e1f7" class="code"><code>package com.pluralsight.web;
+
+// imports
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+public class TzaControllerIntegrationTest {
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void getAllApplications() throws Exception {
+        ResponseEntity&lt;List&gt; response =
+                this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/tza/applications/&quot;, List.class);
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+    }
+
+    @Test
+    public void getAllTickets() throws Exception {
+        ResponseEntity&lt;List&gt; response =
+                this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/tza/tickets/&quot;, List.class);
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+    }
+}</code></pre><p id="e5f798e1-d976-4a5d-a14c-b7387b96b05d" class="">Let’s examine this test.</p><pre id="bfb51f91-b791-49df-bb7b-ee793324f4e4" class="code"><code>...
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+public class TzaControllerIntegrationTest {
+		...</code></pre><p id="febb5452-de0f-4831-84e5-a27a2bb3d0de" class="">The class is using a Spring Runner and is set up with the <code>@SpringBootTest</code> annotation. Notice we have also specified the <code>webEnvironment</code> to use a random port every time it executes this test. This is great for testing, because it reduces the risk of port conflicts.</p><p id="ef5c6475-18b4-4a51-9280-3952ed01489f" class="">We’re also using the <code>@AutoConfigureMockMvc</code> annotation, which enables all auto-configuration related to <code>MockMvc</code> for testing.</p><pre id="cc839abe-0dd6-4e5c-a210-d009ecb623ec" class="code"><code>@LocalServerPort
+private int port;
+
+@Autowired
+private TestRestTemplate restTemplate;</code></pre><p id="b89e176b-484c-492b-8306-6a4cbc98d863" class="">We have a <code>@LocalServerPort</code> annotation, which will inject the selected port onto this attribute. Since we defined we want a random port, this attribute will have a random value every time this test is run.</p><p id="c36abd5c-7062-48b4-93ff-4f389cd3c879" class="">We also have a <code>TestRestTemplate</code> which allows to consume a REST API from a test case. Spring Boot already provides a TestRestTemplate automatically, so all you have to do is <code>@Autowire</code> that Bean to an object in the test class.</p><p id="8653f4cc-115e-4cc5-abc1-b4a01a064af7" class="">Now let’s look at one of the tests and see what it’s doing:</p><pre id="c92a5dbb-b474-4059-94ab-cb7b669179dc" class="code"><code>@Test
+public void getAllApplications() throws Exception {
+		ResponseEntity&lt;List&gt; response =
+				 this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/tza/applications/&quot;, List.class);
+		
+		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+}</code></pre><p id="8e151dff-ae49-4ec0-b764-a6b69f7fe82d" class="">As you can see, we’re generating a <code>ResponseEntity</code> that expects to contain a <code>List</code>, corresponding to a response from a request sent by the <code>restTemplate</code>. It sends a GET request to <code>http://localhost:port/tza/applications/</code> and, just like the ResponseEntity, also states what class of object it expects to receive.</p><p id="ac5c5368-7147-4af9-89ab-0d119fa92522" class="">Finally, we make an assertion regarding to the <code>response</code>&#x27;s status code. We assert that it is <code>equalTo(HttpStatus.OK)</code>, i.e., HTTP 200.</p><figure class="block-color-teal_background callout" style="white-space:pre-wrap;display:flex" id="1d55277b-f3a7-42ab-8c99-688621b6a41c"><div style="font-size:1.5em"><span class="icon">😎</span></div><div style="width:100%">Finished on <time>@August 21, 2023</time>. Written by Nuno Dias, <em><em><em>aka</em></em></em>, Shodan. Based on the <a href="https://app.pluralsight.com/library/courses/creating-first-spring-boot-application/table-of-contents">Pluralsight course</a> of the same name by <strong><strong><strong><strong><strong>Dan Bunker</strong></strong></strong></strong></strong>.</div></figure></div></article></body></html>
