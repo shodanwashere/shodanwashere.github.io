@@ -1,0 +1,10 @@
+- name: home
+  link: /
+- name: about
+  link: /about.html
+- name: resume
+  link: /resume.html
+- name: blog
+  link: /blog/
+- name: github
+  link: https://github.com/shodanwashere

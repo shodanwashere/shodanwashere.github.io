@@ -1,0 +1,31 @@
+@import url('/assets/fonts/garamond.css');
+
+body {
+	background-color: #482317;
+	color: #c87a25;
+	font-family: 'Apple Garamond', sans-serif;
+}
+
+a {
+	color: #f9ebd4;
+	text-decoration: none;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img {
+	width: 30%;
+	height: auto;
+}
+
+.centered_div {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
