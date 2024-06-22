@@ -10,5 +10,3 @@ This is my second post! Featuring Futana, the legendary graphical designer! Say 
 "america ya 😄"
 
 Ye.
-
-- N.
