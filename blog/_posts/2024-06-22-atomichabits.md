@@ -60,4 +60,18 @@ Here are some lessons learned from James Clear's Atomic Habits. I'll be updating
 - so, we avoid temptations, and thus, we must avoid temptational habit cues. we must reduce exposure to those cues that cause bad habits and thus make them "invisible".
 - remember, always call bullshit on self-control. it is a short-term strategy, not a long-term one. avoid temptation whenever possible and only resist it as a last resort.
 
-last update on 22-06-2024
+## 3. habit cravings
+
+### 3.1. cravings, dopamine & temptation bundling
+
+- humans are prone to fall for exaggerated versions of reality, just like most animals. this is called _supernormal stimuli_. modern society has taken advantage of this primordial psychological trigger to get "good at pushing our own buttons".
+- the 2nd law of behavior change is "make it more attractive". to more attractive an opportunity is, the more likely it is to become habit-forming.
+- modern society has taken advantage of this by implementing products and systems with exaggerated features, something that is naturally attractive to us and that makes our instincts go wild. it is one of the reasons for so many current unhealthy habits like excessive shopping, uncontrolled social media use, porn addiction, overeating, etc.
+- to build new habits, we need to learn how to make habits irresistible. it's not possible to transform most habits into supernormal stimuli, though, so all we can do is make them a bit more enticing.
+- dopamine - unlike everyone on youtube, tiktok and twitter has told you - is not the pleasure drug. it is the **desire** drug. without dopamine release, you'll still like doing all the things that could be described as bad, addictive habits - you just won't desire to do them anymore.
+- habits are a dopamine-driven feedback loop. it isn't just released when you experience pleasure but also when you anticipate it, and the latter happens as action repetition occurs due to action automation by your brain.
+    - "Before a habit is learned, dopamine is released when the reward is experienced for the first time. [After some repetition], dopamine rises _before_ taking action, immediately after a cue is recognized. The spike leads to a feeling of desire and a craving to take the action whenever the cue is spotted. Once a habit is learned, dopamine will not rise when a reward is experienced because you already expect the reward."
+- you're more likely to find a behavior attractive if you get to do one of your favorite things at the same time. this is known as Premack's Principle and its implementation is called "temptation bundling", i.e.: you do something you need to do after or at the same time you do a something you want to do.
+- you can also combine it with habit stacking to increase effectiveness of habit creation: `habitStacking(currHabit, newHabit) + temptationBundling(pleasingHabit, newHabit) = 'After [current habit] I will [new habit]' && 'After/While [new habit], I will [pleasing habit].`
+
+last update on 23-06-2024
