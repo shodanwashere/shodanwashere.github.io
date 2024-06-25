@@ -74,4 +74,25 @@ Here are some lessons learned from James Clear's Atomic Habits. I'll be updating
 - you're more likely to find a behavior attractive if you get to do one of your favorite things at the same time. this is known as Premack's Principle and its implementation is called "temptation bundling", i.e.: you do something you need to do after or at the same time you do a something you want to do.
 - you can also combine it with habit stacking to increase effectiveness of habit creation: `habitStacking(currHabit, newHabit) + temptationBundling(pleasingHabit, newHabit) = 'After [current habit] I will [new habit]' && 'After/While [new habit], I will [pleasing habit].`
 
-last update on 23-06-2024
+### 3.2. how relationships affect our habits
+
+- the culture we live in determines which behaviors are attractive to us.
+- our cave man brain steers us into adopting habits that are praised and approved of by our culture because of the tribal instinct of wanting to fit in and belong.
+- humans are inherently social creatures so it's kind of hard to beat this pattern, although not impossible.
+- we tend to imitate the habits of our family and friends, the "tribe" (people who adhere to the culture you live in) and people with status and prestige that you admire.
+- thus, the best strategy, as stated by james, is the path of least resistance:
+    1. join a culture where your desired behavior is the normal behavior and
+    2. join a culture where you already have something in common with the group.
+- the habits and behaviors of the tribe often overpower the desired behavior of the individual, because this can lead to the individual being ostracized by the group. this is bullshit, obviously: times have changed and the lone wolf survives away from packs of fools. there will be moments of self-doubt and anxiousness, but ultimately, you should put yourself first. if the group is wrong, it is wrong, and you're right. you don't have to sink into the boat just because everyone else is.
+- if a behavior can get us approval, respect and praise, we find it attractive. this will be commonly felt and hard to dissuade. humans are a social species by default. you can refuse groups and tribalities but you'll still want attention and praise.
+
+### 3.3. how to make habits unattractive & motivation rituals
+
+- the 2nd law of behavior change is "make it attractive." to create new habits, we have to make them attractive by associating a desire, a craving to them. to break habits, we must then **make them unattractive**.
+- every single one of our behaviors has a surface level craving and a deeper underlying motive that arkens back to our primordial desires, like mating opportunities or our search of clarity.
+- what really causes habits is the prediction your brain makes when following the cue. the prediction leads to a feeling, which can cause disparity between what your body feels and how it wants to feel, which leads to a reaction.
+- the best way to make a habit seem unnatractive, as defined by Allen Carr, is highlighting the benefits of avoiding that habit, saying them until you hear them in your sleep, until the habit sounds so ridiculous and disgusting you won't see a need to do it ever again.
+- another way to make habits attractive is through **motivation rituals**, the act of doing something you enjoy immediately before a difficult habit, because habits are attractive when we associate them with positive feelings and unattractive when we associate them with negative feelings.
+- **ATTENTION**: james points out near the end of this chapter that "You can adapt this strategy for nearly any purpose. Say you want to feel happier in general. Find something that makes you truly happy (...) and then create a short routine that you perform every time _before_ you do the thing you love. (...) Eventually you'll begin to associate this [routine] with being in a good mood. It becomes a cue that _means_ feeling happy." Don't do this. DON'T do this. this is a tactic of emotional gaslighting people will sometimes do to themselves, where they can fool themselves into thinking they feel something else. what this will do is create a lot of emotional instability and it is Antonio Damasio that says "it is emotion that allows you to mark things as good, bad or indifferent." if your emotions are disregulated, how can you tell good choices from bad choices?
+
+last update on 25-06-2024
