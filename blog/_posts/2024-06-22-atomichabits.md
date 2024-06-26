@@ -95,4 +95,15 @@ Here are some lessons learned from James Clear's Atomic Habits. I'll be updating
 - another way to make habits attractive is through **motivation rituals**, the act of doing something you enjoy immediately before a difficult habit, because habits are attractive when we associate them with positive feelings and unattractive when we associate them with negative feelings.
 - **ATTENTION**: james points out near the end of this chapter that "You can adapt this strategy for nearly any purpose. Say you want to feel happier in general. Find something that makes you truly happy (...) and then create a short routine that you perform every time _before_ you do the thing you love. (...) Eventually you'll begin to associate this [routine] with being in a good mood. It becomes a cue that _means_ feeling happy." Don't do this. DON'T do this. this is a tactic of emotional gaslighting people will sometimes do to themselves, where they can fool themselves into thinking they feel something else. what this will do is create a lot of emotional instability and it is Antonio Damasio that says "it is emotion that allows you to mark things as good, bad or indifferent." if your emotions are disregulated, how can you tell good choices from bad choices?
 
-last update on 25-06-2024
+## 4. habit responses
+
+### 4.1. planning vs doing && habit automaticity
+
+- "the best is the enemy of good".
+- planning is ok but people tend to overdo it because planning feels like you get things done without any of the repercussions of failure. without doing, you won't fail. no failure means no lessons learned. no lessons to learn from, no improvement.
+- the more you repeat an activity, the more your brain adapts to become more efficient at completing that activity. this is called "neural potentiation".
+- neural potential can be honed to the point that the activity is done autonomously by the brain's unconscious mind, without any conscious thought or interaction. **this is how habits are formed**.
+- the 3rd law of behavior change is "make it easy". the easier a habit is to perform, the more likely we are to go through with that behavior.
+- it doesnt matter how long you've had a habit for, but how frequently you perform it. neural potentiation leads to more brain efficiency, which leads to autonomous cue response, which creates a habit.
+
+last update on 26-06-2024
