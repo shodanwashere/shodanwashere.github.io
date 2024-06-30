@@ -106,4 +106,27 @@ Here are some lessons learned from James Clear's Atomic Habits. I'll be updating
 - the 3rd law of behavior change is "make it easy". the easier a habit is to perform, the more likely we are to go through with that behavior.
 - it doesnt matter how long you've had a habit for, but how frequently you perform it. neural potentiation leads to more brain efficiency, which leads to autonomous cue response, which creates a habit.
 
-last update on 26-06-2024
+### 4.2. law of least effort
+
+- human behavior naturally adheres to the law of least effort, which states that our attention will gravitate towards tasks that require the least amount of effort to do, when given the chance.
+- in order to make use of the law of least effort to enforce the 3rd law of behavior change, rather than letting _it_ use us, we need to create an environment where the tasks we want to do _are_ tasks that require low effort, i.e., make them easy to do
+- for habits that you know are good for you, reduce friction between you and that behavior, so that you make them easy to do, and thus, disable the creation of restrictions that would not allow you to perform that behavior.
+- to counteract against bad behaviors and habits, you reverse this: create as much friction as possible! make your habits difficult to do and you will start seeing less and less reasons to keep up with that behavior.
+- one thing you can also do is "prime" - enough with the buzzwords, james. you mean "prepare" - prepare your environment to use for future actions. say you want to get a morning routine automated in your mind but you're not in a good place and dont take a shower and get dressed because its still extra effort to pick out an outfit for the day. one thing you can do is pick out your clothes the night before and set them on your chair so that you'll remember "oh right! i gotta go shower. the clothes are all set for me and everything". and as time goes on, you'll stop thinking about it. you just take the outfit on your chair, take a shower and get dressed.
+
+### 4.3. start small, shape up
+
+- you can't expect habits to start at a high performance level and keep going from there. that's like compromising with yourself that you'll go to the gym everyday when you are not used to going to the gym and having that kind of high intensity in your life. you won't stay consistent, start doubting yourself and stop mmidway. that's no way to start up.
+- habits can sometimes be behaviors that last for a few seconds at the start but continue to impact our behavior for minutes or hours afterwards.
+- the best way to start habits is to **start small**. follow the two minute rule to make the start easy: "when you start a new habit, it should take less than two minutes to do." this creates standardization of the habit and cements it in a foundation.
+- we standardize before we optimize. you can't improve a building that doesnt have a solid foundation to begin with. likewise, you can't improve a habit that hasn't been set in stone still. cement that habit first by starting small, then shape up your habit in phases until you get where you want to be.
+
+### 4.4. ulysses pacts & automation
+
+- the ulysses pact is named after ulysses, who wanting to hear the song of the sirens without sending his boat and crew towards deadly waters, ordered his men to tie him to the mast of the boat and cover their ears in beeswax. this way he, he managed to hear the song of the sirens but was not able to fall into temptation.
+- ulysses pacts are good at breaking habits by implementing the reverse of the 3rd law of behavior change, "make it difficult". get someone to make an ulysses pact with you and agree on a commitment you want to do.
+- you can also make a ulysses pact with the cosmos by getting a "commitment device". james calls the ulysses pact a commitment device, but i think they are separate things. a commitment device allows you to sign a pact with the universe around you by making the commitment with yourself (like an outlet timer that plugs off the internet router at 10 pm, signaling that its time to go to bed).
+- automation is also a good thing because you can use it to steer your current behavior towards the one you want to implement. "civilization advances by extending the number of operations we can perform without thinking about them."
+- i myself do this. we all do this. one of the ways i used automation to wake up earlier in the morning was by buying a smart bulb and plugging it into my end table lamp. for every alarm i have set on my phone, i also have a timer set on the smart bulb to go off 30 minutes prior. therefore, the combination of warm light and sound will most likely set me off and wake me up in the morning. i may do another post just on this topic of automation.
+
+last update on 30-06-2024
