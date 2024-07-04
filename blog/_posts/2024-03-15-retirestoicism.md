@@ -13,7 +13,7 @@ I had just begun working full-time as an application security analyst, and I had
 
 I was very wrong about the things I’ve learned. Stoicism is not about becoming indestructible. Moreover, it’s almost a teaching of submission. It treats the emotions we feel, whether positive or negative, as a sickness or object of aversion. It treats adherence to virtue as the highest glory one can have. And worst of all, it poises the belief that permeates my very nightmares.
 
-    In this world, is the destiny of mankind controlled by some transcendental entity or law? Is it like the hand of God hovering above? At least it is true that man has no control, even over his own will.
+> In this world, is the destiny of mankind controlled by some transcendental entity or law? Is it like the hand of God hovering above? At least it is true that man has no control, even over his own will.
 
 The stoics believe that things go in accordance to fate, and that we have no place worrying about things that are out of our control, pre-ordained by fate. I am only now coming to this realization and as someone who has time and time again fought against authority and for my own destiny to be controlled by me and me alone, to fight against fate.
 
